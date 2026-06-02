@@ -83,11 +83,13 @@
         function calculateOverallPoints(player) {
             let total = 0;
             let hasRetired = false;
-            for (let m in player.modes) {
-                const tier = player.modes[m];
-                if (tierConfig[tier]) {
-                    total += tierConfig[tier].points;
-                    if (tier.startsWith('R')) hasRetired = true;
+            if (player && player.modes) {
+                for (let m in player.modes) {
+                    const tier = player.modes[m];
+                    if (tierConfig[tier]) {
+                        total += tierConfig[tier].points;
+                        if (tier.startsWith('R')) hasRetired = true;
+                    }
                 }
             }
             return { total, hasRetired };
@@ -104,6 +106,7 @@
 
         function render() {
             const container = document.getElementById('leaderboard-container');
+            if (!container) return;
             const searchQuery = document.getElementById('search').value.toLowerCase();
             container.innerHTML = '';
 
@@ -120,7 +123,7 @@
                 });
             } else {
                 processedPlayers = playersData
-                    .filter(p => p.modes[currentTab])
+                    .filter(p => p.modes && p.modes[currentTab])
                     .map(p => {
                         const tier = p.modes[currentTab];
                         const isRetired = tier.startsWith('R');
@@ -135,7 +138,7 @@
             }
 
             if (searchQuery) {
-                processedPlayers = processedPlayers.filter(p => p.username.toLowerCase().includes(searchQuery));
+                processedPlayers = processedPlayers.filter(p => p.username && p.username.toLowerCase().includes(searchQuery));
             }
 
             processedPlayers.forEach((player, index) => {
@@ -159,14 +162,14 @@
                     badgesHTML = `
                         <div class="text-right text-sm font-bold text-amber-500 mr-4">${player.score} pts</div>
                         <div class="flex flex-wrap gap-2">
-                            ${Object.entries(player.modes).map(([mode, t]) => {
+                            ${Object.entries(player.modes || {}).map(([mode, t]) => {
                                 const cfg = tierConfig[t] || { bg: 'bg-gray-800', label: t };
                                 return `<span onclick="openHistory('${player.username}', '${mode}')" class="px-2 py-1 rounded text-xs font-bold cursor-pointer hover:scale-105 transition ${cfg.bg}">${mode}: ${cfg.label}</span>`;
                             }).join('')}
                         </div>
                     `;
                 } else {
-                    const cfg = tierConfig[player.currentTier];
+                    const cfg = tierConfig[player.currentTier] || { bg: 'bg-gray-800', label: player.currentTier };
                     badgesHTML = `
                         <span onclick="openHistory('${player.username}', '${currentTab}')" class="px-3 py-1.5 rounded-lg text-sm font-bold cursor-pointer hover:scale-105 transition ${cfg.bg}">
                             ${cfg.label}
@@ -204,7 +207,8 @@
 
             const labels = historyEntries.map(h => h.date);
             const dataPoints = historyEntries.map(h => {
-                return tierOrder.length - tierOrder.indexOf(h.tier);
+                const idx = tierOrder.indexOf(h.tier);
+                return idx !== -1 ? (tierOrder.length - idx) : 0;
             });
 
             if (chartInstance) chartInstance.destroy();
