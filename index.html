@@ -95,7 +95,13 @@
             return { total, hasRetired };
         }
 
-        function getRankTitle(points) {
+        function getRankTitle(player) {
+            // Speciální pravidlo pro absolutně nejlepšího hráče na přání
+            if (player.isBestCZSK) {
+                return { title: 'THE BEST CZSK', bg: 'bg-red-500/20 text-yellow-400 border-red-500/50 shadow-sm shadow-red-500/10' };
+            }
+            
+            const points = player.overallScore || 0;
             if (points >= 240) return { title: 'THE BEST', bg: 'bg-red-500/20 text-red-400 border-red-500/30' };
             if (points >= 210) return { title: 'Legenda', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
             if (points >= 180) return { title: 'Elita', bg: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' };
@@ -129,6 +135,9 @@
 
             if (currentTab === 'Overall') {
                 processedPlayers.sort((a, b) => {
+                    // BEST CZSK má vždy absolutní prioritu a skočí na 1. místo
+                    if (a.isBestCZSK && !b.isBestCZSK) return -1;
+                    if (!a.isBestCZSK && b.isBestCZSK) return 1;
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
                     return b.overallScore - a.overallScore;
                 });
@@ -168,7 +177,7 @@
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
                 }
 
-                const rankInfo = getRankTitle(player.overallScore);
+                const rankInfo = getRankTitle(player);
 
                 let badgesHTML = '';
                 if (currentTab === 'Overall') {
