@@ -29,6 +29,7 @@
             <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">GoldSMP 🟢</button>
             <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">NetheriteSword ⚔️</button>
             <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">IronAxe 🪓</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">UHCMace 👑</button>
         </nav>
 
         <main id="leaderboard-container" class="space-y-3"></main>
@@ -46,7 +47,6 @@
     </div>
 
     <script>
-        // Bodový systém a nastavení stylů pro Tiery
         const tierConfig = {
             'HT1': { points: 60, bg: 'bg-yellow-400 text-black', label: 'HT1' },
             'LT1': { points: 48, bg: 'bg-amber-600 text-white', label: 'LT1' },
@@ -58,7 +58,6 @@
             'LT4': { points: 3,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT4' },
             'HT5': { points: 2,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT5' },
             'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5' },
-            // Retired tiery
             'RHT1': { points: 54, bg: 'bg-black text-red-500 border border-red-900', label: 'RHT1' },
             'RLT1': { points: 44, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT1' },
             'RHT2': { points: 29, bg: 'bg-black text-red-400 border border-red-900', label: 'RHT2' },
@@ -71,7 +70,6 @@
         let currentTab = 'Overall';
         let chartInstance = null;
 
-        // Načtení dat z JSONu
         async function loadData() {
             try {
                 const response = await fetch('players.json');
@@ -82,7 +80,6 @@
             }
         }
 
-        // Výpočet celkových bodů pro Overall
         function calculateOverallPoints(player) {
             let total = 0;
             let hasRetired = false;
@@ -113,18 +110,15 @@
             let processedPlayers = [];
 
             if (currentTab === 'Overall') {
-                // Filtrování a řazení pro OVERALL
                 processedPlayers = playersData.map(p => {
                     const score = calculateOverallPoints(p);
                     return { ...p, score: score.total, isRetired: score.hasRetired };
                 });
-                // Řazení: Aktivní podle bodů, pak Retired podle bodů
                 processedPlayers.sort((a, b) => {
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
                     return b.score - a.score;
                 });
             } else {
-                // Filtrování a řazení pro KONKRÉTNÍ GAMEMODE
                 processedPlayers = playersData
                     .filter(p => p.modes[currentTab])
                     .map(p => {
@@ -134,25 +128,21 @@
                         return { ...p, currentTier: tier, isRetired, orderIndex: orderIndex !== -1 ? orderIndex : 999 };
                     });
                 
-                // Řazení pro Gamemode: Podle pole tierOrder, Retired na konec
                 processedPlayers.sort((a, b) => {
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
                     return a.orderIndex - b.orderIndex;
                 });
             }
 
-            // Aplikace vyhledávacího filtru
             if (searchQuery) {
                 processedPlayers = processedPlayers.filter(p => p.username.toLowerCase().includes(searchQuery));
             }
 
-            // Generování HTML řádků
             processedPlayers.forEach((player, index) => {
                 const rank = index + 1;
                 let borderClass = "border-gray-900 bg-gray-950/40";
                 let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
 
-                // Obarvení top 3 míst v Overall nebo v gamemodu
                 if (rank === 1) {
                     borderClass = "gold-border border-l-4";
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-black shadow-lg shadow-yellow-500/20">1</div>`;
@@ -164,7 +154,6 @@
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
                 }
 
-                // Sestavení badge pro jednotlivé módy
                 let badgesHTML = '';
                 if (currentTab === 'Overall') {
                     badgesHTML = `
@@ -201,7 +190,6 @@
             });
         }
 
-        // Funkce pro otevření historie a vykreslení grafu
         function openHistory(username, gamemode) {
             const player = playersData.find(p => p.username === username);
             if (!player || !player.history || !player.history[gamemode]) {
@@ -216,7 +204,6 @@
 
             const labels = historyEntries.map(h => h.date);
             const dataPoints = historyEntries.map(h => {
-                // Převádíme tiery na indexy v poli, aby graf správně stoupal nahoru (HT1 nejvýše)
                 return tierOrder.length - tierOrder.indexOf(h.tier);
             });
 
@@ -248,7 +235,6 @@
                             ticks: {
                                 color: '#94a3b8',
                                 callback: function(value) {
-                                    // Zpětný překlad indexu na název tieru na Y ose
                                     return tierOrder[tierOrder.length - value] || '';
                                 }
                             }
