@@ -61,7 +61,7 @@
             'RHT1': { points: 54, bg: 'bg-black text-red-500 border border-red-900', label: 'RHT1' },
             'RLT1': { points: 44, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT1' },
             'RHT2': { points: 29, bg: 'bg-black text-red-400 border border-red-900', label: 'RHT2' },
-            .RLT2': { points: 22, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT2' }
+            'RLT2': { points: 22, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT2' }
         };
 
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
@@ -72,7 +72,8 @@
 
         async function loadData() {
             try {
-                const response = await fetch('players.json');
+                // Přidán timestamp, aby GitHub Pages nenačítal starou cache souboru
+                const response = await fetch('players.json?v=' + new Date().getTime());
                 playersData = await response.json();
                 render();
             } catch (e) {
