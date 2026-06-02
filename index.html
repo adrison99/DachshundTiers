@@ -72,7 +72,6 @@
 
         async function loadData() {
             try {
-                // Přidán timestamp, aby GitHub Pages nenačítal starou cache souboru
                 const response = await fetch('players.json?v=' + new Date().getTime());
                 playersData = await response.json();
                 render();
