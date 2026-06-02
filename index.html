@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DachshundTiers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #0d0f12; color: #e2e8f0; font-family: sans-serif; }
+        .gold-border { border-color: #eab308; background: linear-gradient(90deg, rgba(234,179,8,0.1) 0%, rgba(0,0,0,0) 100%); }
+        .silver-border { border-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1) 0%, rgba(0,0,0,0) 100%); }
+        .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.1) 0%, rgba(0,0,0,0) 100%); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
+            <h1 class="text-3xl font-extrabold tracking-wider text-amber-500">DACHSHUND<span class="text-white">TIERS</span></h1>
+            
+            <div class="relative w-full md:w-64">
+                <input type="text" id="search" placeholder="Vyhledat hráče..." class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-amber-500">
+            </div>
+        </header>
+
+        <nav class="flex flex-wrap gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
+            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black">Overall 🏆</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">GoldSMP 🟢</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">NetheriteSword ⚔️</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition">IronAxe 🪓</button>
+        </nav>
+
+        <main id="leaderboard-container" class="space-y-3"></main>
+    </div>
+
+    <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden p-4 z-50">
+        <div class="bg-gray-950 border border-gray-800 p-6 rounded-2xl w-full max-w-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
+            <h3 class="text-xl font-bold mb-1" id="modal-title">Tier Journey</h3>
+            <p class="text-gray-400 text-sm mb-4" id="modal-subtitle"></p>
+            <div class="w-full h-64">
+                <canvas id="historyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Bodový systém a nastavení stylů pro Tiery
+        const tierConfig = {
+            'HT1': { points: 60, bg: 'bg-yellow-400 text-black', label: 'HT1' },
+            'LT1': { points: 48, bg: 'bg-amber-600 text-white', label: 'LT1' },
+            'HT2': { points: 32, bg: 'bg-slate-300 text-black', label: 'HT2' },
+            'LT2': { points: 24, bg: 'bg-slate-500 text-white', label: 'LT2' },
+            'HT3': { points: 16, bg: 'bg-amber-900 text-white', label: 'HT3' },
+            'LT3': { points: 10, bg: 'bg-amber-700 text-white', label: 'LT3' },
+            'HT4': { points: 5,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT4' },
+            'LT4': { points: 3,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT4' },
+            'HT5': { points: 2,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT5' },
+            'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5' },
+            // Retired tiery
+            'RHT1': { points: 54, bg: 'bg-black text-red-500 border border-red-900', label: 'RHT1' },
+            'RLT1': { points: 44, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT1' },
+            'RHT2': { points: 29, bg: 'bg-black text-red-400 border border-red-900', label: 'RHT2' },
+            'RLT2': { points: 22, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT2' }
+        };
+
+        const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
+
+        let playersData = [];
+        let currentTab = 'Overall';
+        let chartInstance = null;
+
+        // Načtení dat z JSONu
+        async function loadData() {
+            try {
+                const response = await fetch('players.json');
+                playersData = await response.json();
+                render();
+            } catch (e) {
+                console.error("Chyba při načítání players.json", e);
+            }
+        }
+
+        // Výpočet celkových bodů pro Overall
+        function calculateOverallPoints(player) {
+            let total = 0;
+            let hasRetired = false;
+            for (let m in player.modes) {
+                const tier = player.modes[m];
+                if (tierConfig[tier]) {
+                    total += tierConfig[tier].points;
+                    if (tier.startsWith('R')) hasRetired = true;
+                }
+            }
+            return { total, hasRetired };
+        }
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('#tabs button').forEach(btn => {
+                btn.className = "px-5 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition";
+            });
+            document.getElementById(`tab-${tabId}`).className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black";
+            render();
+        }
+
+        function render() {
+            const container = document.getElementById('leaderboard-container');
+            const searchQuery = document.getElementById('search').value.toLowerCase();
+            container.innerHTML = '';
+
+            let processedPlayers = [];
+
+            if (currentTab === 'Overall') {
+                // Filtrování a řazení pro OVERALL
+                processedPlayers = playersData.map(p => {
+                    const score = calculateOverallPoints(p);
+                    return { ...p, score: score.total, isRetired: score.hasRetired };
+                });
+                // Řazení: Aktivní podle bodů, pak Retired podle bodů
+                processedPlayers.sort((a, b) => {
+                    if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
+                    return b.score - a.score;
+                });
+            } else {
+                // Filtrování a řazení pro KONKRÉTNÍ GAMEMODE
+                processedPlayers = playersData
+                    .filter(p => p.modes[currentTab])
+                    .map(p => {
+                        const tier = p.modes[currentTab];
+                        const isRetired = tier.startsWith('R');
+                        const orderIndex = tierOrder.indexOf(tier);
+                        return { ...p, currentTier: tier, isRetired, orderIndex: orderIndex !== -1 ? orderIndex : 999 };
+                    });
+                
+                // Řazení pro Gamemode: Podle pole tierOrder, Retired na konec
+                processedPlayers.sort((a, b) => {
+                    if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
+                    return a.orderIndex - b.orderIndex;
+                });
+            }
+
+            // Aplikace vyhledávacího filtru
+            if (searchQuery) {
+                processedPlayers = processedPlayers.filter(p => p.username.toLowerCase().includes(searchQuery));
+            }
+
+            // Generování HTML řádků
+            processedPlayers.forEach((player, index) => {
+                const rank = index + 1;
+                let borderClass = "border-gray-900 bg-gray-950/40";
+                let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
+
+                // Obarvení top 3 míst v Overall nebo v gamemodu
+                if (rank === 1) {
+                    borderClass = "gold-border border-l-4";
+                    rankBadge = `<div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-black shadow-lg shadow-yellow-500/20">1</div>`;
+                } else if (rank === 2) {
+                    borderClass = "silver-border border-l-4";
+                    rankBadge = `<div class="w-8 h-8 rounded-full bg-slate-400 text-black flex items-center justify-center font-black">2</div>`;
+                } else if (rank === 3) {
+                    borderClass = "bronze-border border-l-4";
+                    rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
+                }
+
+                // Sestavení badge pro jednotlivé módy
+                let badgesHTML = '';
+                if (currentTab === 'Overall') {
+                    badgesHTML = `
+                        <div class="text-right text-sm font-bold text-amber-500 mr-4">${player.score} pts</div>
+                        <div class="flex flex-wrap gap-2">
+                            ${Object.entries(player.modes).map(([mode, t]) => {
+                                const cfg = tierConfig[t] || { bg: 'bg-gray-800', label: t };
+                                return `<span onclick="openHistory('${player.username}', '${mode}')" class="px-2 py-1 rounded text-xs font-bold cursor-pointer hover:scale-105 transition ${cfg.bg}">${mode}: ${cfg.label}</span>`;
+                            }).join('')}
+                        </div>
+                    `;
+                } else {
+                    const cfg = tierConfig[player.currentTier];
+                    badgesHTML = `
+                        <span onclick="openHistory('${player.username}', '${currentTab}')" class="px-3 py-1.5 rounded-lg text-sm font-bold cursor-pointer hover:scale-105 transition ${cfg.bg}">
+                            ${cfg.label}
+                        </span>
+                    `;
+                }
+
+                const row = document.createElement('div');
+                row.className = `flex items-center justify-between p-4 rounded-xl border transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
+                row.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        ${rankBadge}
+                        <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700">
+                        <span class="font-bold text-white tracking-wide text-base md:text-lg">${player.username}</span>
+                    </div>
+                    <div class="flex items-center">
+                        ${badgesHTML}
+                    </div>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // Funkce pro otevření historie a vykreslení grafu
+        function openHistory(username, gamemode) {
+            const player = playersData.find(p => p.username === username);
+            if (!player || !player.history || !player.history[gamemode]) {
+                alert(`Hráč ${username} nemá pro mód ${gamemode} zadanou historii.`);
+                return;
+            }
+
+            const historyEntries = player.history[gamemode];
+            document.getElementById('modal-title').innerText = `${username} - ${gamemode}`;
+            document.getElementById('modal-subtitle').innerText = `Historie vývoje tierů v čase`;
+            document.getElementById('modal').classList.remove('hidden');
+
+            const labels = historyEntries.map(h => h.date);
+            const dataPoints = historyEntries.map(h => {
+                // Převádíme tiery na indexy v poli, aby graf správně stoupal nahoru (HT1 nejvýše)
+                return tierOrder.length - tierOrder.indexOf(h.tier);
+            });
+
+            if (chartInstance) chartInstance.destroy();
+
+            const ctx = document.getElementById('historyChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tier level',
+                        data: dataPoints,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.2,
+                        pointBackgroundColor: '#fff',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            grid: { color: '#1e293b' },
+                            ticks: {
+                                color: '#94a3b8',
+                                callback: function(value) {
+                                    // Zpětný překlad indexu na název tieru na Y ose
+                                    return tierOrder[tierOrder.length - value] || '';
+                                }
+                            }
+                        },
+                        x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                    }
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        document.getElementById('search').addEventListener('input', render);
+        window.onload = loadData;
+    </script>
+</body>
+</html>
