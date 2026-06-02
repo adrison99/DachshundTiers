@@ -1,0 +1,42 @@
+[
+  {
+    "username": "kufrajzcz",
+    "modes": {
+      "GoldSMP": "HT1",
+      "NetheriteSword": "LT2",
+      "IronAxe": "HT2"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "22.9.2024", "tier": "HT4"},
+        {"date": "8.10.2024", "tier": "LT3"},
+        {"date": "27.1.2025", "tier": "HT2"},
+        {"date": "29.3.2026", "tier": "LT1"},
+        {"date": "19.5.2026", "tier": "HT1"}
+      ]
+    }
+  },
+  {
+    "username": "caisem",
+    "modes": {
+      "GoldSMP": "LT2",
+      "NetheriteSword": "HT1",
+      "IronAxe": "HT2"
+    },
+    "history": {
+      "NetheriteSword": [
+        {"date": "01.05.2026", "tier": "LT1"},
+        {"date": "02.06.2026", "tier": "HT1"}
+      ]
+    }
+  },
+  {
+    "username": "RetiredHrac",
+    "modes": {
+      "GoldSMP": "RHT1",
+      "NetheriteSword": "RLT2",
+      "IronAxe": "HT4"
+    },
+    "history": {}
+  }
+]
