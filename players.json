@@ -2,7 +2,7 @@
   {
     "username": "Atrajmix_",
     "modes": {
-      "NetheriteSword": "LT3",
+      "NetheriteSword": "LT3"
     },
     "history": {
       "NetheriteSword": [
@@ -14,12 +14,12 @@
     "username": "Adrison99",
     "modes": {
       "GoldSMP": "LT3",
-      "NetheriteSword": "LT3",
+      "NetheriteSword": "LT3"
     },
     "history": {
       "GoldSMP": [
         {"date": "16.05.2026", "tier": "HT1"}
-      ]
+      ],
       "NetheriteSword": [
         {"date": "16.05.2026", "tier": "HT1"}
       ]
