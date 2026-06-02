@@ -61,7 +61,7 @@
             'RHT1': { points: 54, bg: 'bg-black text-red-500 border border-red-900', label: 'RHT1' },
             'RLT1': { points: 44, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT1' },
             'RHT2': { points: 29, bg: 'bg-black text-red-400 border border-red-900', label: 'RHT2' },
-            'RLT2': { points: 22, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT2' }
+            .RLT2': { points: 22, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT2' }
         };
 
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
@@ -95,7 +95,6 @@
             return { total, hasRetired };
         }
 
-        // Nová funkce pro výpočet ranku (titulu) na základě bodů
         function getRankTitle(points) {
             if (points >= 240) return { title: 'THE BEST', bg: 'bg-red-500/20 text-red-400 border-red-500/30' };
             if (points >= 210) return { title: 'Legenda', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
@@ -123,7 +122,6 @@
 
             let processedPlayers = [];
 
-            // Vždy nejprve spočítáme celkové skóre pro všechny, abychom znali jejich rank podle bodů
             processedPlayers = playersData.map(p => {
                 const score = calculateOverallPoints(p);
                 return { ...p, overallScore: score.total, isRetired: score.hasRetired };
@@ -170,13 +168,11 @@
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
                 }
 
-                // Získání správného titulu na základě celkových bodů
                 const rankInfo = getRankTitle(player.overallScore);
 
                 let badgesHTML = '';
                 if (currentTab === 'Overall') {
                     badgesHTML = `
-                        <div class="text-right text-sm font-bold text-amber-500 mr-4">${player.overallScore} pts</div>
                         <div class="flex flex-wrap gap-2">
                             ${Object.entries(player.modes || {}).map(([mode, t]) => {
                                 const cfg = tierConfig[t] || { bg: 'bg-gray-800', label: t };
@@ -201,9 +197,9 @@
                         <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700">
                         <div class="flex flex-col justify-center">
                             <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
-                            <div class="flex items-center gap-2 mt-0.5">
-                                <span class="text-xs font-semibold text-indigo-400">${player.overallScore}</span>
-                                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                            <div class="flex items-center gap-2 mt-1.5">
+                                <span class="text-sm font-bold text-indigo-400">${player.overallScore}</span>
+                                <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
                             </div>
                         </div>
                     </div>
