@@ -1,42 +1,39 @@
 [
   {
-    "username": "kufrajzcz",
+    "username": "Atrajmix_",
     "modes": {
-      "GoldSMP": "HT1",
-      "NetheriteSword": "LT2",
-      "IronAxe": "HT2"
-    },
-    "history": {
-      "GoldSMP": [
-        {"date": "22.9.2024", "tier": "HT4"},
-        {"date": "8.10.2024", "tier": "LT3"},
-        {"date": "27.1.2025", "tier": "HT2"},
-        {"date": "29.3.2026", "tier": "LT1"},
-        {"date": "19.5.2026", "tier": "HT1"}
-      ]
-    }
-  },
-  {
-    "username": "caisem",
-    "modes": {
-      "GoldSMP": "LT2",
-      "NetheriteSword": "HT1",
-      "IronAxe": "HT2"
+      "NetheriteSword": "LT3",
     },
     "history": {
       "NetheriteSword": [
-        {"date": "01.05.2026", "tier": "LT1"},
-        {"date": "02.06.2026", "tier": "HT1"}
+        {"date": "16.5.2026", "tier": "LT3"}
       ]
     }
   },
   {
-    "username": "RetiredHrac",
+    "username": "Adrison99",
     "modes": {
-      "GoldSMP": "RHT1",
-      "NetheriteSword": "RLT2",
-      "IronAxe": "HT4"
+      "GoldSMP": "LT3",
+      "NetheriteSword": "LT3",
     },
-    "history": {}
+    "history": {
+      "GoldSMP": [
+        {"date": "16.05.2026", "tier": "HT1"}
+      ]
+      "NetheriteSword": [
+        {"date": "16.05.2026", "tier": "HT1"}
+      ]
+    }
+  },
+  {
+    "username": "Lewron7485",
+    "modes": {
+      "IronAxe": "LT3"
+    },
+    "history": {
+      "IronAxe": [
+        {"date": "16.05.2026", "tier": "LT3"}
+      ]
+    }
   }
 ]
