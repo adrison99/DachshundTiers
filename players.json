@@ -42,11 +42,10 @@
   },
   {
     "username": "marekfire",
-    "isBestCZSK": true,
     "modes": {
       "GoldSMP": "HT4",
       "NetheriteSword": "LT3",
-      "UHCMace": "HT3"
+      "UHCMace": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -57,26 +56,30 @@
       ],
       "UHCMace": [
         {"date": "02.06.2026", "tier": "LT3"},
-        {"date": "02.06.2026", "tier": "HT3"}
+        {"date": "02.06.2026", "tier": "HT3"},
+        {"date": "03.06.2026", "tier": "LT3"}
       ]
     }
   },
   {
     "username": "Megakraftak_",
+    "isBestCZSK": true,
     "modes": {
-      "GoldSMP": "LT3",
+      "GoldSMP": "HT3",
       "NetheriteSword": "LT3",
-      "UHCMace": "LT3"
+      "UHCMace": "HT3"
     },
     "history": {
       "GoldSMP": [
-        {"date": "03.06.2026", "tier": "LT3"}
+        {"date": "03.06.2026", "tier": "LT3"},
+        {"date": "03.06.2026", "tier": "HT3"}
       ],
       "NetheriteSword": [
         {"date": "03.06.2026", "tier": "LT3"}
       ],
       "UHCMace": [
-        {"date": "03.06.2026", "tier": "LT3"}
+        {"date": "03.06.2026", "tier": "LT3"},
+        {"date": "03.06.2026", "tier": "HT3"}
       ]
     }
   },
