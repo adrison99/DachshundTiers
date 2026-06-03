@@ -60,5 +60,43 @@
         {"date": "02.06.2026", "tier": "HT3"}
       ]
     }
+  },
+  {
+    "username": "Megakraftak_",
+    "modes": {
+      "GoldSMP": "LT3",
+      "NetheriteSword": "LT3",
+      "UHCMace": "LT3"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "03.06.2026", "tier": "LT3"}
+      ],
+      "NetheriteSword": [
+        {"date": "03.06.2026", "tier": "LT3"}
+      ],
+      "UHCMace": [
+        {"date": "03.06.2026", "tier": "LT3"}
+      ]
+    }
+  },
+  {
+    "username": "verbaaaa_",
+    "modes": {
+      "GoldSMP": "LT3",
+      "NetheriteSword": "LT3",
+      "UHCMace": "LT3"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "03.06.2026", "tier": "LT3"}
+      ],
+      "NetheriteSword": [
+        {"date": "03.06.2026", "tier": "LT3"}
+      ],
+      "UHCMace": [
+        {"date": "03.06.2026", "tier": "LT3"}
+      ]
+    }
   }
 ]
