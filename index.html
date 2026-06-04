@@ -12,7 +12,6 @@
         .silver-border { border-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1) 0%, rgba(0,0,0,0) 100%); }
         .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.1) 0%, rgba(0,0,0,0) 100%); }
         
-        /* Custom scrollbar pro našeptávač */
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
@@ -26,7 +25,6 @@
             
             <div class="relative w-full md:w-80">
                 <input type="text" id="search" placeholder="Vyhledat hráče..." autocomplete="off" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
-                
                 <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] border border-gray-800 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
             </div>
         </header>
@@ -42,9 +40,9 @@
         <main id="leaderboard-container" class="space-y-3"></main>
     </div>
 
-    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50 transition-all duration-300">
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
         <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] border border-gray-800 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
-            <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl transition">&times;</button>
+            <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
             
             <div class="flex flex-col items-center mt-2">
                 <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4">
@@ -69,28 +67,71 @@
             </div>
 
             <div class="flex gap-2 justify-center mt-6">
-                <button class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
+                <button onclick="openCompareSelection()" class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
                 <button class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Rank History</button>
             </div>
         </div>
     </div>
 
+    <div id="compare-select-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
+        <div class="bg-gray-950 border border-gray-800 p-6 rounded-3xl w-full max-w-lg relative shadow-2xl">
+            <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            
+            <h3 class="text-2xl font-black text-white mb-1">Výber hráče pro porovnání</h3>
+            <p class="text-gray-500 text-xs mb-4">Porovnání s <span id="compare-with-name" class="font-bold text-gray-400">---</span></p>
+            
+            <input type="text" id="compare-search-input" placeholder="Jméno hráče..." autocomplete="off" class="w-full bg-gray-900/60 border border-gray-800 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 mb-4">
+            
+            <div id="compare-players-list" class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1">
+                </div>
+        </div>
+    </div>
+
+    <div id="vs-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
+        <div class="bg-gradient-to-b from-[#161722] to-[#0d0e12] border border-gray-800 p-6 rounded-3xl w-full max-w-2xl relative shadow-2xl">
+            <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            
+            <h3 class="text-lg font-bold text-gray-400 mb-6 border-b border-gray-800/60 pb-3">Porovnání hráčů</h3>
+            
+            <div class="flex items-center justify-between gap-4 mb-8">
+                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                    <img id="vs-p1-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
+                    <span id="vs-p1-score" class="text-xs text-gray-500 mt-0.5">#0</span>
+                    <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
+                </div>
+                
+                <div class="font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
+                
+                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                    <img id="vs-p2-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
+                    <span id="vs-p2-score" class="text-xs text-gray-500 mt-0.5">#0</span>
+                    <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
+                </div>
+            </div>
+
+            <div class="space-y-2" id="vs-kits-rows">
+                </div>
+        </div>
+    </div>
+
     <script>
         const tierConfig = {
-            'HT1': { points: 60, bg: 'bg-yellow-400 text-black border-yellow-300', label: 'HT1' },
-            'LT1': { points: 48, bg: 'bg-amber-600 text-white border-amber-500', label: 'LT1' },
-            'HT2': { points: 32, bg: 'bg-slate-300 text-black border-slate-200', label: 'HT2' },
-            'LT2': { points: 24, bg: 'bg-slate-500 text-white border-slate-400', label: 'LT2' },
-            'HT3': { points: 16, bg: 'bg-amber-900 text-white border-amber-800', label: 'HT3' },
-            'LT3': { points: 10, bg: 'bg-amber-700 text-white border-amber-600', label: 'LT3' },
-            'HT4': { points: 5,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT4' },
-            'LT4': { points: 3,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT4' },
-            'HT5': { points: 2,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT5' },
-            'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5' },
-            'RHT1': { points: 54, bg: 'bg-black text-red-500 border border-red-900', label: 'RHT1' },
-            'RLT1': { points: 44, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT1' },
-            'RHT2': { points: 29, bg: 'bg-black text-red-400 border border-red-900', label: 'RHT2' },
-            'RLT2': { points: 22, bg: 'bg-black text-red-400 border border-red-900', label: 'RLT2' }
+            'HT1': { points: 60, bg: 'bg-yellow-400 text-black border-yellow-300', label: 'HT1', val: 14 },
+            'LT1': { points: 48, bg: 'bg-amber-600 text-white border-amber-500', label: 'LT1', val: 13 },
+            'RHT1': { points: 54, bg: 'bg-black text-red-500 border-red-900', label: 'RHT1', val: 12 },
+            'RLT1': { points: 44, bg: 'bg-black text-red-400 border-red-900', label: 'RLT1', val: 11 },
+            'HT2': { points: 32, bg: 'bg-slate-300 text-black border-slate-200', label: 'HT2', val: 10 },
+            'LT2': { points: 24, bg: 'bg-slate-500 text-white border-slate-400', label: 'LT2', val: 9 },
+            'RHT2': { points: 29, bg: 'bg-black text-red-400 border-red-900', label: 'RHT2', val: 8 },
+            'RLT2': { points: 22, bg: 'bg-black text-red-400 border-red-900', label: 'RLT2', val: 7 },
+            'HT3': { points: 16, bg: 'bg-amber-900 text-white border-amber-800', label: 'HT3', val: 6 },
+            'LT3': { points: 10, bg: 'bg-amber-700 text-white border-amber-600', label: 'LT3', val: 5 },
+            'HT4': { points: 5,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT4', val: 4 },
+            'LT4': { points: 3,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT4', val: 3 },
+            'HT5': { points: 2,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT5', val: 2 },
+            'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5', val: 1 }
         };
 
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
@@ -149,7 +190,6 @@
             render();
         }
 
-        // RENDER LEADERBOARDU (Nezávislý na psaní do vyhledávače)
         function render() {
             const container = document.getElementById('leaderboard-container');
             if (!container) return;
@@ -237,7 +277,7 @@
             });
         }
 
-        // LOGIKA PRO SKUTEČNÝ NAŠEPTÁVAČ (SEARCH DROPDOWN)
+        // NAŠEPTÁVAČ HLAVNÍHO VYHLEDÁVÁNÍ
         const searchInput = document.getElementById('search');
         const searchDropdown = document.getElementById('search-dropdown');
 
@@ -248,7 +288,6 @@
                 return;
             }
 
-            // Filtrace hráčů pro dropdown menu
             const matches = playersData.map(p => {
                 const score = calculateOverallPoints(p);
                 return { ...p, overallScore: score.total };
@@ -279,14 +318,12 @@
             }
         });
 
-        // Schování dropdownu při kliknutí mimo vyhledávač
         document.addEventListener('click', (e) => {
             if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
                 searchDropdown.classList.add('hidden');
             }
         });
 
-        // OTEVŘENÍ NOVÉHO PROFILOVÉHO MODALU
         function openPlayerModal(player) {
             activeModalPlayer = player;
             if (!player.overallScore) {
@@ -301,7 +338,6 @@
             document.getElementById('modal-points').innerText = player.overallScore;
             document.getElementById('modal-title-label').innerText = rankInfo.title === 'BEST CZECHIA' ? 'Legenda' : rankInfo.title;
 
-            // Vygenerování kruhových badge pro kity (podle screenu)
             const kitsContainer = document.getElementById('modal-kits-container');
             kitsContainer.innerHTML = '';
 
@@ -312,9 +348,7 @@
                     
                     const badgeDiv = document.createElement('div');
                     badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group";
-                    // Kliknutí na kit načte jeho graf historie
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
-                    
                     badgeDiv.innerHTML = `
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black text-[10px] border-2 transition group-hover:scale-110 ${cfg.bg}">
                             <span>${icon}</span>
@@ -325,7 +359,6 @@
                     kitsContainer.appendChild(badgeDiv);
                 });
 
-                // Automaticky načte graf pro první dostupný kit v seznamu
                 const firstKit = Object.keys(player.modes)[0];
                 if (firstKit) loadHistoryChart(player.username, firstKit);
             } else {
@@ -335,7 +368,6 @@
             document.getElementById('modal').classList.remove('hidden');
         }
 
-        // NAČTENÍ CHART.JS GRAFU UVNITŘ PROFILU
         function loadHistoryChart(username, gamemode) {
             const player = playersData.find(p => p.username === username);
             const ctx = document.getElementById('historyChart').getContext('2d');
@@ -343,7 +375,6 @@
             if (chartInstance) chartInstance.destroy();
 
             if (!player || !player.history || !player.history[gamemode]) {
-                // Pokud nemá historii, vymažeme graf
                 chartInstance = new Chart(ctx, {
                     type: 'line',
                     data: { labels: ['Žádná data'], datasets: [] },
@@ -394,8 +425,118 @@
             });
         }
 
-        function closeModal() {
+        /* --- LOGIKA POROVNÁVÁNÍ (NOVÁ ČÁST) --- */
+        function openCompareSelection() {
+            if (!activeModalPlayer) return;
+            
+            // Schováme hlavní detail
             document.getElementById('modal').classList.add('hidden');
+            
+            document.getElementById('compare-with-name').innerText = activeModalPlayer.username;
+            document.getElementById('compare-search-input').value = '';
+            
+            buildCompareList('');
+            document.getElementById('compare-select-modal').classList.remove('hidden');
+        }
+
+        function buildCompareList(filterQuery) {
+            const listContainer = document.getElementById('compare-players-list');
+            listContainer.innerHTML = '';
+
+            const filtered = playersData.map(p => {
+                return { ...p, overallScore: calculateOverallPoints(p).total };
+            }).filter(p => p.username !== activeModalPlayer.username && p.username.toLowerCase().includes(filterQuery.toLowerCase()));
+
+            filtered.forEach((player, idx) => {
+                const rankInfo = getRankTitle(player);
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between p-3 bg-gray-900/40 hover:bg-gray-900/90 border border-gray-800/60 rounded-xl cursor-pointer transition";
+                div.onclick = () => startComparison(player);
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="https://minotar.net/avatar/${player.username}/32" class="w-8 h-8 rounded bg-gray-800">
+                        <span class="font-bold text-white text-sm">${player.username}</span>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                        <span>#${idx + 1} · ${player.overallScore} pts · </span>
+                        <span class="text-amber-500 font-bold">${rankInfo.title}</span>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        document.getElementById('compare-search-input').addEventListener('input', (e) => {
+            buildCompareList(e.target.value);
+        });
+
+        function startComparison(opponent) {
+            document.getElementById('compare-select-modal').classList.add('hidden');
+            
+            const p1 = activeModalPlayer;
+            const p2 = opponent;
+
+            const r1 = getRankTitle(p1);
+            const r2 = getRankTitle(p2);
+
+            // Nastavení karet hráčů nahoru
+            document.getElementById('vs-p1-avatar').src = `https://minotar.net/avatar/${p1.username}/60`;
+            document.getElementById('vs-p1-name').innerText = p1.username;
+            document.getElementById('vs-p1-score').innerText = `${p1.overallScore} pts`;
+            document.getElementById('vs-p1-rank').innerText = r1.title;
+
+            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.username}/60`;
+            document.getElementById('vs-p2-name').innerText = p2.username;
+            document.getElementById('vs-p2-score').innerText = `${p2.overallScore} pts`;
+            document.getElementById('vs-p2-rank').innerText = r2.title;
+
+            // Vygenerování kit řádků
+            const rowsContainer = document.getElementById('vs-kits-rows');
+            rowsContainer.innerHTML = '';
+
+            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace'];
+
+            allKits.forEach(kit => {
+                const t1 = p1.modes ? p1.modes[kit] : null;
+                const t2 = p2.modes ? p2.modes[kit] : null;
+
+                const icon = kitIcons[kit] || '⚔️';
+
+                let c1 = tierConfig[t1];
+                let c2 = tierConfig[t2];
+
+                // Výpočet, kdo má lepší tier (čím menší index v tierOrder, tím lepší tier)
+                let idx1 = tierOrder.indexOf(t1);
+                let idx2 = tierOrder.indexOf(t2);
+
+                if (idx1 === -1) idx1 = 999;
+                if (idx2 === -1) idx2 = 999;
+
+                let style1 = "bg-gray-900/20 text-gray-600 border-gray-950 opacity-40";
+                let style2 = "bg-gray-900/20 text-gray-600 border-gray-950 opacity-40";
+
+                if (t1) {
+                    style1 = (idx1 <= idx2) ? c1.bg + " border-2 shadow-md shadow-amber-500/5" : "bg-gray-800/40 text-gray-500 border-gray-800";
+                }
+                if (t2) {
+                    style2 = (idx2 <= idx1) ? c2.bg + " border-2 shadow-md shadow-amber-500/5" : "bg-gray-800/40 text-gray-500 border-gray-800";
+                }
+
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
+                row.innerHTML = `
+                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block w-14 ${style1}">${t1 || '---'}</span></div>
+                    <div class="flex items-center gap-1.5 text-sm text-gray-400 font-bold"><span>${icon}</span><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block w-14 ${style2}">${t2 || '---'}</span></div>
+                `;
+                rowsContainer.appendChild(row);
+            });
+
+            document.getElementById('vs-modal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
         }
 
         window.onload = loadData;
