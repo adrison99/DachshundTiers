@@ -11,6 +11,11 @@
         .gold-border { border-color: #eab308; background: linear-gradient(90deg, rgba(234,179,8,0.1) 0%, rgba(0,0,0,0) 100%); }
         .silver-border { border-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1) 0%, rgba(0,0,0,0) 100%); }
         .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.1) 0%, rgba(0,0,0,0) 100%); }
+        
+        /* Custom scrollbar pro našeptávač */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -19,8 +24,10 @@
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
             <h1 class="text-3xl font-extrabold tracking-wider text-amber-500">DACHSHUND<span class="text-white">TIERS</span></h1>
             
-            <div class="relative w-full md:w-64">
-                <input type="text" id="search" placeholder="Vyhledat hráče..." class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-amber-500">
+            <div class="relative w-full md:w-80">
+                <input type="text" id="search" placeholder="Vyhledat hráče..." autocomplete="off" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
+                
+                <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] border border-gray-800 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
             </div>
         </header>
 
@@ -35,25 +42,47 @@
         <main id="leaderboard-container" class="space-y-3"></main>
     </div>
 
-    <div id="modal" class="fixed inset-0 bg-black/80 flex items-center justify-center hidden p-4 z-50">
-        <div class="bg-gray-950 border border-gray-800 p-6 rounded-2xl w-full max-w-2xl relative">
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">&times;</button>
-            <h3 class="text-xl font-bold mb-1" id="modal-title">Tier Journey</h3>
-            <p class="text-gray-400 text-sm mb-4" id="modal-subtitle"></p>
-            <div class="w-full h-64">
-                <canvas id="historyChart"></canvas>
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50 transition-all duration-300">
+        <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] border border-gray-800 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl transition">&times;</button>
+            
+            <div class="flex flex-col items-center mt-2">
+                <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4">
+                <h3 class="text-3xl font-black text-amber-400 tracking-wide" id="modal-username">---</h3>
+                <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1 mb-4" id="modal-rank-badge">RANKED PLAYER</p>
+            </div>
+
+            <div class="inline-flex items-center gap-2 bg-gray-950/60 border border-gray-800 px-4 py-2 rounded-full text-sm mb-6">
+                <span class="font-bold text-white"><span id="modal-points">0</span> points</span>
+                <span class="text-amber-500 font-extrabold" id="modal-title-label">---</span>
+            </div>
+
+            <div class="border-t border-gray-800/60 pt-5 mb-6">
+                <div class="flex flex-wrap justify-center gap-4" id="modal-kits-container"></div>
+            </div>
+
+            <div class="border-t border-gray-800/60 pt-4">
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider text-left mb-2">Tier Journey (Klikni na kit výše)</h4>
+                <div class="w-full h-44 bg-gray-950/40 border border-gray-900 rounded-xl p-2">
+                    <canvas id="historyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="flex gap-2 justify-center mt-6">
+                <button class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
+                <button class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Rank History</button>
             </div>
         </div>
     </div>
 
     <script>
         const tierConfig = {
-            'HT1': { points: 60, bg: 'bg-yellow-400 text-black', label: 'HT1' },
-            'LT1': { points: 48, bg: 'bg-amber-600 text-white', label: 'LT1' },
-            'HT2': { points: 32, bg: 'bg-slate-300 text-black', label: 'HT2' },
-            'LT2': { points: 24, bg: 'bg-slate-500 text-white', label: 'LT2' },
-            'HT3': { points: 16, bg: 'bg-amber-900 text-white', label: 'HT3' },
-            'LT3': { points: 10, bg: 'bg-amber-700 text-white', label: 'LT3' },
+            'HT1': { points: 60, bg: 'bg-yellow-400 text-black border-yellow-300', label: 'HT1' },
+            'LT1': { points: 48, bg: 'bg-amber-600 text-white border-amber-500', label: 'LT1' },
+            'HT2': { points: 32, bg: 'bg-slate-300 text-black border-slate-200', label: 'HT2' },
+            'LT2': { points: 24, bg: 'bg-slate-500 text-white border-slate-400', label: 'LT2' },
+            'HT3': { points: 16, bg: 'bg-amber-900 text-white border-amber-800', label: 'HT3' },
+            'LT3': { points: 10, bg: 'bg-amber-700 text-white border-amber-600', label: 'LT3' },
             'HT4': { points: 5,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT4' },
             'LT4': { points: 3,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT4' },
             'HT5': { points: 2,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT5' },
@@ -65,10 +94,12 @@
         };
 
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
+        const kitIcons = { 'GoldSMP': '🟢', 'NetheriteSword': '⚔️', 'IronAxe': '🪓', 'UHCMace': '👑' };
 
         let playersData = [];
         let currentTab = 'Overall';
         let chartInstance = null;
+        let activeModalPlayer = null;
 
         async function loadData() {
             try {
@@ -96,11 +127,9 @@
         }
 
         function getRankTitle(player) {
-            // Speciální pravidlo pro absolutně nejlepšího hráče na přání
             if (player.isBestCZSK) {
-                return { title: 'THE BEST CZSK', bg: 'bg-red-500/20 text-yellow-400 border-red-500/50 shadow-sm shadow-red-500/10' };
+                return { title: 'BEST CZECHIA', bg: 'bg-red-500/20 text-yellow-400 border-red-500/50 shadow-sm shadow-red-500/10' };
             }
-            
             const points = player.overallScore || 0;
             if (points >= 240) return { title: 'THE BEST', bg: 'bg-red-500/20 text-red-400 border-red-500/30' };
             if (points >= 210) return { title: 'Legenda', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
@@ -120,22 +149,19 @@
             render();
         }
 
+        // RENDER LEADERBOARDU (Nezávislý na psaní do vyhledávače)
         function render() {
             const container = document.getElementById('leaderboard-container');
             if (!container) return;
-            const searchQuery = document.getElementById('search').value.toLowerCase();
             container.innerHTML = '';
 
-            let processedPlayers = [];
-
-            processedPlayers = playersData.map(p => {
+            let processedPlayers = playersData.map(p => {
                 const score = calculateOverallPoints(p);
                 return { ...p, overallScore: score.total, isRetired: score.hasRetired };
             });
 
             if (currentTab === 'Overall') {
                 processedPlayers.sort((a, b) => {
-                    // BEST CZSK má vždy absolutní prioritu a skočí na 1. místo
                     if (a.isBestCZSK && !b.isBestCZSK) return -1;
                     if (!a.isBestCZSK && b.isBestCZSK) return 1;
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
@@ -155,10 +181,6 @@
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
                     return a.orderIndex - b.orderIndex;
                 });
-            }
-
-            if (searchQuery) {
-                processedPlayers = processedPlayers.filter(p => p.username && p.username.toLowerCase().includes(searchQuery));
             }
 
             processedPlayers.forEach((player, index) => {
@@ -185,21 +207,18 @@
                         <div class="flex flex-wrap gap-2">
                             ${Object.entries(player.modes || {}).map(([mode, t]) => {
                                 const cfg = tierConfig[t] || { bg: 'bg-gray-800', label: t };
-                                return `<span onclick="openHistory('${player.username}', '${mode}')" class="px-2 py-1 rounded text-xs font-bold cursor-pointer hover:scale-105 transition ${cfg.bg}">${mode}: ${cfg.label}</span>`;
+                                return `<span class="px-2 py-1 rounded text-xs font-bold ${cfg.bg}">${mode}: ${cfg.label}</span>`;
                             }).join('')}
                         </div>
                     `;
                 } else {
                     const cfg = tierConfig[player.currentTier] || { bg: 'bg-gray-800', label: player.currentTier };
-                    badgesHTML = `
-                        <span onclick="openHistory('${player.username}', '${currentTab}')" class="px-3 py-1.5 rounded-lg text-sm font-bold cursor-pointer hover:scale-105 transition ${cfg.bg}">
-                            ${cfg.label}
-                        </span>
-                    `;
+                    badgesHTML = `<span class="px-3 py-1.5 rounded-lg text-sm font-bold ${cfg.bg}">${cfg.label}</span>`;
                 }
 
                 const row = document.createElement('div');
-                row.className = `flex items-center justify-between p-4 rounded-xl border transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
+                row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
+                row.onclick = () => openPlayerModal(player);
                 row.innerHTML = `
                     <div class="flex items-center gap-4">
                         ${rankBadge}
@@ -212,48 +231,146 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center">
-                        ${badgesHTML}
-                    </div>
+                    <div class="flex items-center">${badgesHTML}</div>
                 `;
                 container.appendChild(row);
             });
         }
 
-        function openHistory(username, gamemode) {
+        // LOGIKA PRO SKUTEČNÝ NAŠEPTÁVAČ (SEARCH DROPDOWN)
+        const searchInput = document.getElementById('search');
+        const searchDropdown = document.getElementById('search-dropdown');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                searchDropdown.classList.add('hidden');
+                return;
+            }
+
+            // Filtrace hráčů pro dropdown menu
+            const matches = playersData.map(p => {
+                const score = calculateOverallPoints(p);
+                return { ...p, overallScore: score.total };
+            }).filter(p => p.username && p.username.toLowerCase().includes(query));
+
+            if (matches.length > 0) {
+                searchDropdown.innerHTML = '';
+                matches.forEach(player => {
+                    const div = document.createElement('div');
+                    div.className = "flex items-center gap-3 p-3 hover:bg-gray-900/80 cursor-pointer border-b border-gray-900 last:border-0 transition";
+                    div.onclick = () => {
+                        openPlayerModal(player);
+                        searchDropdown.classList.add('hidden');
+                        searchInput.value = '';
+                    };
+                    div.innerHTML = `
+                        <img src="https://minotar.net/avatar/${player.username}/32" class="w-8 h-8 rounded bg-gray-800">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-white text-sm">${player.username}</span>
+                            <span class="text-xs text-gray-500">Score: ${player.overallScore}</span>
+                        </div>
+                    `;
+                    searchDropdown.appendChild(div);
+                });
+                searchDropdown.classList.remove('hidden');
+            } else {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        // Schování dropdownu při kliknutí mimo vyhledávač
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        // OTEVŘENÍ NOVÉHO PROFILOVÉHO MODALU
+        function openPlayerModal(player) {
+            activeModalPlayer = player;
+            if (!player.overallScore) {
+                player.overallScore = calculateOverallPoints(player).total;
+            }
+
+            document.getElementById('modal-avatar').src = `https://minotar.net/avatar/${player.username}/100`;
+            document.getElementById('modal-username').innerText = player.username;
+            
+            const rankInfo = getRankTitle(player);
+            document.getElementById('modal-rank-badge').innerText = rankInfo.title;
+            document.getElementById('modal-points').innerText = player.overallScore;
+            document.getElementById('modal-title-label').innerText = rankInfo.title === 'BEST CZECHIA' ? 'Legenda' : rankInfo.title;
+
+            // Vygenerování kruhových badge pro kity (podle screenu)
+            const kitsContainer = document.getElementById('modal-kits-container');
+            kitsContainer.innerHTML = '';
+
+            if (player.modes) {
+                Object.entries(player.modes).forEach(([mode, tier]) => {
+                    const cfg = tierConfig[tier] || { bg: 'bg-gray-800', label: tier };
+                    const icon = kitIcons[mode] || '⚔️';
+                    
+                    const badgeDiv = document.createElement('div');
+                    badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group";
+                    // Kliknutí na kit načte jeho graf historie
+                    badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
+                    
+                    badgeDiv.innerHTML = `
+                        <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black text-[10px] border-2 transition group-hover:scale-110 ${cfg.bg}">
+                            <span>${icon}</span>
+                            <span class="leading-none mt-0.5">${cfg.label}</span>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-500 group-hover:text-white transition">${mode}</span>
+                    `;
+                    kitsContainer.appendChild(badgeDiv);
+                });
+
+                // Automaticky načte graf pro první dostupný kit v seznamu
+                const firstKit = Object.keys(player.modes)[0];
+                if (firstKit) loadHistoryChart(player.username, firstKit);
+            } else {
+                if (chartInstance) chartInstance.destroy();
+            }
+
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        // NAČTENÍ CHART.JS GRAFU UVNITŘ PROFILU
+        function loadHistoryChart(username, gamemode) {
             const player = playersData.find(p => p.username === username);
+            const ctx = document.getElementById('historyChart').getContext('2d');
+            
+            if (chartInstance) chartInstance.destroy();
+
             if (!player || !player.history || !player.history[gamemode]) {
-                alert(`Hráč ${username} nemá pro mód ${gamemode} zadanou historii.`);
+                // Pokud nemá historii, vymažeme graf
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: ['Žádná data'], datasets: [] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
                 return;
             }
 
             const historyEntries = player.history[gamemode];
-            document.getElementById('modal-title').innerText = `${username} - ${gamemode}`;
-            document.getElementById('modal-subtitle').innerText = `Historie vývoje tierů v čase`;
-            document.getElementById('modal').classList.remove('hidden');
-
             const labels = historyEntries.map(h => h.date);
             const dataPoints = historyEntries.map(h => {
                 const idx = tierOrder.indexOf(h.tier);
                 return idx !== -1 ? (tierOrder.length - idx) : 0;
             });
 
-            if (chartInstance) chartInstance.destroy();
-
-            const ctx = document.getElementById('historyChart').getContext('2d');
             chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Tier level',
                         data: dataPoints,
                         borderColor: '#f59e0b',
-                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
                         borderWidth: 3,
                         tension: 0.2,
                         pointBackgroundColor: '#fff',
-                        pointRadius: 5
+                        pointRadius: 4
                     }]
                 },
                 options: {
@@ -264,13 +381,14 @@
                         y: {
                             grid: { color: '#1e293b' },
                             ticks: {
-                                color: '#94a3b8',
+                                color: '#64748b',
+                                font: { size: 10, weight: 'bold' },
                                 callback: function(value) {
                                     return tierOrder[tierOrder.length - value] || '';
                                 }
                             }
                         },
-                        x: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+                        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 10 } } }
                     }
                 }
             });
@@ -280,7 +398,6 @@
             document.getElementById('modal').classList.add('hidden');
         }
 
-        document.getElementById('search').addEventListener('input', render);
         window.onload = loadData;
     </script>
 </body>
