@@ -67,7 +67,8 @@
     "modes": {
       "GoldSMP": "HT3",
       "NetheriteSword": "LT3",
-      "UHCMace": "HT3"
+      "UHCMace": "HT3",
+      "IronAxe": "HT3"
     },
     "history": {
       "GoldSMP": [
@@ -80,24 +81,19 @@
       "UHCMace": [
         {"date": "03.06.2026", "tier": "LT3"},
         {"date": "03.06.2026", "tier": "HT3"}
+      ],
+      "IronAxe": [
+        {"date": "04.06.2026", "tier": "HT3"}
       ]
     }
   },
   {
-    "username": "verbaaaa_",
+    "username": "Yexxx_",
     "modes": {
-      "GoldSMP": "LT3",
-      "NetheriteSword": "LT3",
-      "UHCMace": "LT3"
+      "IronAxe": "LT3"
     },
     "history": {
-      "GoldSMP": [
-        {"date": "03.06.2026", "tier": "LT3"}
-      ],
-      "NetheriteSword": [
-        {"date": "03.06.2026", "tier": "LT3"}
-      ],
-      "UHCMace": [
+      "IronAxe": [
         {"date": "03.06.2026", "tier": "LT3"}
       ]
     }
