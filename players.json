@@ -68,28 +68,30 @@
   },
   {
     "username": "Megakraftak_",
-    "isBestCZSK": true,
     "modes": {
-      "GoldSMP": "HT3",
+      "GoldSMP": "LT3",
       "NetheriteSword": "LT3",
-      "UHCMace": "HT3",
-      "IronAxe": "HT3"
+      "UHCMace": "LT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "GoldSMP": [
         {"date": "03.06.2026", "tier": "LT3"},
-        {"date": "03.06.2026", "tier": "HT3"}
+        {"date": "03.06.2026", "tier": "HT3"},
+        {"date": "05.07.2026", "tier": "HT3"}
       ],
       "NetheriteSword": [
         {"date": "03.06.2026", "tier": "LT3"}
       ],
       "UHCMace": [
         {"date": "03.06.2026", "tier": "LT3"},
-        {"date": "03.06.2026", "tier": "HT3"}
+        {"date": "03.06.2026", "tier": "HT3"},
+        {"date": "05.07.2026", "tier": "LT3"}
       ],
       "IronAxe": [
         {"date": "04.06.2026", "tier": "LT3"},
-        {"date": "04.06.2026", "tier": "HT3"}
+        {"date": "04.06.2026", "tier": "HT3"},
+        {"date": "05.07.2026", "tier": "LT3"}
       ]
     }
   },
@@ -101,6 +103,52 @@
     "history": {
       "IronAxe": [
         {"date": "03.06.2026", "tier": "LT3"}
+      ]
+    }
+  },
+  {
+    "username": "Pomelak1243",
+    "modes": {
+      "NetheriteSword": "LT3",
+      "GoldSMP": "LT4"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "02.07.2026", "tier": "LT4"}
+      ],
+      "NetheriteSword": [
+        {"date": "02.07.2026", "tier": "LT3"}
+      ]
+    }
+  },
+  {
+    "username": "Pleistonax",
+    "modes": {
+      "NetheriteSword": "HT5",
+      "UHCMace": "HT5"
+    },
+    "history": {
+      "UHCMace": [
+        {"date": "02.07.2026", "tier": "HT5"}
+      ],
+      "NetheriteSword": [
+        {"date": "02.07.2026", "tier": "HT5"}
+      ]
+    }
+  },
+  {
+    "username": "ItzDixy_",
+    "modes": {
+      "UHCMace": "HT3",
+      "GoldSMP": "LT4"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "05.07.2026", "tier": "LT4"}
+      ],
+      "UHCMace": [
+        {"date": "05.07.2026", "tier": "LT3"},
+        {"date": "05.07.2026", "tier": "HT3"}
       ]
     }
   }
