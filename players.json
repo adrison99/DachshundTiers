@@ -15,9 +15,10 @@
     "modes": {
       "GoldSMP": "LT3",
       "NetheriteSword": "LT3",
-      "UHCMace": "LT3",
+      "UHCMace": "HT3",
       "IronAxe": "LT3",
-      "AnchorPvP": "LT3"
+      "AnchorPvP": "LT3",
+      "RandomPot": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -28,13 +29,17 @@
         {"date": "16.05.2026", "tier": "LT3"}
       ],
       "UHCMace": [
-        {"date": "02.06.2026", "tier": "LT3"}
+        {"date": "02.06.2026", "tier": "LT3"},
+        {"date": "08.07.2026", "tier": "HT3"}
       ],
       "IronAxe": [
         {"date": "04.06.2026", "tier": "LT3"}
       ],
       "AnchorPvP": [
         {"date": "07.07.2026", "tier": "LT3"}
+      ],
+      "RandomPot": [
+        {"date": "08.07.2026", "tier": "LT3"}
       ]
     }
   },
@@ -329,6 +334,21 @@
     "history": {
       "NetheriteSword": [
         {"date": "07.07.2026", "tier": "HT4"}
+      ]
+    }
+  },
+  {
+    "username": "Zentyx111",
+    "modes": {
+      "IronAxe": "LT4",
+      "AnchorPvP": "LT4"
+    },
+    "history": {
+      "IronAxe": [
+        {"date": "08.07.2026", "tier": "LT4"}
+      ],
+      "AnchorPvP": [
+        {"date": "08.07.2026", "tier": "LT4"}
       ]
     }
   }
