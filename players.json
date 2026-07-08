@@ -245,7 +245,7 @@
   {
     "username": "WBotWarrior7",
     "modes": {
-      "UHCMace": "LT3",
+      "UHCMace": "HT3",
       "GoldSMP": "LT4",
       "AnchorPvP": "HT3"
     },
@@ -254,7 +254,8 @@
         {"date": "07.07.2026", "tier": "LT4"}
       ],
       "UHCMace": [
-        {"date": "07.07.2026", "tier": "LT3"}
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "08.07.2026", "tier": "HT3"}
       ],
       "AnchorPvP": [
         {"date": "07.07.2026", "tier": "LT3"},
