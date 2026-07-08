@@ -319,5 +319,16 @@
         {"date": "07.07.2026", "tier": "HT5"}
       ]
     }
-  }
+  },
+  {
+    "username": "Alexobelda",
+    "modes": {
+      "NetheriteSword": "HT4"
+    },
+    "history": {
+      "NetheriteSword": [
+        {"date": "07.07.2026", "tier": "HT4"}
+      ]
+    }
+  },
 ]
