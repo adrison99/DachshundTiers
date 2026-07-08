@@ -147,24 +147,176 @@
   {
     "username": "ItzDixy_",
     "modes": {
-      "UHCMace": "HT3",
-      "GoldSMP": "LT4",
+      "UHCMace": "LT3",
+      "GoldSMP": "LT5",
       "IronAxe": "HT4",
       "NetheriteSword": "LT3"
     },
     "history": {
       "GoldSMP": [
-        {"date": "05.07.2026", "tier": "LT4"}
+        {"date": "05.07.2026", "tier": "LT4"},
+        {"date": "07.07.2026", "tier": "LT5"}
       ],
       "UHCMace": [
         {"date": "05.07.2026", "tier": "LT3"},
-        {"date": "05.07.2026", "tier": "HT3"}
+        {"date": "05.07.2026", "tier": "HT3"},
+        {"date": "07.07.2026", "tier": "LT3"}
       ],
       "IronAxe": [
         {"date": "06.07.2026", "tier": "HT4"}
       ],
       "NetheriteSword": [
         {"date": "06.07.2026", "tier": "LT3"}
+      ]
+    }
+  },
+  {
+    "username": "Domrixx",
+    "modes": {
+      "AnchorPvP": "HT3",
+      "GoldSMP": "HT4"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "07.07.2026", "tier": "HT4"}
+      ],
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "HT3"}
+      ]
+    }
+  },
+  {
+    "username": "Z_zori_I",
+    "modes": {
+      "AnchorPvP": "LT3",
+      "GoldSMP": "HT5",
+      "NetheriteSword": "LT3"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "07.07.2026", "tier": "HT5"}
+      ],
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "LT3"}
+      ],
+      "NetheriteSword": [
+        {"date": "07.07.2026", "tier": "LT3"}
+      ]
+    }
+  },
+  {
+    "username": "Slimeck",
+    "modes": {
+      "UHCMace": "HT3",
+      "GoldSMP": "HT5",
+      "AnchorPvP": "LT5",
+      "NetheriteSword": "LT4"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "07.07.2026", "tier": "HT5"}
+      ],
+      "UHCMace": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "HT3"}
+      ],
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "HT5"}
+      ],
+      "NetheriteSword": [
+        {"date": "07.07.2026", "tier": "LT4"}
+      ]
+    }
+  },
+  {
+    "username": "__LupinekCZ__",
+    "modes": {
+      "UHCMace": "HT3"
+    },
+    "history": {
+      "UHCMace": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "HT3"}
+      ]
+    }
+  },
+  {
+    "username": "WBotWarrior7",
+    "modes": {
+      "UHCMace": "LT3",
+      "GoldSMP": "LT4",
+      "AnchorPvP": "HT3"
+    },
+    "history": {
+      "GoldSMP": [
+        {"date": "07.07.2026", "tier": "LT4"}
+      ],
+      "UHCMace": [
+        {"date": "07.07.2026", "tier": "LT3"}
+      ],
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "HT3"}
+      ]
+    }
+  },
+  {
+    "username": "_Ondys",
+    "modes": {
+      "AnchorPvP": "LT2"
+    },
+    "history": {
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "HT3"},
+        {"date": "07.07.2026", "tier": "LT2"}
+      ]
+    }
+  },
+  {
+    "username": "Mendu__",
+    "modes": {
+      "AnchorPvP": "HT3"
+    },
+    "history": {
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "LT3"},
+        {"date": "07.07.2026", "tier": "HT3"}
+      ]
+    }
+  },
+  {
+    "username": "Lurionix",
+    "modes": {
+      "AnchorPvP": "LT3"
+    },
+    "history": {
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "LT3"}
+      ]
+    }
+  },
+  {
+    "username": "Vo1dSlay3r_",
+    "modes": {
+      "AnchorPvP": "HT4"
+    },
+    "history": {
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "HT4"}
+      ]
+    }
+  },
+  {
+    "username": "Baterka1177",
+    "modes": {
+      "AnchorPvP": "HT5"
+    },
+    "history": {
+      "AnchorPvP": [
+        {"date": "07.07.2026", "tier": "HT5"}
       ]
     }
   }
