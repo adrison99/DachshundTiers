@@ -240,12 +240,13 @@
   {
     "username": "__LupinekCZ__",
     "modes": {
-      "UHCMace": "HT3"
+      "UHCMace": "LT2"
     },
     "history": {
       "UHCMace": [
         {"date": "07.07.2026", "tier": "LT3"},
-        {"date": "07.07.2026", "tier": "HT3"}
+        {"date": "07.07.2026", "tier": "HT3"},
+        {"date": "08.07.2026", "tier": "LT2"}
       ]
     }
   },
