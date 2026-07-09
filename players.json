@@ -351,5 +351,16 @@
         {"date": "08.07.2026", "tier": "LT4"}
       ]
     }
+  },
+  {
+    "username": "blekhed_king",
+    "modes": {
+      "AnchorPvP": "LT3"
+    },
+    "history": {
+      "AnchorPvP": [
+        {"date": "08.07.2026", "tier": "LT3"}
+      ]
+    }
   }
 ]
