@@ -183,7 +183,7 @@
     "modes": {
       "AnchorPvP": "LT3",
       "GoldSMP": "HT4",
-      "UHCMace": LT3"
+      "UHCMace": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -192,9 +192,7 @@
       "AnchorPvP": [
         {"date": "07.07.2026", "tier": "LT3"},
         {"date": "07.07.2026", "tier": "HT3"},
-        {"date": "09.07.2026", "tier": "LT3"}
-      ],
-      "AnchorPvP": [
+        {"date": "09.07.2026", "tier": "LT3"},
         {"date": "08.07.2026", "tier": "LT3"}
       ]
     }
@@ -252,7 +250,7 @@
     "history": {
       "AnchorPvP": [
         {"date": "09.07.2026", "tier": "LT3"},
-        {"date": "09.07.2026", "tier": "HT3"},
+        {"date": "09.07.2026", "tier": "HT3"}
       ]
     }
   },
@@ -262,7 +260,7 @@
       "UHCMace": "HT3",
       "GoldSMP": "LT4",
       "AnchorPvP": "HT3",
-      "IronAxe": "LT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -319,7 +317,7 @@
     "history": {
       "AnchorPvP": [
         {"date": "07.07.2026", "tier": "LT3"}
-      ]
+      ],
       "NetheriteSword": [
         {"date": "09.07.2026", "tier": "LT4"}
       ]
