@@ -220,7 +220,7 @@
       "GoldSMP": "HT5",
       "NetheriteSword": "LT3",
       "IronAxe": "HT4",
-      "UHCMace": HT3"
+      "UHCMace": "HT3"
     },
     "history": {
       "GoldSMP": [
@@ -493,7 +493,7 @@
       "AnchorPvP": "LT2",
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
-      "RandomPot": "HT3",
+      "RandomPot": "HT3"
     },
     "history": {
       "AnchorPvP": [
