@@ -279,16 +279,16 @@
         {"date": "09.07.2026", "tier": "LT3"},
         {"date": "09.07.2026", "tier": "HT3"}
       ],
-       "RandomPot": [
+      "RandomPot": [
         {"date": "14.07.2026", "tier": "LT3"}
       ],
-       "GoldSMP": [
+      "GoldSMP": [
         {"date": "14.07.2026", "tier": "LT3"}
       ],
-       "NetheriteSword": [
+      "NetheriteSword": [
         {"date": "14.07.2026", "tier": "LT3"}
       ],
-       "IronAxe": [
+      "IronAxe": [
         {"date": "14.07.2026", "tier": "LT3"}
       ]
     }
@@ -464,7 +464,7 @@
     "modes": {
       "NetheriteSword": "HT5",
       "UHCMace": "LT3",
-      "AnchorPvP": "HT4",
+      "AnchorPvP": "HT4"
     },
     "history": {
       "NetheriteSword": [
@@ -480,12 +480,12 @@
     }
   },
   {
-    "username": "StaryPes_,
+    "username": "StaryPes_",
     "modes": {
       "AnchorPvP": "LT3",
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
-      "RandomPot: "LT3"
+      "RandomPot": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -530,7 +530,7 @@
     }
   },
   {
-    "username": "ItsPablos_,
+    "username": "ItsPablos_",
     "modes": {
       "NetheriteSword": "HT5",
       "AnchorPvP": "LT5"
@@ -571,7 +571,7 @@
     "modes": {
       "NetheriteSword": "HT5",
       "UHCMace": "LT4",
-      "IronAxe": LT3"
+      "IronAxe": "LT3"
     },
     "history": {
       "NetheriteSword": [
