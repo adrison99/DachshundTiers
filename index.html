@@ -77,7 +77,7 @@
                 <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 dark:bg-slate-200 border-2 border-gray-800 dark:border-gray-300 shadow-xl mb-4">
                 <h3 class="text-3xl font-black text-amber-400 tracking-wide" id="modal-username">---</h3>
                 <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
-                <p class="text-xs text-gray-400 dark:text-gray-600 mb-4 font-medium">Oblíbený kit: <span id="modal-favorite-kit" class="font-bold text-white dark:text-gray-900">---</span></p>
+                <p class="text-xs text-gray-400 dark:text-gray-600 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-white dark:text-gray-900">---</span></p>
             </div>
 
             <div class="inline-flex items-center gap-2 bg-gray-950/60 dark:bg-slate-200 border border-gray-800 dark:border-gray-300 px-4 py-2 rounded-full text-sm mb-6">
@@ -162,7 +162,6 @@
             'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5', val: 1 }
         };
 
-        // Konfigurace Peak Tierů (dny potrubí, body)
         const peakConfig = {
             'HT3':  { days: 15, points: 14, baseTier: 'HT3' },
             'RHT3': { days: 15, points: 14, baseTier: 'HT3' },
@@ -234,7 +233,6 @@
             }
         }
 
-        // Pomocná funkce pro vyhodnocení dosaženého Peak Tieru z historie a bodů
         function getKitPeakInfo(player, mode) {
             const currentTier = player.modes ? player.modes[mode] : null;
             let currentPoints = currentTier && tierConfig[currentTier] ? tierConfig[currentTier].points : 0;
@@ -242,7 +240,6 @@
             let bestPeakTier = null;
             let bestPeakPoints = 0;
 
-            // Výpočet z historie
             if (player.history && player.history[mode] && player.history[mode].length > 0) {
                 const history = player.history[mode];
 
@@ -257,7 +254,6 @@
                         const item = history[i];
                         const itemIdx = tierOrder.indexOf(item.tier);
 
-                        // Pokud měl hráč stejný nebo lepší tier
                         if (itemIdx !== -1 && itemIdx <= targetIdx) {
                             const startDate = new Date(item.date);
                             const endDate = (i < history.length - 1) ? new Date(history[i + 1].date) : new Date();
@@ -277,7 +273,6 @@
                 });
             }
 
-            // Pokud aktuální tier má už sám o sobě peak body, nebo je vyšší
             const effectivePoints = Math.max(currentPoints, bestPeakPoints);
 
             return {
@@ -501,7 +496,6 @@
                     badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
                     
-                    // HTML struktura badge i s Tooltipem přesně jako ze screenshotu
                     badgeDiv.innerHTML = `
                         <div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center z-50 pointer-events-none transition-all duration-200">
                             <div class="bg-[#1e2230] text-white px-4 py-2.5 rounded-xl shadow-2xl border border-gray-700/80 text-center min-w-[100px]">
