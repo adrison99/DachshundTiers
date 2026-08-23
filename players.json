@@ -288,7 +288,7 @@
     "modes": {
       "AnchorPvP": "HT2",
       "RandomPot": "HT3",
-      "IronAxe": "HT3",
+      "IronAxe": "LT2",
       "NetheriteSword": "LT2",
       "GoldSMP": "HT3",
       "UHCMace": "HT3"
@@ -315,7 +315,8 @@
       ],
       "IronAxe": [
         {"date": "14.07.2026", "tier": "LT3"},
-        {"date": "19.07.2026", "tier": "HT3"}
+        {"date": "19.07.2026", "tier": "HT3"},
+        {"date": "17.08.2026", "tier": "LT2"}
       ],
       "UHCMace": [
         {"date": "19.07.2026", "tier": "LT3"},
@@ -1117,13 +1118,18 @@
     "username": "DroWnerT",
     "modes": {
       "UHCMace": "LT3",
-      "IronAxe": "LT3"
+      "IronAxe": "LT3",
+      "AnchorPvP": "LT3"
     },
     "history": {
       "UHCMace": [
         {"date": "14.08.2026", "tier": "LT3"}
       ],
       "IronAxe": [
+        {"date": "16.08.2026", "tier": "LT3"}
+      ],
+      "AnchorPvP": [
+        {"date": "16.08.2026", "tier": "LT3"},
         {"date": "16.08.2026", "tier": "LT3"}
       ]
     }
