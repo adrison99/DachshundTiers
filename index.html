@@ -162,9 +162,22 @@
             'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5', val: 1 }
         };
 
+        // Konfigurace Peak Tierů (dny potrubí, body)
+        const peakConfig = {
+            'HT3':  { days: 15, points: 14, baseTier: 'HT3' },
+            'RHT3': { days: 15, points: 14, baseTier: 'HT3' },
+            'LT2':  { days: 30, points: 22, baseTier: 'LT2' },
+            'RLT2': { days: 30, points: 22, baseTier: 'LT2' },
+            'HT2':  { days: 30, points: 29, baseTier: 'HT2' },
+            'RHT2': { days: 30, points: 29, baseTier: 'HT2' },
+            'LT1':  { days: 60, points: 44, baseTier: 'LT1' },
+            'RLT1': { days: 60, points: 44, baseTier: 'LT1' },
+            'HT1':  { days: 60, points: 54, baseTier: 'HT1' },
+            'RHT1': { days: 60, points: 54, baseTier: 'HT1' }
+        };
+
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
         
-        // PŘIDÁNY NOVÉ IKONY PRO KITY
         const kitIcons = { 
             'GoldSMP': '🟢', 
             'NetheriteSword': '⚔️', 
@@ -221,16 +234,68 @@
             }
         }
 
+        // Pomocná funkce pro vyhodnocení dosaženého Peak Tieru z historie a bodů
+        function getKitPeakInfo(player, mode) {
+            const currentTier = player.modes ? player.modes[mode] : null;
+            let currentPoints = currentTier && tierConfig[currentTier] ? tierConfig[currentTier].points : 0;
+            
+            let bestPeakTier = null;
+            let bestPeakPoints = 0;
+
+            // Výpočet z historie
+            if (player.history && player.history[mode] && player.history[mode].length > 0) {
+                const history = player.history[mode];
+
+                Object.keys(peakConfig).forEach(pTier => {
+                    const reqDays = peakConfig[pTier].days;
+                    const pPoints = peakConfig[pTier].points;
+
+                    let totalDaysHeld = 0;
+                    let targetIdx = tierOrder.indexOf(pTier);
+
+                    for (let i = 0; i < history.length; i++) {
+                        const item = history[i];
+                        const itemIdx = tierOrder.indexOf(item.tier);
+
+                        // Pokud měl hráč stejný nebo lepší tier
+                        if (itemIdx !== -1 && itemIdx <= targetIdx) {
+                            const startDate = new Date(item.date);
+                            const endDate = (i < history.length - 1) ? new Date(history[i + 1].date) : new Date();
+                            
+                            const diffTime = Math.max(0, endDate - startDate);
+                            const diffDays = diffTime / (1000 * 60 * 60 * 24);
+                            totalDaysHeld += diffDays;
+                        }
+                    }
+
+                    if (totalDaysHeld >= reqDays) {
+                        if (pPoints > bestPeakPoints) {
+                            bestPeakPoints = pPoints;
+                            bestPeakTier = peakConfig[pTier].baseTier;
+                        }
+                    }
+                });
+            }
+
+            // Pokud aktuální tier má už sám o sobě peak body, nebo je vyšší
+            const effectivePoints = Math.max(currentPoints, bestPeakPoints);
+
+            return {
+                currentTier: currentTier || 'None',
+                effectivePoints: effectivePoints,
+                peakTier: bestPeakTier || (currentTier && tierConfig[currentTier] && tierConfig[currentTier].val >= 6 ? currentTier.replace(/^R/, '') : 'None')
+            };
+        }
+
         function calculateOverallPoints(player) {
             let total = 0;
             let hasRetired = false;
             if (player && player.modes) {
                 for (let m in player.modes) {
                     const tier = player.modes[m];
-                    if (tierConfig[tier]) {
-                        total += tierConfig[tier].points;
-                        if (tier.startsWith('R')) hasRetired = true;
-                    }
+                    const kitInfo = getKitPeakInfo(player, m);
+                    total += kitInfo.effectivePoints;
+                    if (tier.startsWith('R')) hasRetired = true;
                 }
             }
             return { total, hasRetired };
@@ -430,11 +495,23 @@
                 Object.entries(player.modes).forEach(([mode, tier]) => {
                     const cfg = tierConfig[tier] || { bg: 'bg-gray-800', label: tier };
                     const icon = kitIcons[mode] || '⚔️';
+                    const peakInfo = getKitPeakInfo(player, mode);
                     
                     const badgeDiv = document.createElement('div');
-                    badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group";
+                    badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
+                    
+                    // HTML struktura badge i s Tooltipem přesně jako ze screenshotu
                     badgeDiv.innerHTML = `
+                        <div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center z-50 pointer-events-none transition-all duration-200">
+                            <div class="bg-[#1e2230] text-white px-4 py-2.5 rounded-xl shadow-2xl border border-gray-700/80 text-center min-w-[100px]">
+                                <div class="font-black text-base leading-tight">${tier.replace(/^R/, '')}</div>
+                                <div class="text-sm font-extrabold text-gray-200 my-0.5">${peakInfo.effectivePoints} pts</div>
+                                <div class="text-xs text-gray-400 font-semibold">Peak: ${peakInfo.peakTier}</div>
+                            </div>
+                            <div class="w-3 h-3 bg-[#1e2230] rotate-45 -mt-1.5 border-r border-b border-gray-700/80"></div>
+                        </div>
+
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black text-[10px] border-2 transition group-hover:scale-110 ${cfg.bg}">
                             <span>${icon}</span>
                             <span class="leading-none mt-0.5">${cfg.label}</span>
@@ -521,7 +598,6 @@
             document.getElementById('compare-select-modal').classList.remove('hidden');
         }
 
-        // DOKONČENÁ FUNKCE SEZNAMU PRO POROVNÁNÍ
         function buildCompareList(filterQuery) {
             const listContainer = document.getElementById('compare-players-list');
             listContainer.innerHTML = '';
@@ -549,12 +625,10 @@
             });
         }
 
-        // VYHLEDÁVÁNÍ V COMPARED SEZNAMU
         document.getElementById('compare-search-input').addEventListener('input', (e) => {
             buildCompareList(e.target.value);
         });
 
-        // LOGIKA PRO VS POROVNÁNÍ S PODPOROU VŠECH 6 KITŮ
         function startComparison(opponent) {
             document.getElementById('compare-select-modal').classList.add('hidden');
             
@@ -577,7 +651,6 @@
             const rowsContainer = document.getElementById('vs-kits-rows');
             rowsContainer.innerHTML = '';
 
-            // PRIDÁNY ANCHORPVP A RANDOMPOT PRO COMPARE ZOBRAZENÍ
             const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot'];
 
             allKits.forEach(kit => {
