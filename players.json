@@ -585,37 +585,7 @@
         {"date": "29.07.2026", "tier": "LT3"}
       ]
     }
-  },
-  {
-    "username": "Prime_maty",
-    "modes": {
-      "AnchorPvP": "HT3",
-      "NetheriteSword": "LT3",
-      "UHCMace": "LT2",
-      "RandomPot": "HT4",
-      "IronAxe": "LT3"
-    },
-    "history": {
-      "AnchorPvP": [
-        {"date": "10.07.2026", "tier": "LT3"},
-        {"date": "08.08.2026", "tier": "HT3"}
-      ],
-      "NetheriteSword": [
-        {"date": "10.07.2026", "tier": "LT3"}
-      ],
-      "UHCMace": [
-        {"date": "10.07.2026", "tier": "LT3"},
-        {"date": "11.07.2026", "tier": "HT3"},
-        {"date": "14.07.2026", "tier": "LT2"}
-      ],
-      "RandomPot": [
-        {"date": "12.07.2026", "tier": "HT4"}
-      ],
-      "IronAxe": [
-        {"date": "12.07.2026", "tier": "LT3"}
-      ]
-    }
-  },
+  },  
   {
     "username": "ItsPablos_",
     "modes": {
