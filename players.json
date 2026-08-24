@@ -286,7 +286,7 @@
   {
     "username": "SievT",
     "modes": {
-      "AnchorPvP": "HT2",
+      "AnchorPvP": "LT1",
       "RandomPot": "HT3",
       "IronAxe": "LT2",
       "NetheriteSword": "LT2",
@@ -298,7 +298,8 @@
         {"date": "09.07.2026", "tier": "LT3"},
         {"date": "09.07.2026", "tier": "HT3"},
         {"date": "14.07.2026", "tier": "LT2"},
-        {"date": "03.08.2026", "tier": "HT2"}
+        {"date": "03.08.2026", "tier": "HT2"},
+        {"date": "24.08.2026", "tier": "LT1"}
       ],
       "RandomPot": [
         {"date": "14.07.2026", "tier": "LT3"},
