@@ -1088,7 +1088,7 @@
     "username": "DroWnerT",
     "modes": {
       "UHCMace": "LT2",
-      "IronAxe": "LT3",
+      "IronAxe": "LT2",
       "AnchorPvP": "LT3",
       "NetheriteSword": "HT3",
       "GoldSMP": "LT3",
@@ -1101,7 +1101,9 @@
         {"date": "24.08.2026", "tier": "LT2"}
       ],
       "IronAxe": [
-        {"date": "16.08.2026", "tier": "LT3"}
+        {"date": "16.08.2026", "tier": "LT3"},
+        {"date": "24.08.2026", "tier": "HT3"},
+        {"date": "24.08.2026", "tier": "LT2"}
       ],
       "AnchorPvP": [
         {"date": "16.08.2026", "tier": "LT3"},
