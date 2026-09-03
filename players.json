@@ -1092,8 +1092,8 @@
       "IronAxe": "LT2",
       "AnchorPvP": "LT3",
       "NetheriteSword": "HT3",
-      "GoldSMP": "LT3",
-      "RandomPot": "LT3"
+      "GoldSMP": "HT3",
+      "RandomPot": "HT3"
     },
     "history": {
       "UHCMace": [
@@ -1116,10 +1116,12 @@
         {"date": "24.08.2026", "tier": "HT3"}
       ],
       "GoldSMP": [
-        {"date": "17.08.2026", "tier": "LT3"}
+        {"date": "17.08.2026", "tier": "LT3"},
+        {"date": "31.08.2026", "tier": "HT3"}
       ],
       "RandomPot": [
-        {"date": "24.08.2026", "tier": "LT3"}
+        {"date": "24.08.2026", "tier": "LT3"},
+        {"date": "03.09.2026", "tier": "HT3"}
       ]
     }
   },
