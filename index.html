@@ -64,6 +64,7 @@
             <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">UHCMace 👑</button>
             <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">AnchorPvP ⚓</button>
             <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">RandomPot 🧪</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">ShieldlessSMP 🛡️</button>
         </nav>
 
         <main id="leaderboard-container" class="space-y-3"></main>
@@ -183,7 +184,8 @@
             'IronAxe': '🪓', 
             'UHCMace': '👑',
             'AnchorPvP': '⚓',
-            'RandomPot': '🧪'
+            'RandomPot': '🧪',
+            'ShieldlessSMP': '🛡️'
         };
 
         let playersData = [];
@@ -645,7 +647,7 @@
             const rowsContainer = document.getElementById('vs-kits-rows');
             rowsContainer.innerHTML = '';
 
-            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot'];
+            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP'];
 
             allKits.forEach(kit => {
                 const t1 = p1.modes ? p1.modes[kit] : null;
