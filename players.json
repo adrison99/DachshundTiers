@@ -1988,10 +1988,17 @@
   {
     "username": "DarkHonzaCz",
     "modes": {
-      "AnchorPvP": "HT3"
+      "AnchorPvP": "HT3",
+      "IronAxe": "HT3"
     },
     "history": {
       "AnchorPvP": [
+        {
+          "date": "13.09.2026",
+          "tier": "HT3"
+        }
+      ],
+      "IronAxe": [
         {
           "date": "13.09.2026",
           "tier": "HT3"
