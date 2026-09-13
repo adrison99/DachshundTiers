@@ -27,7 +27,10 @@
     <div class="max-w-6xl mx-auto">
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
             <div class="flex flex-wrap items-center gap-3 md:gap-4 justify-center md:justify-start">
-                <h1 class="text-3xl font-extrabold tracking-wider text-amber-500">DACHSHUND<span class="text-white">TIERS</span></h1>
+                <!-- Změna textu na logo.png -->
+                <a href="/" class="flex items-center">
+                    <img src="logo.png" alt="DachshundTiers Logo" class="h-10 w-auto object-contain">
+                </a>
                 
                 <div class="flex items-center gap-2">
                     <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 transition">
@@ -234,13 +237,59 @@
             });
 
             if (currentTab === 'Overall') {
-                container.className = "space-y-3";
+                container.className = "space-y-6";
                 processedPlayers.sort((a, b) => {
                     if (a.isBestCZSK && !b.isBestCZSK) return -1;
                     if (!a.isBestCZSK && b.isBestCZSK) return 1;
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
                     return b.overallScore - a.overallScore;
                 });
+
+                // NOVOST: Vykreslení Top 3 Podia
+                if (processedPlayers.length >= 3) {
+                    const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]]; // 2., 1., 3. místo
+                    const podiumContainer = document.createElement('div');
+                    podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-4 mb-10 mt-4";
+
+                    top3.forEach((player, idx) => {
+                        const rankNum = idx === 1 ? 1 : (idx === 0 ? 2 : 3);
+                        const isFirst = rankNum === 1;
+                        const rankInfo = getRankTitle(player);
+
+                        const card = document.createElement('div');
+                        card.className = `w-full md:w-1/3 bg-[#13151d] border ${isFirst ? 'border-amber-500/80 shadow-2xl shadow-amber-500/10 -translate-y-4' : 'border-gray-800/80'} p-5 rounded-2xl flex flex-col items-center cursor-pointer transition hover:scale-105 relative`;
+                        card.onclick = () => openPlayerModal(player);
+
+                        let badgeColor = "bg-amber-700 text-white";
+                        if (rankNum === 1) badgeColor = "bg-yellow-500 text-black";
+                        if (rankNum === 2) badgeColor = "bg-slate-300 text-black";
+
+                        const badgesHTML = Object.entries(player.modes || {}).map(([mode, t]) => `
+                            <div class="flex items-center gap-1 bg-gray-950/80 px-2 py-1 rounded-lg border border-gray-800">
+                                <img src="${mode}.png" alt="${mode}" class="w-3.5 h-3.5 object-contain">
+                                <span class="text-[10px] font-black text-amber-400">${t}</span>
+                            </div>
+                        `).join('');
+
+                        card.innerHTML = `
+                            <div class="w-7 h-7 rounded-lg ${badgeColor} flex items-center justify-center font-black text-xs mb-3 shadow-md">${rankNum}</div>
+                            <img src="https://minotar.net/avatar/${player.username}/64" class="w-16 h-16 rounded-xl bg-gray-900 border-2 ${isFirst ? 'border-amber-500' : 'border-gray-800'} mb-2">
+                            <h3 class="font-black text-white text-lg tracking-wide">${player.username}</h3>
+                            <div class="flex items-center gap-2 mt-1 mb-4">
+                                <span class="text-xs font-bold text-amber-500">${player.overallScore} bodů</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                            </div>
+                            <div class="w-full bg-[#0b0c10] p-2.5 rounded-xl border border-gray-900 flex flex-wrap gap-1.5 justify-center">${badgesHTML}</div>
+                        `;
+                        podiumContainer.appendChild(card);
+                    });
+
+                    container.appendChild(podiumContainer);
+                }
+
+                // Vykreslení zbývajícího seznamu hráčů
+                const listContainer = document.createElement('div');
+                listContainer.className = "space-y-3";
 
                 processedPlayers.forEach((player, index) => {
                     const rank = index + 1;
@@ -292,8 +341,10 @@
                         </div>
                         <div class="flex items-center">${badgesHTML}</div>
                     `;
-                    container.appendChild(row);
+                    listContainer.appendChild(row);
                 });
+
+                container.appendChild(listContainer);
             } else {
                 // Zobrazení 5 TIER sloupců pro vybraný gamemode
                 container.className = "grid grid-cols-1 md:grid-cols-5 gap-4";
@@ -315,7 +366,7 @@
 
                     const listContainer = col.querySelector(`#tier-list-${tNum}`);
 
-                    // Filtrování hráčů, kteří spadají do Tieru X (př. Tier 3 = HT3, LT3, RHT3, RLT3)
+                    // Filtrování hráčů
                     const filtered = processedPlayers.filter(p => {
                         if (!p.modes || !p.modes[currentTab]) return false;
                         const tStr = p.modes[currentTab];
@@ -335,7 +386,6 @@
                         filtered.forEach(player => {
                             const rawTier = player.modes[currentTab];
                             const isHT = rawTier.includes('HT');
-                            // Pro HT dáme 2 šipky (▲▲), pro LT 1 šipku (▲)
                             const arrows = isHT ? '▲▲' : '▲';
 
                             const item = document.createElement('div');
