@@ -1798,7 +1798,7 @@
   {
     "username": "DroWnerT",
     "modes": {
-      "UHCMace": "LT2",
+      "UHCMace": "HT2",
       "IronAxe": "LT2",
       "AnchorPvP": "LT3",
       "NetheriteSword": "HT3",
@@ -1818,6 +1818,10 @@
         {
           "date": "24.08.2026",
           "tier": "LT2"
+        },
+        {
+          "date": "13.09.2026",
+          "tier": "HT2"
         }
       ],
       "IronAxe": [
