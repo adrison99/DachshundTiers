@@ -2080,7 +2080,7 @@
   {
     "username": "DressierTooth22",
     "modes": {
-      "NetheriteSword": "LT3",
+      "NetheriteSword": "HT3",
       "UHCMace": "LT3",
       "IronAxe": "LT3",
       "AnchorPvP": "HT5",
@@ -2092,6 +2092,10 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "13.09.2026",
+          "tier": "HT3"
         }
       ],
       "UHCMace": [
