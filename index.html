@@ -26,10 +26,9 @@
 
     <div class="max-w-6xl mx-auto">
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
-            <div class="flex flex-wrap items-center gap-3 md:gap-4 justify-center md:justify-start">
-                <!-- Změna textu na logo.png -->
+            <div class="flex flex-wrap items-center gap-3 md:gap-6 justify-center md:justify-start">
                 <a href="/" class="flex items-center">
-                    <img src="logo.png" alt="DachshundTiers Logo" class="h-10 w-auto object-contain">
+                    <img src="logo.png" alt="DachshundTiers Logo" class="h-32 w-auto object-contain">
                 </a>
                 
                 <div class="flex items-center gap-2">
@@ -154,6 +153,15 @@
         let chartInstance = null;
         let activeModalPlayer = null;
 
+        function getSortedModes(modes) {
+            if (!modes) return [];
+            return Object.entries(modes).sort((a, b) => {
+                const idxA = tierOrder.indexOf(a[1]);
+                const idxB = tierOrder.indexOf(b[1]);
+                return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
+            });
+        }
+
         window.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.activeElement !== document.getElementById('search') && document.activeElement !== document.getElementById('compare-search-input')) {
                 e.preventDefault();
@@ -187,17 +195,10 @@
 
         function getFavoriteKit(player) {
             if (!player.modes || Object.keys(player.modes).length === 0) return 'Žádný';
-            let bestKit = 'Žádný';
-            let bestIdx = 999;
-
-            Object.entries(player.modes).forEach(([kit, tier]) => {
-                let idx = tierOrder.indexOf(tier);
-                if (idx !== -1 && idx < bestIdx) {
-                    bestIdx = idx;
-                    bestKit = `${kit} (${tier})`;
-                }
-            });
-            return bestKit;
+            const sorted = getSortedModes(player.modes);
+            if (sorted.length === 0) return 'Žádný';
+            const [bestKit, bestTier] = sorted[0];
+            return `${bestKit} (${bestTier})`;
         }
 
         function getRankTitle(player) {
@@ -245,26 +246,40 @@
                     return b.overallScore - a.overallScore;
                 });
 
-                // NOVOST: Vykreslení Top 3 Podia
                 if (processedPlayers.length >= 3) {
-                    const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]]; // 2., 1., 3. místo
+                    const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
                     podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-4 mb-10 mt-4";
 
                     top3.forEach((player, idx) => {
                         const rankNum = idx === 1 ? 1 : (idx === 0 ? 2 : 3);
-                        const isFirst = rankNum === 1;
                         const rankInfo = getRankTitle(player);
 
                         const card = document.createElement('div');
-                        card.className = `w-full md:w-1/3 bg-[#13151d] border ${isFirst ? 'border-amber-500/80 shadow-2xl shadow-amber-500/10 -translate-y-4' : 'border-gray-800/80'} p-5 rounded-2xl flex flex-col items-center cursor-pointer transition hover:scale-105 relative`;
+                        
+                        let rankBorderGlow = "";
+                        let avatarBorder = "";
+                        let badgeColor = "bg-amber-700 text-white";
+
+                        if (rankNum === 1) {
+                            rankBorderGlow = "border-amber-500/80 shadow-[0_0_25px_rgba(234,179,8,0.3)] -translate-y-4";
+                            avatarBorder = "border-amber-500";
+                            badgeColor = "bg-yellow-500 text-black";
+                        } else if (rankNum === 2) {
+                            rankBorderGlow = "border-slate-400/80 shadow-[0_0_25px_rgba(203,213,225,0.25)]";
+                            avatarBorder = "border-slate-300";
+                            badgeColor = "bg-slate-300 text-black";
+                        } else if (rankNum === 3) {
+                            rankBorderGlow = "border-amber-700/80 shadow-[0_0_25px_rgba(180,83,9,0.3)]";
+                            avatarBorder = "border-amber-700";
+                            badgeColor = "bg-amber-700 text-white";
+                        }
+
+                        card.className = `w-full md:w-1/3 bg-[#13151d] border ${rankBorderGlow} p-5 rounded-2xl flex flex-col items-center cursor-pointer transition hover:scale-105 relative`;
                         card.onclick = () => openPlayerModal(player);
 
-                        let badgeColor = "bg-amber-700 text-white";
-                        if (rankNum === 1) badgeColor = "bg-yellow-500 text-black";
-                        if (rankNum === 2) badgeColor = "bg-slate-300 text-black";
-
-                        const badgesHTML = Object.entries(player.modes || {}).map(([mode, t]) => `
+                        const sortedModes = getSortedModes(player.modes);
+                        const badgesHTML = sortedModes.map(([mode, t]) => `
                             <div class="flex items-center gap-1 bg-gray-950/80 px-2 py-1 rounded-lg border border-gray-800">
                                 <img src="${mode}.png" alt="${mode}" class="w-3.5 h-3.5 object-contain">
                                 <span class="text-[10px] font-black text-amber-400">${t}</span>
@@ -273,7 +288,7 @@
 
                         card.innerHTML = `
                             <div class="w-7 h-7 rounded-lg ${badgeColor} flex items-center justify-center font-black text-xs mb-3 shadow-md">${rankNum}</div>
-                            <img src="https://minotar.net/avatar/${player.username}/64" class="w-16 h-16 rounded-xl bg-gray-900 border-2 ${isFirst ? 'border-amber-500' : 'border-gray-800'} mb-2">
+                            <img src="https://minotar.net/avatar/${player.username}/64" class="w-16 h-16 rounded-xl bg-gray-900 border-2 ${avatarBorder} mb-2">
                             <h3 class="font-black text-white text-lg tracking-wide">${player.username}</h3>
                             <div class="flex items-center gap-2 mt-1 mb-4">
                                 <span class="text-xs font-bold text-amber-500">${player.overallScore} bodů</span>
@@ -287,31 +302,22 @@
                     container.appendChild(podiumContainer);
                 }
 
-                // Vykreslení zbývajícího seznamu hráčů
                 const listContainer = document.createElement('div');
                 listContainer.className = "space-y-3";
 
-                processedPlayers.forEach((player, index) => {
-                    const rank = index + 1;
+                const restPlayers = processedPlayers.slice(3);
+
+                restPlayers.forEach((player, index) => {
+                    const rank = index + 4;
                     let borderClass = "border-gray-900 bg-gray-950/40";
                     let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
 
-                    if (rank === 1) {
-                        borderClass = "gold-border border-l-4";
-                        rankBadge = `<div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-black shadow-lg shadow-yellow-500/20">1</div>`;
-                    } else if (rank === 2) {
-                        borderClass = "silver-border border-l-4";
-                        rankBadge = `<div class="w-8 h-8 rounded-full bg-slate-400 text-black flex items-center justify-center font-black">2</div>`;
-                    } else if (rank === 3) {
-                        borderClass = "bronze-border border-l-4";
-                        rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
-                    }
-
                     const rankInfo = getRankTitle(player);
+                    const sortedModes = getSortedModes(player.modes);
 
                     const badgesHTML = `
                         <div class="flex flex-wrap gap-3 items-center">
-                            ${Object.entries(player.modes || {}).map(([mode, t]) => {
+                            ${sortedModes.map(([mode, t]) => {
                                 return `
                                     <div class="flex flex-col items-center">
                                         <div class="w-9 h-9 rounded-full bg-gray-900/80 border border-gray-700/60 flex items-center justify-center p-1.5 shadow-inner">
@@ -346,7 +352,6 @@
 
                 container.appendChild(listContainer);
             } else {
-                // Zobrazení 5 TIER sloupců pro vybraný gamemode
                 container.className = "grid grid-cols-1 md:grid-cols-5 gap-4";
 
                 const tiers = [1, 2, 3, 4, 5];
@@ -355,7 +360,6 @@
                     const col = document.createElement('div');
                     col.className = "bg-gray-950/60 border border-gray-800/80 rounded-2xl p-4 flex flex-col gap-3 min-h-[300px]";
 
-                    // Hlavička tieru
                     col.innerHTML = `
                         <div class="text-center pb-3 border-b border-gray-800/80">
                             <h3 class="text-gray-300 font-extrabold text-sm tracking-wider">Tier ${tNum}</h3>
@@ -366,14 +370,12 @@
 
                     const listContainer = col.querySelector(`#tier-list-${tNum}`);
 
-                    // Filtrování hráčů
                     const filtered = processedPlayers.filter(p => {
                         if (!p.modes || !p.modes[currentTab]) return false;
                         const tStr = p.modes[currentTab];
                         return tStr.includes(tNum.toString());
                     });
 
-                    // Seřazení podle HT před LT
                     filtered.sort((a, b) => {
                         const tA = a.modes[currentTab];
                         const tB = b.modes[currentTab];
@@ -470,7 +472,8 @@
             kitsContainer.innerHTML = '';
 
             if (player.modes) {
-                Object.entries(player.modes).forEach(([mode, tier]) => {
+                const sortedModes = getSortedModes(player.modes);
+                sortedModes.forEach(([mode, tier]) => {
                     const badgeDiv = document.createElement('div');
                     badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
@@ -484,8 +487,9 @@
                     kitsContainer.appendChild(badgeDiv);
                 });
 
-                const firstKit = Object.keys(player.modes)[0];
-                if (firstKit) loadHistoryChart(player.username, firstKit);
+                if (sortedModes.length > 0) {
+                    loadHistoryChart(player.username, sortedModes[0][0]);
+                }
             } else {
                 if (chartInstance) chartInstance.destroy();
             }
