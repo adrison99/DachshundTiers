@@ -396,7 +396,7 @@
   {
     "username": "Z_zori_I",
     "modes": {
-      "AnchorPvP": "LT2",
+      "AnchorPvP": "LT3",
       "GoldSMP": "HT4",
       "NetheriteSword": "LT3",
       "IronAxe": "HT4",
@@ -430,6 +430,10 @@
           "date": "31.07.2026",
           "tier": "LT2"
         }
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        },
       ],
       "NetheriteSword": [
         {
@@ -458,14 +462,19 @@
   {
     "username": "Slimeck",
     "modes": {
-      "UHCMace": "LT4",
+      "UHCMace": "HT4",
+      "RandomPot": "LT4",
       "GoldSMP": "LT3",
-      "AnchorPvP": "LT5",
-      "NetheriteSword": "LT4",
-      "IronAxe": "HT5"
+      "AnchorPvP": "LT3",
+      "NetheriteSword": "HT5",
+      "IronAxe": "LT3"
     },
     "history": {
       "GoldSMP": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        },
         {
           "date": "07.07.2026",
           "tier": "HT5"
@@ -480,6 +489,10 @@
         }
       ],
       "UHCMace": [
+        {
+          "date": "13.09.2026",
+          "tier": "HT4"
+        },
         {
           "date": "07.07.2026",
           "tier": "LT3"
@@ -499,6 +512,10 @@
       ],
       "AnchorPvP": [
         {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        },
+        {
           "date": "07.07.2026",
           "tier": "LT5"
         },
@@ -506,14 +523,30 @@
           "date": "12.08.2026",
           "tier": "LT5"
         }
+        ],
+      "RandomPot": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT4"
+        },
+        
+        }
       ],
       "NetheriteSword": [
+        {
+          "date": "13.09.2026",
+          "tier": "HT5"
+        },
         {
           "date": "07.07.2026",
           "tier": "LT4"
         }
       ],
       "IronAxe": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        },
         {
           "date": "09.07.2026",
           "tier": "HT5"
