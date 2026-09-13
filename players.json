@@ -2076,5 +2076,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "DressierTooth22",
+    "modes": {
+      "NetheriteSword": "LT3"
+    },
+    "history": {
+      "NetheriteSword": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
