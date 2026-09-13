@@ -2081,7 +2081,8 @@
     "username": "DressierTooth22",
     "modes": {
       "NetheriteSword": "LT3",
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2091,6 +2092,12 @@
         }
       ],
       "UHCMace": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "IronAxe": [
         {
           "date": "13.09.2026",
           "tier": "LT3"
