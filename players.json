@@ -1341,7 +1341,8 @@
       "UHCMace": "LT4",
       "IronAxe": "LT3",
       "ShieldlessSMP": "HT4",
-      "RandomPot": "LT3"
+      "RandomPot": "LT3",
+      "NetheriteSword": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -1369,6 +1370,12 @@
         }
       ],
       "RandomPot": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "NetheriteSword": [
         {
           "date": "13.09.2026",
           "tier": "LT3"
