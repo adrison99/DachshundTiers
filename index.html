@@ -47,13 +47,13 @@
 
         <nav class="flex flex-wrap gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
             <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
         </nav>
 
         <main id="leaderboard-container" class="space-y-3"></main>
@@ -282,7 +282,7 @@
                                 return `
                                     <div class="flex flex-col items-center">
                                         <div class="w-9 h-9 rounded-full bg-gray-900/80 border border-gray-700/60 flex items-center justify-center p-1.5 shadow-inner">
-                                            <img src="icons/${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
                                         </div>
                                         <span class="text-[11px] font-black text-amber-400 tracking-wide mt-1">${t}</span>
                                     </div>
@@ -295,7 +295,7 @@
                     badgesHTML = `
                         <div class="flex flex-col items-center">
                             <div class="w-10 h-10 rounded-full bg-gray-900/80 border border-amber-500/50 flex items-center justify-center p-1.5 shadow-inner">
-                                <img src="icons/${currentTab}.png" alt="${currentTab}" class="w-full h-full object-contain">
+                                <img src="${currentTab}.png" alt="${currentTab}" class="w-full h-full object-contain">
                             </div>
                             <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${cfg.label}</span>
                         </div>
@@ -395,7 +395,7 @@
                     
                     badgeDiv.innerHTML = `
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
-                            <img src="icons/${mode}.png" class="w-full h-full object-contain">
+                            <img src="${mode}.png" class="w-full h-full object-contain">
                         </div>
                         <span class="text-[10px] font-bold text-amber-400 mt-0.5">${tier}</span>
                     `;
@@ -539,7 +539,7 @@
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="icons/${kit}.png" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${kit}.png" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
