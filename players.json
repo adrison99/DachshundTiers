@@ -1340,7 +1340,8 @@
       "AnchorPvP": "HT4",
       "UHCMace": "LT4",
       "IronAxe": "LT3",
-      "ShieldlessSMP": "HT4"
+      "ShieldlessSMP": "HT4",
+      "RandomPot": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -1365,6 +1366,12 @@
         {
           "date": "13.09.2026",
           "tier": "HT4"
+        }
+      ],
+      "RandomPot": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
         }
       ]
     }
