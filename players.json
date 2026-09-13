@@ -1834,7 +1834,8 @@
       "AnchorPvP": "HT3",
       "NetheriteSword": "HT3",
       "GoldSMP": "HT3",
-      "RandomPot": "HT3"
+      "RandomPot": "HT3",
+      "ShieldlessSMP": "LT3"
     },
     "history": {
       "UHCMace": [
@@ -1915,6 +1916,12 @@
         {
           "date": "03.09.2026",
           "tier": "HT3"
+        }
+      ],
+      "ShieldlessSMP": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
         }
       ]
     }
