@@ -2129,5 +2129,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "Lukyk656",
+    "modes": {
+      "UHCMace": "LT3"
+    },
+    "history": {
+      "UHCMace": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
