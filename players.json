@@ -2080,10 +2080,17 @@
   {
     "username": "DressierTooth22",
     "modes": {
-      "NetheriteSword": "LT3"
+      "NetheriteSword": "LT3",
+      "UHCMace": "LT3"
     },
     "history": {
       "NetheriteSword": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "UHCMace": [
         {
           "date": "13.09.2026",
           "tier": "LT3"
