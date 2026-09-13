@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,35 +12,24 @@
         }
     </script>
     <style>
-        body { background-color: #0d0f12; color: #e2e8f0; font-family: sans-serif; transition: background-color 0.3s, color 0.3s; }
+        body { background-color: #0d0f12; color: #e2e8f0; font-family: sans-serif; }
         .gold-border { border-color: #eab308; background: linear-gradient(90deg, rgba(234,179,8,0.1) 0%, rgba(0,0,0,0) 100%); }
         .silver-border { border-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1) 0%, rgba(0,0,0,0) 100%); }
         .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.1) 0%, rgba(0,0,0,0) 100%); }
-        
-        .dark body { background-color: #f8fafc; color: #0f172a; }
-        .dark .gold-border { border-color: #eab308; background: linear-gradient(90deg, rgba(234,179,8,0.05) 0%, rgba(0,0,0,0) 100%); }
-        .dark .silver-border { border-color: #64748b; background: linear-gradient(90deg, rgba(100,116,139,0.05) 0%, rgba(0,0,0,0) 100%); }
-        .dark .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.05) 0%, rgba(0,0,0,0) 100%); }
 
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
-        .dark .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
-        .dark .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; }
     </style>
 </head>
-<body class="p-4 md:p-8 dark:bg-[#0d0f12]">
+<body class="p-4 md:p-8 bg-[#0d0f12]">
 
     <div class="max-w-6xl mx-auto">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 dark:border-gray-200 pb-6 gap-4">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
             <div class="flex flex-wrap items-center gap-3 md:gap-4 justify-center md:justify-start">
-                <h1 class="text-3xl font-extrabold tracking-wider text-amber-500">DACHSHUND<span class="text-gray-900 dark:text-white">TIERS</span></h1>
+                <h1 class="text-3xl font-extrabold tracking-wider text-amber-500">DACHSHUND<span class="text-white">TIERS</span></h1>
                 
                 <div class="flex items-center gap-2">
-                    <button onclick="toggleTheme()" class="p-2 rounded-xl bg-gray-900 dark:bg-gray-100 border border-gray-800 dark:border-gray-300 text-lg hover:scale-105 transition" title="Přepnout režim">
-                        <span class="inline dark:hidden">☀️</span><span class="hidden dark:inline">🌙</span>
-                    </button>
-                    
                     <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 transition">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
                             <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.14,68.5,68.5,0,0,1-10.75-5.13c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,72.68,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.75,5.13,74.12,74.12,0,0,0,6.85,11.14,105.62,105.62,0,0,0,31.05-18.83C129.92,50.12,124.16,27.23,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.87,46,53.7,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.11,46,95.94,53,91,65.69,84.69,65.69Z"/>
@@ -51,172 +40,116 @@
             </div>
             
             <div class="relative w-full md:w-80">
-                <input type="text" id="search" placeholder="Vyhledat hráče... (stiskni /)" autocomplete="off" class="w-full bg-gray-900 dark:bg-white border border-gray-700 dark:border-gray-300 text-white dark:text-gray-900 px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
-                <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] dark:bg-white border border-gray-800 dark:border-gray-200 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
+                <input type="text" id="search" placeholder="Vyhledat hráče... (stiskni /)" autocomplete="off" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
+                <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] border border-gray-800 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
             </div>
         </header>
 
-        <nav class="flex flex-wrap gap-2 mb-8 bg-gray-950 dark:bg-gray-100 p-2 rounded-xl border border-gray-900 dark:border-gray-200" id="tabs">
-            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">GoldSMP 🟢</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">NetheriteSword ⚔️</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">IronAxe 🪓</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">UHCMace 👑</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">AnchorPvP ⚓</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">RandomPot 🧪</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition">ShieldlessSMP 🛡️</button>
+        <nav class="flex flex-wrap gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
+            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="icons/ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
         </nav>
 
         <main id="leaderboard-container" class="space-y-3"></main>
     </div>
 
+    <!-- Modaly -->
     <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
-        <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] dark:from-white dark:to-slate-50 border border-gray-800 dark:border-gray-200 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
-            <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black text-2xl">&times;</button>
+        <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] border border-gray-800 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
+            <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
             
             <div class="flex flex-col items-center mt-2">
-                <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 dark:bg-slate-200 border-2 border-gray-800 dark:border-gray-300 shadow-xl mb-4">
+                <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4">
                 <h3 class="text-3xl font-black text-amber-400 tracking-wide" id="modal-username">---</h3>
                 <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
-                <p class="text-xs text-gray-400 dark:text-gray-600 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-white dark:text-gray-900">---</span></p>
+                <p class="text-xs text-gray-400 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-white">---</span></p>
             </div>
 
-            <div class="inline-flex items-center gap-2 bg-gray-950/60 dark:bg-slate-200 border border-gray-800 dark:border-gray-300 px-4 py-2 rounded-full text-sm mb-6">
-                <span class="font-bold text-white dark:text-gray-900"><span id="modal-points">0</span> points</span>
+            <div class="inline-flex items-center gap-2 bg-gray-950/60 border border-gray-800 px-4 py-2 rounded-full text-sm mb-6">
+                <span class="font-bold text-white"><span id="modal-points">0</span> bodů</span>
                 <span class="text-amber-500 font-extrabold" id="modal-title-label">---</span>
             </div>
 
-            <div class="border-t border-gray-800/60 dark:border-gray-200 pt-5 mb-6">
+            <div class="border-t border-gray-800/60 pt-5 mb-6">
                 <div class="flex flex-wrap justify-center gap-4" id="modal-kits-container"></div>
             </div>
 
-            <div class="border-t border-gray-800/60 dark:border-gray-200 pt-4">
+            <div class="border-t border-gray-800/60 pt-4">
                 <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider text-left mb-2">Tier Journey</h4>
-                <div class="w-full h-44 bg-gray-950/40 dark:bg-slate-100 border border-gray-900 dark:border-gray-200 rounded-xl p-2">
+                <div class="w-full h-44 bg-gray-950/40 border border-gray-900 rounded-xl p-2">
                     <canvas id="historyChart"></canvas>
                 </div>
             </div>
 
             <div class="flex gap-2 justify-center mt-6">
-                <button onclick="openCompareSelection()" class="bg-[#202330] dark:bg-slate-200 hover:bg-[#2a2e40] dark:hover:bg-slate-300 text-gray-400 dark:text-gray-700 hover:text-white dark:hover:text-black px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
-                <button class="bg-[#202330] dark:bg-slate-200 hover:bg-[#2a2e40] dark:hover:bg-slate-300 text-gray-400 dark:text-gray-700 hover:text-white dark:hover:text-black px-5 py-2 rounded-full font-bold text-sm transition">Rank History</button>
+                <button onclick="openCompareSelection()" class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
             </div>
         </div>
     </div>
 
     <div id="compare-select-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
-        <div class="bg-gray-950 dark:bg-white border border-gray-800 dark:border-gray-200 p-6 rounded-3xl w-full max-w-lg relative shadow-2xl">
-            <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black text-2xl">&times;</button>
-            
-            <h3 class="text-2xl font-black text-white dark:text-gray-900 mb-1">Výber hráče pro porovnání</h3>
-            <p class="text-gray-500 text-xs mb-4">Porovnání s <span id="compare-with-name" class="font-bold text-gray-400 dark:text-gray-600">---</span></p>
-            
-            <input type="text" id="compare-search-input" placeholder="Jméno hráče..." autocomplete="off" class="w-full bg-gray-900/60 dark:bg-slate-100 border border-gray-800 dark:border-gray-300 text-white dark:text-gray-900 px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 mb-4">
-            
+        <div class="bg-gray-950 border border-gray-800 p-6 rounded-3xl w-full max-w-lg relative shadow-2xl">
+            <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <h3 class="text-2xl font-black text-white mb-1">Výběr hráče pro porovnání</h3>
+            <p class="text-gray-500 text-xs mb-4">Porovnání s <span id="compare-with-name" class="font-bold text-gray-400">---</span></p>
+            <input type="text" id="compare-search-input" placeholder="Jméno hráče..." autocomplete="off" class="w-full bg-gray-900/60 border border-gray-800 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 mb-4">
             <div id="compare-players-list" class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1"></div>
         </div>
     </div>
 
     <div id="vs-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
-        <div class="bg-gradient-to-b from-[#161722] to-[#0d0e12] dark:from-white dark:to-slate-50 border border-gray-800 dark:border-gray-200 p-6 rounded-3xl w-full max-w-2xl relative shadow-2xl">
-            <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 dark:text-gray-600 hover:text-white dark:hover:text-black text-2xl">&times;</button>
-            
-            <h3 class="text-lg font-bold text-gray-400 dark:text-gray-500 mb-6 border-b border-gray-800/60 dark:border-gray-200 pb-3">Porovnání hráčů</h3>
-            
+        <div class="bg-gradient-to-b from-[#161722] to-[#0d0e12] border border-gray-800 p-6 rounded-3xl w-full max-w-2xl relative shadow-2xl">
+            <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <h3 class="text-lg font-bold text-gray-400 mb-6 border-b border-gray-800/60 pb-3">Porovnání hráčů</h3>
             <div class="flex items-center justify-between gap-4 mb-8">
-                <div class="flex-1 bg-gray-900/40 dark:bg-slate-100 border border-gray-800/80 dark:border-gray-200 p-4 rounded-2xl flex flex-col items-center text-center">
-                    <img id="vs-p1-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 dark:bg-slate-200 mb-2">
-                    <span id="vs-p1-name" class="font-black text-white dark:text-gray-900 text-base tracking-wide">---</span>
+                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                    <img id="vs-p1-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
                     <span id="vs-p1-score" class="text-xs text-gray-500 mt-0.5">#0</span>
-                    <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 dark:text-indigo-600 mt-1">---</span>
+                    <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
                 </div>
-                
                 <div class="font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
-                
-                <div class="flex-1 bg-gray-900/40 dark:bg-slate-100 border border-gray-800/80 dark:border-gray-200 p-4 rounded-2xl flex flex-col items-center text-center">
-                    <img id="vs-p2-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 dark:bg-slate-200 mb-2">
-                    <span id="vs-p2-name" class="font-black text-white dark:text-gray-900 text-base tracking-wide">---</span>
+                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                    <img id="vs-p2-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
                     <span id="vs-p2-score" class="text-xs text-gray-500 mt-0.5">#0</span>
-                    <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 dark:text-indigo-600 mt-1">---</span>
+                    <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
                 </div>
             </div>
-
             <div class="space-y-2" id="vs-kits-rows"></div>
         </div>
     </div>
 
     <script>
         const tierConfig = {
-            'HT1': { points: 60, bg: 'bg-yellow-400 text-black border-yellow-300', label: 'HT1', val: 14 },
-            'LT1': { points: 48, bg: 'bg-amber-600 text-white border-amber-500', label: 'LT1', val: 13 },
-            'RHT1': { points: 54, bg: 'bg-black text-red-500 border-red-900', label: 'RHT1', val: 12 },
-            'RLT1': { points: 44, bg: 'bg-black text-red-400 border-red-900', label: 'RLT1', val: 11 },
-            'HT2': { points: 32, bg: 'bg-slate-300 text-black border-slate-200', label: 'HT2', val: 10 },
-            'LT2': { points: 24, bg: 'bg-slate-500 text-white border-slate-400', label: 'LT2', val: 9 },
-            'RHT2': { points: 29, bg: 'bg-black text-red-400 border-red-900', label: 'RHT2', val: 8 },
-            'RLT2': { points: 22, bg: 'bg-black text-red-400 border-red-900', label: 'RLT2', val: 7 },
-            'HT3': { points: 16, bg: 'bg-amber-900 text-white border-amber-800', label: 'HT3', val: 6 },
-            'LT3': { points: 10, bg: 'bg-amber-700 text-white border-amber-600', label: 'LT3', val: 5 },
-            'HT4': { points: 5,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT4', val: 4 },
-            'LT4': { points: 3,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT4', val: 3 },
-            'HT5': { points: 2,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'HT5', val: 2 },
-            'LT5': { points: 1,  bg: 'bg-black text-gray-400 border border-gray-800', label: 'LT5', val: 1 }
-        };
-
-        const peakConfig = {
-            'HT3':  { days: 15, points: 14, baseTier: 'HT3' },
-            'RHT3': { days: 15, points: 14, baseTier: 'HT3' },
-            'LT2':  { days: 30, points: 22, baseTier: 'LT2' },
-            'RLT2': { days: 30, points: 22, baseTier: 'LT2' },
-            'HT2':  { days: 30, points: 29, baseTier: 'HT2' },
-            'RHT2': { days: 30, points: 29, baseTier: 'HT2' },
-            'LT1':  { days: 60, points: 44, baseTier: 'LT1' },
-            'RLT1': { days: 60, points: 44, baseTier: 'LT1' },
-            'HT1':  { days: 60, points: 54, baseTier: 'HT1' },
-            'RHT1': { days: 60, points: 54, baseTier: 'HT1' }
+            'HT1': { points: 60, label: 'HT1' },
+            'LT1': { points: 48, label: 'LT1' },
+            'RHT1': { points: 54, label: 'RHT1' },
+            'RLT1': { points: 44, label: 'RLT1' },
+            'HT2': { points: 32, label: 'HT2' },
+            'LT2': { points: 24, label: 'LT2' },
+            'RHT2': { points: 29, label: 'RHT2' },
+            'RLT2': { points: 22, label: 'RLT2' },
+            'HT3': { points: 16, label: 'HT3' },
+            'LT3': { points: 10, label: 'LT3' },
+            'HT4': { points: 5,  label: 'HT4' },
+            'LT4': { points: 3,  label: 'LT4' },
+            'HT5': { points: 2,  label: 'HT5' },
+            'LT5': { points: 1,  label: 'LT5' }
         };
 
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
-        
-        const kitIcons = { 
-            'GoldSMP': '🟢', 
-            'NetheriteSword': '⚔️', 
-            'IronAxe': '🪓', 
-            'UHCMace': '👑',
-            'AnchorPvP': '⚓',
-            'RandomPot': '🧪',
-            'ShieldlessSMP': '🛡️'
-        };
 
         let playersData = [];
         let currentTab = 'Overall';
         let chartInstance = null;
         let activeModalPlayer = null;
-
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.add('dark');
-            document.documentElement.classList.remove('dark');
-            document.body.classList.remove('dark:bg-[#0d0f12]');
-            document.body.parentElement.classList.add('light-mode-active');
-        } else {
-            document.documentElement.classList.add('dark');
-        }
-
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-            if(chartInstance) {
-                const isDark = document.documentElement.classList.contains('dark');
-                chartInstance.options.scales.y.grid.color = isDark ? '#1e293b' : '#e2e8f0';
-                chartInstance.options.scales.x.grid.color = isDark ? '#1e293b' : '#e2e8f0';
-                chartInstance.update();
-            }
-        }
 
         window.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.activeElement !== document.getElementById('search') && document.activeElement !== document.getElementById('compare-search-input')) {
@@ -235,63 +168,14 @@
             }
         }
 
-        function getKitPeakInfo(player, mode) {
-            const currentTier = player.modes ? player.modes[mode] : null;
-            let currentPoints = currentTier && tierConfig[currentTier] ? tierConfig[currentTier].points : 0;
-            
-            let bestPeakTier = null;
-            let bestPeakPoints = 0;
-
-            if (player.history && player.history[mode] && player.history[mode].length > 0) {
-                const history = player.history[mode];
-
-                Object.keys(peakConfig).forEach(pTier => {
-                    const reqDays = peakConfig[pTier].days;
-                    const pPoints = peakConfig[pTier].points;
-
-                    let totalDaysHeld = 0;
-                    let targetIdx = tierOrder.indexOf(pTier);
-
-                    for (let i = 0; i < history.length; i++) {
-                        const item = history[i];
-                        const itemIdx = tierOrder.indexOf(item.tier);
-
-                        if (itemIdx !== -1 && itemIdx <= targetIdx) {
-                            const startDate = new Date(item.date);
-                            const endDate = (i < history.length - 1) ? new Date(history[i + 1].date) : new Date();
-                            
-                            const diffTime = Math.max(0, endDate - startDate);
-                            const diffDays = diffTime / (1000 * 60 * 60 * 24);
-                            totalDaysHeld += diffDays;
-                        }
-                    }
-
-                    if (totalDaysHeld >= reqDays) {
-                        if (pPoints > bestPeakPoints) {
-                            bestPeakPoints = pPoints;
-                            bestPeakTier = peakConfig[pTier].baseTier;
-                        }
-                    }
-                });
-            }
-
-            const effectivePoints = Math.max(currentPoints, bestPeakPoints);
-
-            return {
-                currentTier: currentTier || 'None',
-                effectivePoints: effectivePoints,
-                peakTier: bestPeakTier || (currentTier && tierConfig[currentTier] && tierConfig[currentTier].val >= 6 ? currentTier.replace(/^R/, '') : 'None')
-            };
-        }
-
         function calculateOverallPoints(player) {
             let total = 0;
             let hasRetired = false;
             if (player && player.modes) {
                 for (let m in player.modes) {
                     const tier = player.modes[m];
-                    const kitInfo = getKitPeakInfo(player, m);
-                    total += kitInfo.effectivePoints;
+                    const cfg = tierConfig[tier];
+                    if (cfg) total += cfg.points;
                     if (tier.startsWith('R')) hasRetired = true;
                 }
             }
@@ -307,7 +191,7 @@
                 let idx = tierOrder.indexOf(tier);
                 if (idx !== -1 && idx < bestIdx) {
                     bestIdx = idx;
-                    bestKit = `${kitIcons[kit] || '⚔️'} ${kit} (${tier})`;
+                    bestKit = `${kit} (${tier})`;
                 }
             });
             return bestKit;
@@ -330,9 +214,12 @@
         function switchTab(tabId) {
             currentTab = tabId;
             document.querySelectorAll('#tabs button').forEach(btn => {
-                btn.className = "px-5 py-2 rounded-lg font-bold text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-900 transition";
+                btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2";
             });
-            document.getElementById(`tab-${tabId}`).className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black";
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
+            }
             render();
         }
 
@@ -371,17 +258,17 @@
 
             processedPlayers.forEach((player, index) => {
                 const rank = index + 1;
-                let borderClass = "border-gray-900 dark:border-gray-200 bg-gray-950/40 dark:bg-white";
+                let borderClass = "border-gray-900 bg-gray-950/40";
                 let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
 
                 if (rank === 1) {
-                    borderClass = "gold-border border-l-4 dark:bg-white";
+                    borderClass = "gold-border border-l-4";
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-black shadow-lg shadow-yellow-500/20">1</div>`;
                 } else if (rank === 2) {
-                    borderClass = "silver-border border-l-4 dark:bg-white";
+                    borderClass = "silver-border border-l-4";
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-slate-400 text-black flex items-center justify-center font-black">2</div>`;
                 } else if (rank === 3) {
-                    borderClass = "bronze-border border-l-4 dark:bg-white";
+                    borderClass = "bronze-border border-l-4";
                     rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
                 }
 
@@ -390,29 +277,42 @@
                 let badgesHTML = '';
                 if (currentTab === 'Overall') {
                     badgesHTML = `
-                        <div class="flex flex-wrap gap-2">
+                        <div class="flex flex-wrap gap-3 items-center">
                             ${Object.entries(player.modes || {}).map(([mode, t]) => {
-                                const cfg = tierConfig[t] || { bg: 'bg-gray-800', label: t };
-                                return `<span class="px-2 py-1 rounded text-xs font-bold ${cfg.bg}">${mode}: ${cfg.label}</span>`;
+                                return `
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-9 h-9 rounded-full bg-gray-900/80 border border-gray-700/60 flex items-center justify-center p-1.5 shadow-inner">
+                                            <img src="icons/${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                                        </div>
+                                        <span class="text-[11px] font-black text-amber-400 tracking-wide mt-1">${t}</span>
+                                    </div>
+                                `;
                             }).join('')}
                         </div>
                     `;
                 } else {
-                    const cfg = tierConfig[player.currentTier] || { bg: 'bg-gray-800', label: player.currentTier };
-                    badgesHTML = `<span class="px-3 py-1.5 rounded-lg text-sm font-bold ${cfg.bg}">${cfg.label}</span>`;
+                    const cfg = tierConfig[player.currentTier] || { label: player.currentTier };
+                    badgesHTML = `
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 rounded-full bg-gray-900/80 border border-amber-500/50 flex items-center justify-center p-1.5 shadow-inner">
+                                <img src="icons/${currentTab}.png" alt="${currentTab}" class="w-full h-full object-contain">
+                            </div>
+                            <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${cfg.label}</span>
+                        </div>
+                    `;
                 }
 
                 const row = document.createElement('div');
-                row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/30 dark:hover:bg-gray-100 ${borderClass}`;
+                row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
                 row.onclick = () => openPlayerModal(player);
                 row.innerHTML = `
                     <div class="flex items-center gap-4">
                         ${rankBadge}
-                        <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 dark:bg-gray-200 border border-gray-700 dark:border-gray-300">
+                        <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700">
                         <div class="flex flex-col justify-center">
-                            <span class="font-bold text-white dark:text-gray-900 tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
+                            <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
                             <div class="flex items-center gap-2 mt-1.5">
-                                <span class="text-sm font-bold text-indigo-400 dark:text-indigo-600">${player.overallScore}</span>
+                                <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
                                 <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
                             </div>
                         </div>
@@ -442,7 +342,7 @@
                 searchDropdown.innerHTML = '';
                 matches.forEach(player => {
                     const div = document.createElement('div');
-                    div.className = "flex items-center gap-3 p-3 hover:bg-gray-900/80 dark:hover:bg-gray-100 cursor-pointer border-b border-gray-900 dark:border-gray-100 last:border-0 transition text-white dark:text-gray-900";
+                    div.className = "flex items-center gap-3 p-3 hover:bg-gray-900/80 cursor-pointer border-b border-gray-900 last:border-0 transition text-white";
                     div.onclick = () => {
                         openPlayerModal(player);
                         searchDropdown.classList.add('hidden');
@@ -452,7 +352,7 @@
                         <img src="https://minotar.net/avatar/${player.username}/32" class="w-8 h-8 rounded bg-gray-800">
                         <div class="flex flex-col">
                             <span class="font-bold text-sm">${player.username}</span>
-                            <span class="text-xs text-gray-500">Score: ${player.overallScore}</span>
+                            <span class="text-xs text-gray-500">Skóre: ${player.overallScore}</span>
                         </div>
                     `;
                     searchDropdown.appendChild(div);
@@ -482,7 +382,6 @@
             document.getElementById('modal-rank-badge').innerText = rankInfo.title;
             document.getElementById('modal-points').innerText = player.overallScore;
             document.getElementById('modal-title-label').innerText = rankInfo.title === 'BEST CZECHIA' ? 'Legenda' : rankInfo.title;
-
             document.getElementById('modal-favorite-kit').innerHTML = getFavoriteKit(player);
 
             const kitsContainer = document.getElementById('modal-kits-container');
@@ -490,29 +389,15 @@
 
             if (player.modes) {
                 Object.entries(player.modes).forEach(([mode, tier]) => {
-                    const cfg = tierConfig[tier] || { bg: 'bg-gray-800', label: tier };
-                    const icon = kitIcons[mode] || '⚔️';
-                    const peakInfo = getKitPeakInfo(player, mode);
-                    
                     const badgeDiv = document.createElement('div');
                     badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
                     
                     badgeDiv.innerHTML = `
-                        <div class="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center z-50 pointer-events-none transition-all duration-200">
-                            <div class="bg-[#1e2230] text-white px-4 py-2.5 rounded-xl shadow-2xl border border-gray-700/80 text-center min-w-[100px]">
-                                <div class="font-black text-base leading-tight">${tier.replace(/^R/, '')}</div>
-                                <div class="text-sm font-extrabold text-gray-200 my-0.5">${peakInfo.effectivePoints} pts</div>
-                                <div class="text-xs text-gray-400 font-semibold">Peak: ${peakInfo.peakTier}</div>
-                            </div>
-                            <div class="w-3 h-3 bg-[#1e2230] rotate-45 -mt-1.5 border-r border-b border-gray-700/80"></div>
+                        <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
+                            <img src="icons/${mode}.png" class="w-full h-full object-contain">
                         </div>
-
-                        <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black text-[10px] border-2 transition group-hover:scale-110 ${cfg.bg}">
-                            <span>${icon}</span>
-                            <span class="leading-none mt-0.5">${cfg.label}</span>
-                        </div>
-                        <span class="text-[10px] font-bold text-gray-500 dark:text-gray-400 group-hover:text-white dark:group-hover:text-black transition">${mode}</span>
+                        <span class="text-[10px] font-bold text-amber-400 mt-0.5">${tier}</span>
                     `;
                     kitsContainer.appendChild(badgeDiv);
                 });
@@ -548,8 +433,6 @@
                 return idx !== -1 ? (tierOrder.length - idx) : 0;
             });
 
-            const isDark = document.documentElement.classList.contains('dark');
-
             chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -570,7 +453,7 @@
                     plugins: { legend: { display: false } },
                     scales: {
                         y: {
-                            grid: { color: isDark ? '#1e293b' : '#e2e8f0' },
+                            grid: { color: '#1e293b' },
                             ticks: {
                                 color: '#64748b',
                                 font: { size: 10, weight: 'bold' },
@@ -579,7 +462,7 @@
                                 }
                             }
                         },
-                        x: { grid: { color: isDark ? '#1e293b' : '#e2e8f0' }, ticks: { color: '#64748b', font: { size: 10 } } }
+                        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 10 } } }
                     }
                 }
             });
@@ -602,10 +485,10 @@
                 return { ...p, overallScore: calculateOverallPoints(p).total };
             }).filter(p => p.username !== activeModalPlayer.username && p.username.toLowerCase().includes(filterQuery.toLowerCase()));
 
-            filtered.forEach((player, idx) => {
+            filtered.forEach((player) => {
                 const rankInfo = getRankTitle(player);
                 const div = document.createElement('div');
-                div.className = "flex items-center justify-between p-3 bg-gray-900/40 dark:bg-slate-100 hover:bg-gray-900/80 dark:hover:bg-slate-200 border border-gray-800 dark:border-gray-200 rounded-xl cursor-pointer transition text-white dark:text-gray-900";
+                div.className = "flex items-center justify-between p-3 bg-gray-900/40 hover:bg-gray-900/80 border border-gray-800 rounded-xl cursor-pointer transition text-white";
                 div.onclick = () => startComparison(player);
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
@@ -613,7 +496,7 @@
                         <span class="font-bold text-sm">${player.username}</span>
                     </div>
                     <div class="text-right text-xs text-gray-500">
-                        <span>${player.overallScore} pts · </span>
+                        <span>${player.overallScore} bodů · </span>
                         <span class="text-amber-500 font-bold">${rankInfo.title}</span>
                     </div>
                 `;
@@ -630,18 +513,17 @@
             
             const p1 = activeModalPlayer;
             const p2 = opponent;
-
             const r1 = getRankTitle(p1);
             const r2 = getRankTitle(p2);
 
             document.getElementById('vs-p1-avatar').src = `https://minotar.net/avatar/${p1.username}/60`;
             document.getElementById('vs-p1-name').innerText = p1.username;
-            document.getElementById('vs-p1-score').innerText = `${p1.overallScore} pts`;
+            document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
             document.getElementById('vs-p1-rank').innerText = r1.title;
 
             document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.username}/60`;
             document.getElementById('vs-p2-name').innerText = p2.username;
-            document.getElementById('vs-p2-score').innerText = `${p2.overallScore} pts`;
+            document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
             document.getElementById('vs-p2-rank').innerText = r2.title;
 
             const rowsContainer = document.getElementById('vs-kits-rows');
@@ -652,33 +534,13 @@
             allKits.forEach(kit => {
                 const t1 = p1.modes ? p1.modes[kit] : null;
                 const t2 = p2.modes ? p2.modes[kit] : null;
-                const icon = kitIcons[kit] || '⚔️';
-
-                let cfg1 = tierConfig[t1];
-                let cfg2 = tierConfig[t2];
-
-                let idx1 = tierOrder.indexOf(t1);
-                let idx2 = tierOrder.indexOf(t2);
-
-                if (idx1 === -1) idx1 = 999;
-                if (idx2 === -1) idx2 = 999;
-
-                let style1 = "bg-gray-900/20 text-gray-600 border-gray-950 opacity-40";
-                let style2 = "bg-gray-900/20 text-gray-600 border-gray-950 opacity-40";
-
-                if (t1) {
-                    style1 = (idx1 <= idx2) ? cfg1.bg + " border shadow-md" : "bg-gray-800/40 text-gray-500 border-gray-800";
-                }
-                if (t2) {
-                    style2 = (idx2 <= idx1) ? cfg2.bg + " border shadow-md" : "bg-gray-800/40 text-gray-500 border-gray-800";
-                }
 
                 const row = document.createElement('div');
-                row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 dark:bg-slate-100 border border-gray-900 dark:border-gray-200 rounded-xl";
+                row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
-                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block w-14 ${style1}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-1.5 text-sm text-gray-400 dark:text-gray-600 font-bold"><span>${icon}</span><span class="text-xs text-gray-500">${kit}</span></div>
-                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block w-14 ${style2}">${t2 || '---'}</span></div>
+                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="icons/${kit}.png" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
             });
