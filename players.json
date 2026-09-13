@@ -1991,7 +1991,8 @@
       "AnchorPvP": "HT3",
       "IronAxe": "HT3",
       "NetheriteSword": "LT3",
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "GoldSMP": "HT4"
     },
     "history": {
       "AnchorPvP": [
@@ -2016,6 +2017,12 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "GoldSMP": [
+        {
+          "date": "13.09.2026",
+          "tier": "HT4"
         }
       ]
     }
