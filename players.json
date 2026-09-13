@@ -2133,10 +2133,17 @@
   {
     "username": "Lukyk656",
     "modes": {
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "UHCMace": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "IronAxe": [
         {
           "date": "13.09.2026",
           "tier": "LT3"
