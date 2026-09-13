@@ -1990,7 +1990,8 @@
     "modes": {
       "AnchorPvP": "HT3",
       "IronAxe": "HT3",
-      "NetheriteSword": "LT3"
+      "NetheriteSword": "LT3",
+      "UHCMace": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -2006,6 +2007,12 @@
         }
       ],
       "NetheriteSword": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "UHCMace": [
         {
           "date": "13.09.2026",
           "tier": "LT3"
