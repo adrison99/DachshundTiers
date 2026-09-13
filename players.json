@@ -429,11 +429,11 @@
         {
           "date": "31.07.2026",
           "tier": "LT2"
-        }
+        },
         {
           "date": "13.09.2026",
           "tier": "LT3"
-        },
+        }
       ],
       "NetheriteSword": [
         {
@@ -523,13 +523,11 @@
           "date": "12.08.2026",
           "tier": "LT5"
         }
-        ],
+      ],
       "RandomPot": [
         {
           "date": "13.09.2026",
           "tier": "LT4"
-        },
-        
         }
       ],
       "NetheriteSword": [
