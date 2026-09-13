@@ -1989,7 +1989,8 @@
     "username": "DarkHonzaCz",
     "modes": {
       "AnchorPvP": "HT3",
-      "IronAxe": "HT3"
+      "IronAxe": "HT3",
+      "NetheriteSword": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -2002,6 +2003,12 @@
         {
           "date": "13.09.2026",
           "tier": "HT3"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
         }
       ]
     }
