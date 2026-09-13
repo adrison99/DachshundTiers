@@ -56,7 +56,7 @@
             <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
         </nav>
 
-        <main id="leaderboard-container" class="space-y-3"></main>
+        <main id="leaderboard-container"></main>
     </div>
 
     <!-- Modaly -->
@@ -234,49 +234,33 @@
             });
 
             if (currentTab === 'Overall') {
+                container.className = "space-y-3";
                 processedPlayers.sort((a, b) => {
                     if (a.isBestCZSK && !b.isBestCZSK) return -1;
                     if (!a.isBestCZSK && b.isBestCZSK) return 1;
                     if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
                     return b.overallScore - a.overallScore;
                 });
-            } else {
-                processedPlayers = processedPlayers
-                    .filter(p => p.modes && p.modes[currentTab])
-                    .map(p => {
-                        const tier = p.modes[currentTab];
-                        const isRetired = tier.startsWith('R');
-                        const orderIndex = tierOrder.indexOf(tier);
-                        return { ...p, currentTier: tier, isRetired, orderIndex: orderIndex !== -1 ? orderIndex : 999 };
-                    });
-                
-                processedPlayers.sort((a, b) => {
-                    if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
-                    return a.orderIndex - b.orderIndex;
-                });
-            }
 
-            processedPlayers.forEach((player, index) => {
-                const rank = index + 1;
-                let borderClass = "border-gray-900 bg-gray-950/40";
-                let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
+                processedPlayers.forEach((player, index) => {
+                    const rank = index + 1;
+                    let borderClass = "border-gray-900 bg-gray-950/40";
+                    let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
 
-                if (rank === 1) {
-                    borderClass = "gold-border border-l-4";
-                    rankBadge = `<div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-black shadow-lg shadow-yellow-500/20">1</div>`;
-                } else if (rank === 2) {
-                    borderClass = "silver-border border-l-4";
-                    rankBadge = `<div class="w-8 h-8 rounded-full bg-slate-400 text-black flex items-center justify-center font-black">2</div>`;
-                } else if (rank === 3) {
-                    borderClass = "bronze-border border-l-4";
-                    rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
-                }
+                    if (rank === 1) {
+                        borderClass = "gold-border border-l-4";
+                        rankBadge = `<div class="w-8 h-8 rounded-full bg-yellow-500 text-black flex items-center justify-center font-black shadow-lg shadow-yellow-500/20">1</div>`;
+                    } else if (rank === 2) {
+                        borderClass = "silver-border border-l-4";
+                        rankBadge = `<div class="w-8 h-8 rounded-full bg-slate-400 text-black flex items-center justify-center font-black">2</div>`;
+                    } else if (rank === 3) {
+                        borderClass = "bronze-border border-l-4";
+                        rankBadge = `<div class="w-8 h-8 rounded-full bg-amber-700 text-white flex items-center justify-center font-black">3</div>`;
+                    }
 
-                const rankInfo = getRankTitle(player);
+                    const rankInfo = getRankTitle(player);
 
-                let badgesHTML = '';
-                if (currentTab === 'Overall') {
-                    badgesHTML = `
+                    const badgesHTML = `
                         <div class="flex flex-wrap gap-3 items-center">
                             ${Object.entries(player.modes || {}).map(([mode, t]) => {
                                 return `
@@ -290,37 +274,85 @@
                             }).join('')}
                         </div>
                     `;
-                } else {
-                    const cfg = tierConfig[player.currentTier] || { label: player.currentTier };
-                    badgesHTML = `
-                        <div class="flex flex-col items-center">
-                            <div class="w-10 h-10 rounded-full bg-gray-900/80 border border-amber-500/50 flex items-center justify-center p-1.5 shadow-inner">
-                                <img src="${currentTab}.png" alt="${currentTab}" class="w-full h-full object-contain">
-                            </div>
-                            <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${cfg.label}</span>
-                        </div>
-                    `;
-                }
 
-                const row = document.createElement('div');
-                row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
-                row.onclick = () => openPlayerModal(player);
-                row.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        ${rankBadge}
-                        <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700">
-                        <div class="flex flex-col justify-center">
-                            <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
-                            <div class="flex items-center gap-2 mt-1.5">
-                                <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
-                                <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                    const row = document.createElement('div');
+                    row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
+                    row.onclick = () => openPlayerModal(player);
+                    row.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            ${rankBadge}
+                            <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700">
+                            <div class="flex flex-col justify-center">
+                                <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
+                                <div class="flex items-center gap-2 mt-1.5">
+                                    <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
+                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="flex items-center">${badgesHTML}</div>
-                `;
-                container.appendChild(row);
-            });
+                        <div class="flex items-center">${badgesHTML}</div>
+                    `;
+                    container.appendChild(row);
+                });
+            } else {
+                // Zobrazení 5 TIER sloupců pro vybraný gamemode
+                container.className = "grid grid-cols-1 md:grid-cols-5 gap-4";
+
+                const tiers = [1, 2, 3, 4, 5];
+
+                tiers.forEach(tNum => {
+                    const col = document.createElement('div');
+                    col.className = "bg-gray-950/60 border border-gray-800/80 rounded-2xl p-4 flex flex-col gap-3 min-h-[300px]";
+
+                    // Hlavička tieru
+                    col.innerHTML = `
+                        <div class="text-center pb-3 border-b border-gray-800/80">
+                            <h3 class="text-gray-300 font-extrabold text-sm tracking-wider">Tier ${tNum}</h3>
+                        </div>
+                        <div class="flex flex-col gap-2 flex-grow" id="tier-list-${tNum}"></div>
+                    `;
+                    container.appendChild(col);
+
+                    const listContainer = col.querySelector(`#tier-list-${tNum}`);
+
+                    // Filtrování hráčů, kteří spadají do Tieru X (př. Tier 3 = HT3, LT3, RHT3, RLT3)
+                    const filtered = processedPlayers.filter(p => {
+                        if (!p.modes || !p.modes[currentTab]) return false;
+                        const tStr = p.modes[currentTab];
+                        return tStr.includes(tNum.toString());
+                    });
+
+                    // Seřazení podle HT před LT
+                    filtered.sort((a, b) => {
+                        const tA = a.modes[currentTab];
+                        const tB = b.modes[currentTab];
+                        return tierOrder.indexOf(tA) - tierOrder.indexOf(tB);
+                    });
+
+                    if (filtered.length === 0) {
+                        listContainer.innerHTML = `<div class="m-auto text-gray-600 font-medium text-xs">Prázdné</div>`;
+                    } else {
+                        filtered.forEach(player => {
+                            const rawTier = player.modes[currentTab];
+                            const isHT = rawTier.includes('HT');
+                            // Pro HT dáme 2 šipky (▲▲), pro LT 1 šipku (▲)
+                            const arrows = isHT ? '▲▲' : '▲';
+
+                            const item = document.createElement('div');
+                            item.className = "flex items-center justify-between p-2.5 bg-gray-900/60 hover:bg-gray-800/80 border border-gray-800/80 rounded-xl cursor-pointer transition group";
+                            item.onclick = () => openPlayerModal(player);
+                            item.innerHTML = `
+                                <div class="flex items-center gap-2.5 overflow-hidden">
+                                    <img src="https://minotar.net/avatar/${player.username}/32" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
+                                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
+                                </div>
+                                <span class="text-sky-400 text-[10px] font-black tracking-tighter ml-1">${arrows}</span>
+                            `;
+                            listContainer.appendChild(item);
+                        });
+                    }
+                });
+            }
         }
 
         const searchInput = document.getElementById('search');
