@@ -2161,9 +2161,9 @@
     "username": "_MladyPes",
     "modes": {
       "IronAxe": "HT3",
-      "GoldSMP": "LT3",
+      "NetheriteSword": "LT3",
       "ShieldlessSMP": "HT4",
-      "RandomPot": "LT3"
+      "RandomPot": "HT4"
     },
     "history": {
       "IronAxe": [
@@ -2180,7 +2180,7 @@
           "tier": "HT3"
         }
       ],
-      "GoldSMP": [
+      "NetheriteSword": [
         {
           "date": "14.09.2026",
           "tier": "LT3"
@@ -2195,7 +2195,7 @@
       "RandomPot": [
         {
           "date": "14.09.2026",
-          "tier": "LT3"
+          "tier": "HT4"
         }
       ]
     }
