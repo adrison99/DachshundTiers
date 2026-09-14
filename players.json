@@ -2161,7 +2161,8 @@
     "username": "_MladyPes",
     "modes": {
       "IronAxe": "HT3",
-      "GoldSMP": "LT3"
+      "GoldSMP": "LT3",
+      "ShieldlessSMP": "HT4"
     },
     "history": {
       "IronAxe": [
@@ -2182,6 +2183,12 @@
         {
           "date": "14.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "ShieldlessSMP": [
+        {
+          "date": "14.09.2026",
+          "tier": "HT4"
         }
       ]
     }
