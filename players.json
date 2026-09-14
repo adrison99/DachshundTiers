@@ -1277,7 +1277,7 @@
     "username": "Frexiq",
     "modes": {
       "AnchorPvP": "HT4",
-      "UHCMace": "LT4",
+      "UHCMace": "LT3",
       "IronAxe": "LT3",
       "ShieldlessSMP": "LT4",
       "RandomPot": "LT3",
@@ -1295,6 +1295,10 @@
         {
           "date": "11.07.2026",
           "tier": "LT4"
+        },
+        {
+          "date": "14.09.2026",
+          "tier": "LT3"
         }
       ],
       "IronAxe": [
