@@ -17,7 +17,7 @@
         .silver-border { border-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1) 0%, rgba(0,0,0,0) 100%); }
         .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.1) 0%, rgba(0,0,0,0) 100%); }
 
-        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
     </style>
@@ -46,6 +46,15 @@
                 <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] border border-gray-800 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
             </div>
         </header>
+
+        <!-- Horní lišta: NEDÁVNO TESTOVÁNO -->
+        <div id="recent-tests-container" class="mb-8 hidden">
+            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <span>NEDÁVNO TESTOVÁNO</span>
+                <span class="text-gray-700">— DACHSHUNDTIERS</span>
+            </h4>
+            <div id="recent-tests-list" class="flex gap-3 overflow-x-auto pb-2 custom-scroll"></div>
+        </div>
 
         <nav class="flex flex-wrap gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
             <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
@@ -173,10 +182,92 @@
             try {
                 const response = await fetch('players.json?v=' + new Date().getTime());
                 playersData = await response.json();
+                renderRecentTests();
                 render();
             } catch (e) {
                 console.error("Chyba při načítání players.json", e);
             }
+        }
+
+        function renderRecentTests() {
+            const container = document.getElementById('recent-tests-container');
+            const listContainer = document.getElementById('recent-tests-list');
+            if (!container || !listContainer) return;
+
+            const recentTests = [];
+
+            playersData.forEach(player => {
+                if (!player.history) return;
+
+                Object.keys(player.history).forEach(mode => {
+                    const modeEntries = player.history[mode];
+                    modeEntries.forEach((entry, idx) => {
+                        const parts = entry.date.split('.');
+                        if (parts.length === 3) {
+                            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
+                            
+                            // Vyhodnocení trendu (up / down / same) oproti předchozímu testu
+                            let trend = 'up';
+                            if (idx > 0) {
+                                const prevTier = modeEntries[idx - 1].tier;
+                                const prevIdx = tierOrder.indexOf(prevTier);
+                                const currIdx = tierOrder.indexOf(entry.tier);
+                                if (currIdx > prevIdx) trend = 'down';
+                                else if (currIdx === prevIdx) trend = 'same';
+                            }
+
+                            recentTests.push({
+                                username: player.username,
+                                mode: mode,
+                                tier: entry.tier,
+                                dateStr: entry.date,
+                                dateObj: dateObj,
+                                trend: trend
+                            });
+                        }
+                    });
+                });
+            });
+
+            if (recentTests.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            // Seřadit od nejnovějšího
+            recentTests.sort((a, b) => b.dateObj - a.dateObj);
+
+            // Vybrat 8 nejnovějších
+            const latest = recentTests.slice(0, 8);
+            listContainer.innerHTML = '';
+
+            latest.forEach(item => {
+                let arrowIcon = '▲';
+                let arrowColor = 'text-emerald-400';
+                if (item.trend === 'down') {
+                    arrowIcon = '▼';
+                    arrowColor = 'text-red-400';
+                } else if (item.trend === 'same') {
+                    arrowIcon = '•';
+                    arrowColor = 'text-gray-400';
+                }
+
+                const card = document.createElement('div');
+                card.className = "flex items-center gap-3 bg-[#13151f] border border-gray-800/80 px-3.5 py-2 rounded-xl flex-shrink-0 shadow-md hover:border-gray-700 transition";
+                card.innerHTML = `
+                    <img src="https://minotar.net/avatar/${item.username}/32" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
+                        <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
+                    </div>
+                    <img src="${item.mode}.png" alt="${item.mode}" class="w-4 h-4 object-contain ml-1">
+                    <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
+                    <span class="${arrowColor} text-xs font-black">${arrowIcon}</span>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            container.classList.remove('hidden');
         }
 
         function calculateOverallPoints(player) {
@@ -249,7 +340,7 @@
                 if (processedPlayers.length >= 3) {
                     const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
-                    podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-4 mb-10 mt-4";
+                    podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-6 mb-12 mt-6";
 
                     top3.forEach((player, idx) => {
                         const rankNum = idx === 1 ? 1 : (idx === 0 ? 2 : 3);
@@ -260,41 +351,45 @@
                         let rankBorderGlow = "";
                         let avatarBorder = "";
                         let badgeColor = "bg-amber-700 text-white";
+                        let cardPadding = "p-7 md:p-8";
 
                         if (rankNum === 1) {
-                            rankBorderGlow = "border-amber-500/80 shadow-[0_0_25px_rgba(234,179,8,0.3)] -translate-y-4";
-                            avatarBorder = "border-amber-500";
-                            badgeColor = "bg-yellow-500 text-black";
+                            rankBorderGlow = "border-amber-500 shadow-[0_0_35px_rgba(234,179,8,0.35)] -translate-y-6 z-10";
+                            avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
+                            badgeColor = "bg-amber-400 text-black";
+                            cardPadding = "p-8 md:p-9";
                         } else if (rankNum === 2) {
-                            rankBorderGlow = "border-slate-400/80 shadow-[0_0_25px_rgba(203,213,225,0.25)]";
+                            rankBorderGlow = "border-slate-400/80 shadow-[0_0_25px_rgba(203,213,225,0.2)]";
                             avatarBorder = "border-slate-300";
                             badgeColor = "bg-slate-300 text-black";
                         } else if (rankNum === 3) {
-                            rankBorderGlow = "border-amber-700/80 shadow-[0_0_25px_rgba(180,83,9,0.3)]";
-                            avatarBorder = "border-amber-700";
-                            badgeColor = "bg-amber-700 text-white";
+                            rankBorderGlow = "border-amber-700/80 shadow-[0_0_25px_rgba(180,83,9,0.25)]";
+                            avatarBorder = "border-amber-600";
+                            badgeColor = "bg-amber-600 text-white";
                         }
 
-                        card.className = `w-full md:w-1/3 bg-[#13151d] border ${rankBorderGlow} p-5 rounded-2xl flex flex-col items-center cursor-pointer transition hover:scale-105 relative`;
+                        card.className = `w-full md:w-1/3 bg-[#13151f] border-2 ${rankBorderGlow} ${cardPadding} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-105 relative`;
                         card.onclick = () => openPlayerModal(player);
 
                         const sortedModes = getSortedModes(player.modes);
+                        
+                        // Zvětšené badges s tiery pro Top 3
                         const badgesHTML = sortedModes.map(([mode, t]) => `
-                            <div class="flex items-center gap-1 bg-gray-950/80 px-2 py-1 rounded-lg border border-gray-800">
-                                <img src="${mode}.png" alt="${mode}" class="w-3.5 h-3.5 object-contain">
-                                <span class="text-[10px] font-black text-amber-400">${t}</span>
+                            <div class="flex items-center gap-1.5 bg-gray-950/90 px-3 py-1.5 rounded-xl border border-gray-800 shadow-sm">
+                                <img src="${mode}.png" alt="${mode}" class="w-5 h-5 object-contain">
+                                <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
                             </div>
                         `).join('');
 
                         card.innerHTML = `
-                            <div class="w-7 h-7 rounded-lg ${badgeColor} flex items-center justify-center font-black text-xs mb-3 shadow-md">${rankNum}</div>
-                            <img src="https://minotar.net/avatar/${player.username}/64" class="w-16 h-16 rounded-xl bg-gray-900 border-2 ${avatarBorder} mb-2">
-                            <h3 class="font-black text-white text-lg tracking-wide">${player.username}</h3>
-                            <div class="flex items-center gap-2 mt-1 mb-4">
-                                <span class="text-xs font-bold text-amber-500">${player.overallScore} bodů</span>
-                                <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                            <div class="w-9 h-9 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-lg">${rankNum}</div>
+                            <img src="https://minotar.net/avatar/${player.username}/96" class="w-24 h-24 rounded-2xl bg-gray-900 border-3 ${avatarBorder} mb-3 shadow-xl">
+                            <h3 class="font-black text-white text-2xl tracking-wide">${player.username}</h3>
+                            <div class="flex items-center gap-2.5 mt-2 mb-6">
+                                <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
+                                <span class="px-3 py-1 rounded-md text-xs font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
                             </div>
-                            <div class="w-full bg-[#0b0c10] p-2.5 rounded-xl border border-gray-900 flex flex-wrap gap-1.5 justify-center">${badgesHTML}</div>
+                            <div class="w-full bg-[#0a0b0e] p-3.5 rounded-2xl border border-gray-900 flex flex-wrap gap-2 justify-center shadow-inner">${badgesHTML}</div>
                         `;
                         podiumContainer.appendChild(card);
                     });
@@ -320,10 +415,10 @@
                             ${sortedModes.map(([mode, t]) => {
                                 return `
                                     <div class="flex flex-col items-center">
-                                        <div class="w-9 h-9 rounded-full bg-gray-900/80 border border-gray-700/60 flex items-center justify-center p-1.5 shadow-inner">
+                                        <div class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
                                             <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
                                         </div>
-                                        <span class="text-[11px] font-black text-amber-400 tracking-wide mt-1">${t}</span>
+                                        <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${t}</span>
                                     </div>
                                 `;
                             }).join('')}
@@ -336,12 +431,12 @@
                     row.innerHTML = `
                         <div class="flex items-center gap-4">
                             ${rankBadge}
-                            <img src="https://minotar.net/avatar/${player.username}/40" alt="${player.username}" class="w-10 h-10 rounded-lg bg-gray-800 border border-gray-700">
+                            <img src="https://minotar.net/avatar/${player.username}/48" alt="${player.username}" class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700">
                             <div class="flex flex-col justify-center">
                                 <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
                                 <div class="flex items-center gap-2 mt-1.5">
                                     <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
-                                    <span class="px-2 py-0.5 rounded text-[11px] font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                                    <span class="px-2.5 py-0.5 rounded text-xs font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
                                 </div>
                             </div>
                         </div>
@@ -482,7 +577,7 @@
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
                             <img src="${mode}.png" class="w-full h-full object-contain">
                         </div>
-                        <span class="text-[10px] font-bold text-amber-400 mt-0.5">${tier}</span>
+                        <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
                     `;
                     kitsContainer.appendChild(badgeDiv);
                 });
