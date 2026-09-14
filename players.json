@@ -400,7 +400,7 @@
       "GoldSMP": "HT4",
       "NetheriteSword": "LT3",
       "IronAxe": "HT4",
-      "UHCMace": "HT3"
+      "UHCMace": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -455,7 +455,11 @@
         {
           "date": "11.07.2026",
           "tier": "HT3"
-        }
+        },
+        {
+          "date": "13.09.2026",
+          "tier": "LT3"
+        },
       ]
     }
   },
