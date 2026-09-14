@@ -44,7 +44,7 @@
       "IronAxe": "LT2",
       "AnchorPvP": "HT3",
       "RandomPot": "LT3",
-      "ShieldlessSMP": "LT3"
+      "ShieldlessSMP": "HT3"
     },
     "history": {
       "GoldSMP": [
@@ -115,6 +115,10 @@
         {
           "date": "08.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "14.09.2026",
+          "tier": "HT3"
         }
       ]
     }
@@ -549,7 +553,6 @@
           "date": "09.07.2026",
           "tier": "HT5"
         },
-        
         {
           "date": "13.09.2026",
           "tier": "LT3"
