@@ -2160,7 +2160,7 @@
   {
     "username": "_MladyPes",
     "modes": {
-      "IronAxe": "LT3"
+      "IronAxe": "HT3"
     },
     "history": {
       "IronAxe": [
@@ -2171,6 +2171,10 @@
         {
           "date": "14.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "14.09.2026",
+          "tier": "HT3"
         }
       ]
     }
