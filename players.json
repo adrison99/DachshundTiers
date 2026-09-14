@@ -1135,7 +1135,8 @@
     "modes": {
       "AnchorPvP": "LT4",
       "IronAxe": "HT4",
-      "GoldSMP": "LT3"
+      "GoldSMP": "LT3",
+      "NetheriteSword": "LT4"
     },
     "history": {
       "AnchorPvP": [
@@ -1158,6 +1159,12 @@
         {
           "date": "13.08.2026",
           "tier": "LT3"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "14.09.2026",
+          "tier": "LT4"
         }
       ]
     }
