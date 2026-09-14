@@ -28,8 +28,17 @@
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
             <div class="flex flex-wrap items-center gap-3 md:gap-6 justify-center md:justify-start">
                 <a href="/" class="flex items-center">
-                    <img src="logo.png" alt="DachshundTiers Logo" class="h-32 w-auto object-contain">
+                    <img src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain">
                 </a>
+
+                <!-- Počítadlo otestovaných hráčů -->
+                <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
+                    <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                    </svg>
+                    <span id="player-count" class="font-black text-amber-400 text-base md:text-lg tracking-wide">0</span>
+                    <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">HRÁČŮ</span>
+                </div>
                 
                 <div class="flex items-center gap-2">
                     <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 transition">
@@ -182,6 +191,11 @@
             try {
                 const response = await fetch('players.json?v=' + new Date().getTime());
                 playersData = await response.json();
+                
+                // Nastavení celkového počtu hráčů
+                const countElem = document.getElementById('player-count');
+                if (countElem) countElem.innerText = playersData.length;
+
                 renderRecentTests();
                 render();
             } catch (e) {
@@ -206,7 +220,6 @@
                         if (parts.length === 3) {
                             const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
                             
-                            // Vyhodnocení trendu (up / down / same) oproti předchozímu testu
                             let trend = 'up';
                             if (idx > 0) {
                                 const prevTier = modeEntries[idx - 1].tier;
@@ -234,10 +247,8 @@
                 return;
             }
 
-            // Seřadit od nejnovějšího
             recentTests.sort((a, b) => b.dateObj - a.dateObj);
 
-            // Vybrat 8 nejnovějších
             const latest = recentTests.slice(0, 8);
             listContainer.innerHTML = '';
 
@@ -338,9 +349,10 @@
                 });
 
                 if (processedPlayers.length >= 3) {
+                    // Poradi v poli: [2. misto, 1. misto, 3. misto]
                     const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
-                    podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-6 mb-12 mt-6";
+                    podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-5 mb-14 mt-8";
 
                     top3.forEach((player, idx) => {
                         const rankNum = idx === 1 ? 1 : (idx === 0 ? 2 : 3);
@@ -351,45 +363,50 @@
                         let rankBorderGlow = "";
                         let avatarBorder = "";
                         let badgeColor = "bg-amber-700 text-white";
-                        let cardPadding = "p-7 md:p-8";
+                        let customHeightClass = "";
 
+                        // Stylizace podle 3. obrázku (1. místo velké a dominantní)
                         if (rankNum === 1) {
-                            rankBorderGlow = "border-amber-500 shadow-[0_0_35px_rgba(234,179,8,0.35)] -translate-y-6 z-10";
+                            rankBorderGlow = "border-amber-500 shadow-[0_0_40px_rgba(234,179,8,0.25)] z-10 md:-translate-y-4";
                             avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
                             badgeColor = "bg-amber-400 text-black";
-                            cardPadding = "p-8 md:p-9";
+                            customHeightClass = "md:w-[38%] py-10 px-8 bg-[#141622]";
                         } else if (rankNum === 2) {
-                            rankBorderGlow = "border-slate-400/80 shadow-[0_0_25px_rgba(203,213,225,0.2)]";
+                            rankBorderGlow = "border-slate-500/60 shadow-[0_0_20px_rgba(203,213,225,0.15)]";
                             avatarBorder = "border-slate-300";
                             badgeColor = "bg-slate-300 text-black";
+                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a]";
                         } else if (rankNum === 3) {
-                            rankBorderGlow = "border-amber-700/80 shadow-[0_0_25px_rgba(180,83,9,0.25)]";
-                            avatarBorder = "border-amber-600";
-                            badgeColor = "bg-amber-600 text-white";
+                            rankBorderGlow = "border-amber-800/60 shadow-[0_0_20px_rgba(180,83,9,0.15)]";
+                            avatarBorder = "border-amber-700";
+                            badgeColor = "bg-amber-700 text-white";
+                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a]";
                         }
 
-                        card.className = `w-full md:w-1/3 bg-[#13151f] border-2 ${rankBorderGlow} ${cardPadding} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-105 relative`;
+                        card.className = `w-full ${customHeightClass} border-2 ${rankBorderGlow} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-[1.02] relative`;
                         card.onclick = () => openPlayerModal(player);
 
                         const sortedModes = getSortedModes(player.modes);
                         
-                        // Zvětšené badges s tiery pro Top 3
                         const badgesHTML = sortedModes.map(([mode, t]) => `
-                            <div class="flex items-center gap-1.5 bg-gray-950/90 px-3 py-1.5 rounded-xl border border-gray-800 shadow-sm">
-                                <img src="${mode}.png" alt="${mode}" class="w-5 h-5 object-contain">
+                            <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm">
+                                <img src="${mode}.png" alt="${mode}" class="w-4 h-4 object-contain">
                                 <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
                             </div>
                         `).join('');
 
+                        const avatarSize = rankNum === 1 ? 'w-24 h-24' : 'w-20 h-20';
+                        const nameSize = rankNum === 1 ? 'text-2xl' : 'text-xl';
+
                         card.innerHTML = `
-                            <div class="w-9 h-9 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-lg">${rankNum}</div>
-                            <img src="https://minotar.net/avatar/${player.username}/96" class="w-24 h-24 rounded-2xl bg-gray-900 border-3 ${avatarBorder} mb-3 shadow-xl">
-                            <h3 class="font-black text-white text-2xl tracking-wide">${player.username}</h3>
-                            <div class="flex items-center gap-2.5 mt-2 mb-6">
+                            <div class="w-8 h-8 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-md">${rankNum}</div>
+                            <img src="https://minotar.net/avatar/${player.username}/96" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
+                            <h3 class="font-black text-white ${nameSize} tracking-wide text-center">${player.username}</h3>
+                            <div class="flex items-center gap-2 mt-2 mb-6">
                                 <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
-                                <span class="px-3 py-1 rounded-md text-xs font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
+                                <span class="px-2.5 py-0.5 rounded text-[11px] font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
                             </div>
-                            <div class="w-full bg-[#0a0b0e] p-3.5 rounded-2xl border border-gray-900 flex flex-wrap gap-2 justify-center shadow-inner">${badgesHTML}</div>
+                            <div class="w-full bg-[#0a0b0e]/90 p-3 rounded-2xl border border-gray-900/80 flex flex-wrap gap-2 justify-center shadow-inner">${badgesHTML}</div>
                         `;
                         podiumContainer.appendChild(card);
                     });
