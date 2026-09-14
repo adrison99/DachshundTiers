@@ -2125,13 +2125,20 @@
   {
     "username": "Kransagen",
     "modes": {
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "NetheriteSword": "LT4"
     },
     "history": {
       "UHCMace": [
         {
           "date": "14.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "14.09.2026",
+          "tier": "LT4"
         }
       ]
     }
