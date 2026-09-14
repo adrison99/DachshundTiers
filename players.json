@@ -2162,7 +2162,8 @@
     "modes": {
       "IronAxe": "HT3",
       "GoldSMP": "LT3",
-      "ShieldlessSMP": "HT4"
+      "ShieldlessSMP": "HT4",
+      "RandomPot": "LT3"
     },
     "history": {
       "IronAxe": [
@@ -2189,6 +2190,12 @@
         {
           "date": "14.09.2026",
           "tier": "HT4"
+        }
+      ],
+      "RandomPot": [
+        {
+          "date": "14.09.2026",
+          "tier": "LT3"
         }
       ]
     }
