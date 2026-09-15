@@ -2267,5 +2267,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "jekuba",
+    "modes": {
+      "AnchorPvP": "LT4"
+    },
+    "history": {
+      "AnchorPvP": [
+        {
+          "date": "15.09.2026",
+          "tier": "LT4"
+        }
+      ]
+    }
   }
 ]
