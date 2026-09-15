@@ -2203,5 +2203,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "ruzovypasik",
+    "modes": {
+      "NetheriteSword": "HT5"
+    },
+    "history": {
+      "NetheriteSword": [
+        {
+          "date": "15.09.2026",
+          "tier": "HT5"
+        }
+      ]
+    }
   }
 ]
