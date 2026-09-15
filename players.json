@@ -2218,13 +2218,20 @@
   {
     "username": "ruzovypasik",
     "modes": {
-      "NetheriteSword": "HT5"
+      "NetheriteSword": "HT5",
+      "AnchorPvP": "LT3"
     },
     "history": {
       "NetheriteSword": [
         {
           "date": "15.09.2026",
           "tier": "HT5"
+        }
+      ],
+      "AnchorPvP": [
+        {
+          "date": "15.09.2026",
+          "tier": "LT3"
         }
       ]
     }
