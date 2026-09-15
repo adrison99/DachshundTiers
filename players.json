@@ -1133,7 +1133,7 @@
   {
     "username": "misssery",
     "modes": {
-      "AnchorPvP": "LT4",
+      "AnchorPvP": "LT3",
       "IronAxe": "HT4",
       "GoldSMP": "LT3",
       "NetheriteSword": "LT4"
@@ -1147,6 +1147,10 @@
         {
           "date": "18.07.2026",
           "tier": "LT4"
+        },
+        {
+          "date": "15.09.2026",
+          "tier": "LT3"
         }
       ],
       "IronAxe": [
