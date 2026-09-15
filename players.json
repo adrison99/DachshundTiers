@@ -2242,5 +2242,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "Itz_goodboy",
+    "modes": {
+      "AnchorPvP": "LT3"
+    },
+    "history": {
+      "AnchorPvP": [
+        {
+          "date": "15.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
