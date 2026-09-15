@@ -1289,7 +1289,7 @@
       "ShieldlessSMP": "LT4",
       "RandomPot": "LT3",
       "NetheriteSword": "LT3",
-      "GoldSMP": "HT4"
+      "GoldSMP": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -1336,6 +1336,10 @@
         {
           "date": "13.09.2026",
           "tier": "HT4"
+        },
+        {
+          "date": "15.09.2026",
+          "tier": "LT3"
         }
       ]
     }
