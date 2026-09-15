@@ -1652,12 +1652,19 @@
   {
     "username": "Adurytak",
     "modes": {
-      "AnchorPvP": "LT5"
+      "AnchorPvP": "LT5",
+      "NetheriteSword": "LT5"
     },
     "history": {
       "AnchorPvP": [
         {
           "date": "12.08.2026",
+          "tier": "LT5"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "15.09.2026",
           "tier": "LT5"
         }
       ]
