@@ -2251,13 +2251,20 @@
   {
     "username": "Gromyyx",
     "modes": {
-      "NetheriteSword": "HT5"
+      "NetheriteSword": "HT5",
+      "UHCMace": "HT4"
     },
     "history": {
       "NetheriteSword": [
         {
           "date": "15.09.2026",
           "tier": "HT5"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "16.09.2026",
+          "tier": "HT4"
         }
       ]
     }
