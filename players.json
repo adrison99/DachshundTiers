@@ -727,7 +727,7 @@
   {
     "username": "_Ondys",
     "modes": {
-      "AnchorPvP": "LT2",
+      "AnchorPvP": "RLT2",
       "UHCMace": "LT3",
       "GoldSMP": "LT3",
       "IronAxe": "LT3"
@@ -745,6 +745,10 @@
         {
           "date": "07.07.2026",
           "tier": "LT2"
+        },
+        {
+          "date": "16.09.2026",
+          "tier": "RLT2"
         }
       ],
       "UHCMace": [
