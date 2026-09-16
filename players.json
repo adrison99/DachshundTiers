@@ -2070,7 +2070,7 @@
       "UHCMace": "LT3",
       "IronAxe": "LT3",
       "AnchorPvP": "HT5",
-      "GoldSMP": "LT3",
+      "GoldSMP": "HT3",
       "RandomPot": "LT3"
     },
     "history": {
@@ -2106,6 +2106,10 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "16.09.2026",
+          "tier": "HT3"
         }
       ],
       "RandomPot": [
