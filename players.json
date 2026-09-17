@@ -2276,13 +2276,17 @@
   {
     "username": "Itz_goodboy",
     "modes": {
-      "AnchorPvP": "LT3"
+      "AnchorPvP": "HT3"
     },
     "history": {
       "AnchorPvP": [
         {
           "date": "15.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "17.09.2026",
+          "tier": "HT3"
         }
       ]
     }
