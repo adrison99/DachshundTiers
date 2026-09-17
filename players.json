@@ -2304,5 +2304,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "ginger_cira",
+    "modes": {
+      "UHCMace": "LT3"
+    },
+    "history": {
+      "UHCMace": [
+        {
+          "date": "17.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
