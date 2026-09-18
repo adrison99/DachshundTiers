@@ -2294,13 +2294,20 @@
   {
     "username": "jekuba",
     "modes": {
-      "AnchorPvP": "LT4"
+      "AnchorPvP": "LT4",
+      "UHCMace": "LT5"
     },
     "history": {
       "AnchorPvP": [
         {
           "date": "15.09.2026",
           "tier": "LT4"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "18.09.2026",
+          "tier": "LT5"
         }
       ]
     }
