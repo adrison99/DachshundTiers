@@ -50,14 +50,14 @@
             color: #a78bfa;
         }
 
-        /* HT a LT odlišení dle 3. obrázku */
+        /* HT a LT odlišení - Prohozeno: HT světlejší, LT tmavší */
         .player-card-ht {
-            background-color: #11131a;
-            border: 1px solid #1e2230;
-        }
-        .player-card-lt {
             background-color: #1a1d28;
             border: 1px solid #272c3d;
+        }
+        .player-card-lt {
+            background-color: #11131a;
+            border: 1px solid #1e2230;
         }
     </style>
 </head>
@@ -103,23 +103,23 @@
             <div id="recent-tests-list" class="flex gap-3 overflow-x-auto pb-2 custom-scroll"></div>
         </div>
 
-        <nav class="flex flex-wrap items-center justify-between gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
-            <div class="flex flex-wrap gap-2">
-                <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-                <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
-                <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
-                <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
-                <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
-                <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
-                <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
-                <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
-            </div>
+        <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
+            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
+        </nav>
 
-            <!-- Tlačítko Zobrazit Retired (Obrázek 4) -->
-            <button id="toggle-retired-btn" onclick="toggleRetired()" class="hidden px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition items-center gap-2 text-xs">
+        <!-- Tlačítko Zobrazit Retired umístěné pod gamemody v centru -->
+        <div id="retired-container" class="flex justify-center mb-8 hidden">
+            <button id="toggle-retired-btn" onclick="toggleRetired()" class="px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs">
                 <span class="font-black text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded text-[10px]">R</span> Zobrazit retired
             </button>
-        </nav>
+        </div>
 
         <main id="leaderboard-container"></main>
     </div>
@@ -370,7 +370,7 @@
 
         function switchTab(tabId) {
             currentTab = tabId;
-            document.querySelectorAll('#tabs button:not(#toggle-retired-btn)').forEach(btn => {
+            document.querySelectorAll('#tabs button').forEach(btn => {
                 btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2";
             });
             const activeBtn = document.getElementById(`tab-${tabId}`);
@@ -378,11 +378,11 @@
                 activeBtn.className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
             }
 
-            const toggleBtn = document.getElementById('toggle-retired-btn');
+            const retiredBox = document.getElementById('retired-container');
             if (tabId === 'Overall') {
-                toggleBtn.classList.add('hidden');
+                retiredBox.classList.add('hidden');
             } else {
-                toggleBtn.classList.remove('hidden');
+                retiredBox.classList.remove('hidden');
             }
 
             render();
@@ -572,7 +572,6 @@
 
                     const listContainer = col.querySelector(`#tier-list-${tNum}`);
 
-                    // Aktivní (neretired) hráči
                     const activeFiltered = processedPlayers.filter(p => {
                         if (!p.modes || !p.modes[currentTab]) return false;
                         const tStr = p.modes[currentTab];
@@ -589,7 +588,6 @@
                         listContainer.appendChild(renderPlayerCard(player, false));
                     });
 
-                    // Retired hráči (Zobrazit jen když je zapnuté tlačítko showRetired) - Obrázek 5
                     if (showRetired) {
                         const retiredFiltered = processedPlayers.filter(p => {
                             if (!p.modes || !p.modes[currentTab]) return false;
