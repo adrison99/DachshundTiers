@@ -13,13 +13,52 @@
     </script>
     <style>
         body { background-color: #0d0f12; color: #e2e8f0; font-family: sans-serif; }
-        .gold-border { border-color: #eab308; background: linear-gradient(90deg, rgba(234,179,8,0.1) 0%, rgba(0,0,0,0) 100%); }
-        .silver-border { border-color: #94a3b8; background: linear-gradient(90deg, rgba(148,163,184,0.1) 0%, rgba(0,0,0,0) 100%); }
-        .bronze-border { border-color: #b45309; background: linear-gradient(90deg, rgba(180,83,9,0.1) 0%, rgba(0,0,0,0) 100%); }
 
         .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+
+        /* Tier Styles z 2. obrázku (Záře + Barvy) */
+        .tier-header-1 {
+            border-top: 3px solid #f59e0b;
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(245, 158, 11, 0.25);
+            color: #fbbf24;
+        }
+        .tier-header-2 {
+            border-top: 3px solid #94a3b8;
+            background: linear-gradient(180deg, rgba(148, 163, 184, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(148, 163, 184, 0.15);
+            color: #cbd5e1;
+        }
+        .tier-header-3 {
+            border-top: 3px solid #ea580c;
+            background: linear-gradient(180deg, rgba(234, 88, 12, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(234, 88, 12, 0.2);
+            color: #f97316;
+        }
+        .tier-header-4 {
+            border-top: 3px solid #6366f1;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+        }
+        .tier-header-5 {
+            border-top: 3px solid #8b5cf6;
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+        }
+
+        /* HT a LT odlišení dle 3. obrázku */
+        .player-card-ht {
+            background-color: #11131a;
+            border: 1px solid #1e2230;
+        }
+        .player-card-lt {
+            background-color: #1a1d28;
+            border: 1px solid #272c3d;
+        }
     </style>
 </head>
 <body class="p-4 md:p-8 bg-[#0d0f12]">
@@ -31,7 +70,6 @@
                     <img src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain">
                 </a>
 
-                <!-- Počítadlo otestovaných hráčů -->
                 <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
                     <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
@@ -65,15 +103,22 @@
             <div id="recent-tests-list" class="flex gap-3 overflow-x-auto pb-2 custom-scroll"></div>
         </div>
 
-        <nav class="flex flex-wrap gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
-            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
+        <nav class="flex flex-wrap items-center justify-between gap-2 mb-8 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
+            <div class="flex flex-wrap gap-2">
+                <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
+                <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
+                <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
+                <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
+                <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
+                <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
+                <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
+                <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
+            </div>
+
+            <!-- Tlačítko Zobrazit Retired (Obrázek 4) -->
+            <button id="toggle-retired-btn" onclick="toggleRetired()" class="hidden px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition items-center gap-2 text-xs">
+                <span class="font-black text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded text-[10px]">R</span> Zobrazit retired
+            </button>
         </nav>
 
         <main id="leaderboard-container"></main>
@@ -158,18 +203,25 @@
             'RLT2': { points: 22, label: 'RLT2' },
             'HT3': { points: 16, label: 'HT3' },
             'LT3': { points: 10, label: 'LT3' },
+            'RHT3': { points: 14, label: 'RHT3' },
+            'RLT3': { points: 8, label: 'RLT3' },
             'HT4': { points: 5,  label: 'HT4' },
             'LT4': { points: 3,  label: 'LT4' },
+            'RHT4': { points: 4,  label: 'RHT4' },
+            'RLT4': { points: 2,  label: 'RLT4' },
             'HT5': { points: 2,  label: 'HT5' },
-            'LT5': { points: 1,  label: 'LT5' }
+            'LT5': { points: 1,  label: 'LT5' },
+            'RHT5': { points: 1,  label: 'RHT5' },
+            'RLT5': { points: 1,  label: 'RLT5' }
         };
 
-        const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','HT4','LT4','HT5','LT5'];
+        const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','RHT3','RLT3','HT4','LT4','RHT4','RLT4','HT5','LT5','RHT5','RLT5'];
 
         let playersData = [];
         let currentTab = 'Overall';
         let chartInstance = null;
         let activeModalPlayer = null;
+        let showRetired = false;
 
         function getSortedModes(modes) {
             if (!modes) return [];
@@ -192,7 +244,6 @@
                 const response = await fetch('players.json?v=' + new Date().getTime());
                 playersData = await response.json();
                 
-                // Nastavení celkového počtu hráčů
                 const countElem = document.getElementById('player-count');
                 if (countElem) countElem.innerText = playersData.length;
 
@@ -319,14 +370,55 @@
 
         function switchTab(tabId) {
             currentTab = tabId;
-            document.querySelectorAll('#tabs button').forEach(btn => {
+            document.querySelectorAll('#tabs button:not(#toggle-retired-btn)').forEach(btn => {
                 btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2";
             });
             const activeBtn = document.getElementById(`tab-${tabId}`);
             if (activeBtn) {
                 activeBtn.className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
             }
+
+            const toggleBtn = document.getElementById('toggle-retired-btn');
+            if (tabId === 'Overall') {
+                toggleBtn.classList.add('hidden');
+            } else {
+                toggleBtn.classList.remove('hidden');
+            }
+
             render();
+        }
+
+        function toggleRetired() {
+            showRetired = !showRetired;
+            const toggleBtn = document.getElementById('toggle-retired-btn');
+            if (showRetired) {
+                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-amber-400 bg-amber-500/10 border border-amber-500/40 transition flex items-center gap-2 text-xs shadow-lg shadow-amber-500/10";
+            } else {
+                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs";
+            }
+            render();
+        }
+
+        function renderPlayerCard(player, isRetired = false) {
+            const rawTier = player.modes[currentTab];
+            const isHT = rawTier.includes('HT');
+            
+            const cardClass = isHT ? 'player-card-ht' : 'player-card-lt';
+            
+            const item = document.createElement('div');
+            item.className = `flex items-center justify-between p-2.5 ${cardClass} rounded-2xl cursor-pointer transition group duration-200 hover:scale-[1.02] shadow-sm`;
+            item.onclick = () => openPlayerModal(player);
+            
+            let retiredBadge = isRetired ? `<span class="px-2 py-0.5 bg-[#201625] border border-[#3b2048] text-[#d884f3] font-black text-[10px] rounded-md tracking-wider">R</span>` : '';
+
+            item.innerHTML = `
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <img src="https://minotar.net/avatar/${player.username}/32" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
+                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
+                </div>
+                ${retiredBadge}
+            `;
+            return item;
         }
 
         function render() {
@@ -349,7 +441,6 @@
                 });
 
                 if (processedPlayers.length >= 3) {
-                    // Poradi v poli: [2. misto, 1. misto, 3. misto]
                     const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
                     podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-5 mb-14 mt-8";
@@ -365,7 +456,6 @@
                         let badgeColor = "bg-amber-700 text-white";
                         let customHeightClass = "";
 
-                        // Stylizace podle 3. obrázku (1. místo velké a dominantní)
                         if (rankNum === 1) {
                             rankBorderGlow = "border-amber-500 shadow-[0_0_40px_rgba(234,179,8,0.25)] z-10 md:-translate-y-4";
                             avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
@@ -470,50 +560,62 @@
 
                 tiers.forEach(tNum => {
                     const col = document.createElement('div');
-                    col.className = "bg-gray-950/60 border border-gray-800/80 rounded-2xl p-4 flex flex-col gap-3 min-h-[300px]";
+                    col.className = "bg-[#0b0c12] border border-gray-900 rounded-3xl overflow-hidden flex flex-col min-h-[350px] shadow-xl";
 
                     col.innerHTML = `
-                        <div class="text-center pb-3 border-b border-gray-800/80">
-                            <h3 class="text-gray-300 font-extrabold text-sm tracking-wider">Tier ${tNum}</h3>
+                        <div class="text-center py-3.5 tier-header-${tNum} font-black text-sm tracking-widest uppercase">
+                            TIER ${tNum}
                         </div>
-                        <div class="flex flex-col gap-2 flex-grow" id="tier-list-${tNum}"></div>
+                        <div class="flex flex-col gap-2 p-3 flex-grow" id="tier-list-${tNum}"></div>
                     `;
                     container.appendChild(col);
 
                     const listContainer = col.querySelector(`#tier-list-${tNum}`);
 
-                    const filtered = processedPlayers.filter(p => {
+                    // Aktivní (neretired) hráči
+                    const activeFiltered = processedPlayers.filter(p => {
                         if (!p.modes || !p.modes[currentTab]) return false;
                         const tStr = p.modes[currentTab];
-                        return tStr.includes(tNum.toString());
+                        return tStr.includes(tNum.toString()) && !tStr.startsWith('R');
                     });
 
-                    filtered.sort((a, b) => {
+                    activeFiltered.sort((a, b) => {
                         const tA = a.modes[currentTab];
                         const tB = b.modes[currentTab];
                         return tierOrder.indexOf(tA) - tierOrder.indexOf(tB);
                     });
 
-                    if (filtered.length === 0) {
-                        listContainer.innerHTML = `<div class="m-auto text-gray-600 font-medium text-xs">Prázdné</div>`;
-                    } else {
-                        filtered.forEach(player => {
-                            const rawTier = player.modes[currentTab];
-                            const isHT = rawTier.includes('HT');
-                            const arrows = isHT ? '▲▲' : '▲';
+                    activeFiltered.forEach(player => {
+                        listContainer.appendChild(renderPlayerCard(player, false));
+                    });
 
-                            const item = document.createElement('div');
-                            item.className = "flex items-center justify-between p-2.5 bg-gray-900/60 hover:bg-gray-800/80 border border-gray-800/80 rounded-xl cursor-pointer transition group";
-                            item.onclick = () => openPlayerModal(player);
-                            item.innerHTML = `
-                                <div class="flex items-center gap-2.5 overflow-hidden">
-                                    <img src="https://minotar.net/avatar/${player.username}/32" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
-                                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
-                                </div>
-                                <span class="text-sky-400 text-[10px] font-black tracking-tighter ml-1">${arrows}</span>
-                            `;
-                            listContainer.appendChild(item);
+                    // Retired hráči (Zobrazit jen když je zapnuté tlačítko showRetired) - Obrázek 5
+                    if (showRetired) {
+                        const retiredFiltered = processedPlayers.filter(p => {
+                            if (!p.modes || !p.modes[currentTab]) return false;
+                            const tStr = p.modes[currentTab];
+                            return tStr.includes(tNum.toString()) && tStr.startsWith('R');
                         });
+
+                        retiredFiltered.sort((a, b) => {
+                            const tA = a.modes[currentTab];
+                            const tB = b.modes[currentTab];
+                            return tierOrder.indexOf(tA) - tierOrder.indexOf(tB);
+                        });
+
+                        if (retiredFiltered.length > 0) {
+                            const retiredDivider = document.createElement('div');
+                            retiredDivider.className = "my-2 border-t border-gray-800/80";
+                            listContainer.appendChild(retiredDivider);
+
+                            retiredFiltered.forEach(player => {
+                                listContainer.appendChild(renderPlayerCard(player, true));
+                            });
+                        }
+                    }
+
+                    if (activeFiltered.length === 0 && (!showRetired || listContainer.children.length === 0)) {
+                        listContainer.innerHTML = `<div class="m-auto text-gray-700 font-bold text-xs tracking-wider uppercase">Prázdné</div>`;
                     }
                 });
             }
