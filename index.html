@@ -18,7 +18,7 @@
         .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
 
-        /* Tier Styles z 2. obrázku (Záře + Barvy) */
+        /* Tier Styles (Záře + Barvy) */
         .tier-header-1 {
             border-top: 3px solid #f59e0b;
             background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
@@ -50,7 +50,7 @@
             color: #a78bfa;
         }
 
-        /* HT a LT odlišení - Prohozeno: HT světlejší, LT tmavší */
+        /* HT a LT odlišení */
         .player-card-ht {
             background-color: #1a1d28;
             border: 1px solid #272c3d;
@@ -105,16 +105,16 @@
 
         <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
             <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain"> GoldSMP</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain"> NetheriteSword</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain"> IronAxe</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain"> UHCMace</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain"> AnchorPvP</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain"> RandomPot</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain"> ShieldlessSMP</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain" alt=""> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain" alt=""> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain" alt=""> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain" alt=""> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain" alt=""> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain" alt=""> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain" alt=""> ShieldlessSMP</button>
         </nav>
 
-        <!-- Tlačítko Zobrazit Retired umístěné pod gamemody v centru -->
+        <!-- Tlačítko Zobrazit Retired -->
         <div id="retired-container" class="flex justify-center mb-8 hidden">
             <button id="toggle-retired-btn" onclick="toggleRetired()" class="px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs">
                 <span class="font-black text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded text-[10px]">R</span> Zobrazit retired
@@ -125,7 +125,7 @@
     </div>
 
     <!-- Modaly -->
-    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'modal')">
         <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] border border-gray-800 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
             <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
             
@@ -158,7 +158,7 @@
         </div>
     </div>
 
-    <div id="compare-select-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
+    <div id="compare-select-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'compare-select-modal')">
         <div class="bg-gray-950 border border-gray-800 p-6 rounded-3xl w-full max-w-lg relative shadow-2xl">
             <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
             <h3 class="text-2xl font-black text-white mb-1">Výběr hráče pro porovnání</h3>
@@ -168,20 +168,20 @@
         </div>
     </div>
 
-    <div id="vs-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50">
+    <div id="vs-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'vs-modal')">
         <div class="bg-gradient-to-b from-[#161722] to-[#0d0e12] border border-gray-800 p-6 rounded-3xl w-full max-w-2xl relative shadow-2xl">
             <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
             <h3 class="text-lg font-bold text-gray-400 mb-6 border-b border-gray-800/60 pb-3">Porovnání hráčů</h3>
             <div class="flex items-center justify-between gap-4 mb-8">
                 <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
-                    <img id="vs-p1-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <img id="vs-p1-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
                     <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
                     <span id="vs-p1-score" class="text-xs text-gray-500 mt-0.5">#0</span>
                     <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
                 </div>
                 <div class="font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
                 <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
-                    <img id="vs-p2-avatar" src="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <img id="vs-p2-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
                     <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
                     <span id="vs-p2-score" class="text-xs text-gray-500 mt-0.5">#0</span>
                     <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
@@ -236,6 +236,11 @@
             if (e.key === '/' && document.activeElement !== document.getElementById('search') && document.activeElement !== document.getElementById('compare-search-input')) {
                 e.preventDefault();
                 document.getElementById('search').focus();
+            }
+            if (e.key === 'Escape') {
+                closeModal('modal');
+                closeModal('compare-select-modal');
+                closeModal('vs-modal');
             }
         });
 
@@ -317,7 +322,7 @@
                 const card = document.createElement('div');
                 card.className = "flex items-center gap-3 bg-[#13151f] border border-gray-800/80 px-3.5 py-2 rounded-xl flex-shrink-0 shadow-md hover:border-gray-700 transition";
                 card.innerHTML = `
-                    <img src="https://minotar.net/avatar/${item.username}/32" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
+                    <img src="https://minotar.net/avatar/${item.username}/32" alt="${item.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
                     <div class="flex flex-col">
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
                         <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
@@ -413,7 +418,7 @@
 
             item.innerHTML = `
                 <div class="flex items-center gap-2.5 overflow-hidden">
-                    <img src="https://minotar.net/avatar/${player.username}/32" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
+                    <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
                     <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
                 </div>
                 ${retiredBadge}
@@ -490,7 +495,7 @@
 
                         card.innerHTML = `
                             <div class="w-8 h-8 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-md">${rankNum}</div>
-                            <img src="https://minotar.net/avatar/${player.username}/96" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
+                            <img src="https://minotar.net/avatar/${player.username}/96" alt="${player.username}" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
                             <h3 class="font-black text-white ${nameSize} tracking-wide text-center">${player.username}</h3>
                             <div class="flex items-center gap-2 mt-2 mb-6">
                                 <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
@@ -645,7 +650,7 @@
                         searchInput.value = '';
                     };
                     div.innerHTML = `
-                        <img src="https://minotar.net/avatar/${player.username}/32" class="w-8 h-8 rounded bg-gray-800">
+                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
                         <div class="flex flex-col">
                             <span class="font-bold text-sm">${player.username}</span>
                             <span class="text-xs text-gray-500">Skóre: ${player.overallScore}</span>
@@ -692,7 +697,7 @@
                     
                     badgeDiv.innerHTML = `
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
-                            <img src="${mode}.png" class="w-full h-full object-contain">
+                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
                         </div>
                         <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
                     `;
@@ -790,7 +795,7 @@
                 div.onclick = () => startComparison(player);
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <img src="https://minotar.net/avatar/${player.username}/32" class="w-8 h-8 rounded bg-gray-800">
+                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
                         <span class="font-bold text-sm">${player.username}</span>
                     </div>
                     <div class="text-right text-xs text-gray-500">
@@ -837,7 +842,7 @@
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${kit}.png" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${kit}.png" alt="${kit}" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
@@ -850,6 +855,12 @@
             document.getElementById(modalId).classList.add('hidden');
             if (modalId === 'vs-modal') {
                 document.getElementById('compare-select-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeModalOnBackdrop(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
             }
         }
 
