@@ -1461,7 +1461,8 @@
     "username": "xkubax_X",
     "modes": {
       "UHCMace": "LT3",
-      "AnchorPvP": "LT3"
+      "AnchorPvP": "LT3",
+      "NetheriteSword": "LT3"
     },
     "history": {
       "UHCMace": [
@@ -1471,6 +1472,12 @@
         }
       ],
       "AnchorPvP": [
+        {
+          "date": "19.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "NetheriteSword": [
         {
           "date": "19.09.2026",
           "tier": "LT3"
