@@ -2320,7 +2320,8 @@
     "username": "Itz_goodboy",
     "modes": {
       "AnchorPvP": "HT3",
-      "UHCMace": "HT4"
+      "UHCMace": "HT4",
+      "IronAxe": "HT5"
     },
     "history": {
       "AnchorPvP": [
@@ -2337,6 +2338,12 @@
         {
           "date": "19.09.2026",
           "tier": "HT4"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "19.09.2026",
+          "tier": "HT5"
         }
       ]
     }
