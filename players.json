@@ -1632,7 +1632,8 @@
   {
     "username": "zizalkac_",
     "modes": {
-      "AnchorPvP": "HT3"
+      "AnchorPvP": "HT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -1643,6 +1644,12 @@
         {
           "date": "12.08.2026",
           "tier": "HT3"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "19.09.2026",
+          "tier": "LT3"
         }
       ]
     }
