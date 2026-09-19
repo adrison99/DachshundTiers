@@ -1460,12 +1460,19 @@
   {
     "username": "xkubax_X",
     "modes": {
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "AnchorPvP": "LT3"
     },
     "history": {
       "UHCMace": [
         {
           "date": "10.08.2026",
+          "tier": "LT3"
+        }
+      ],
+      "AnchorPvP": [
+        {
+          "date": "19.09.2026",
           "tier": "LT3"
         }
       ]
