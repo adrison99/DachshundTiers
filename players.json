@@ -2287,7 +2287,8 @@
   {
     "username": "Itz_goodboy",
     "modes": {
-      "AnchorPvP": "HT3"
+      "AnchorPvP": "HT3",
+      "UHCMace": "HT4"
     },
     "history": {
       "AnchorPvP": [
@@ -2298,6 +2299,12 @@
         {
           "date": "17.09.2026",
           "tier": "HT3"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "19.09.2026",
+          "tier": "HT4"
         }
       ]
     }
