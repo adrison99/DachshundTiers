@@ -1711,7 +1711,8 @@
     "username": "Adurytak",
     "modes": {
       "AnchorPvP": "LT5",
-      "NetheriteSword": "LT5"
+      "NetheriteSword": "LT5",
+      "UHCMace": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -1724,6 +1725,12 @@
         {
           "date": "15.09.2026",
           "tier": "LT5"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "19.09.2026",
+          "tier": "LT3"
         }
       ]
     }
