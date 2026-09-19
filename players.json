@@ -941,7 +941,8 @@
     "username": "blekhed_king",
     "modes": {
       "AnchorPvP": "HT3",
-      "NetheriteSword": "LT3"
+      "NetheriteSword": "LT3",
+      "UHCMace": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -957,6 +958,12 @@
       "NetheriteSword": [
         {
           "date": "13.08.2026",
+          "tier": "LT3"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "19.09.2026",
           "tier": "LT3"
         }
       ]
