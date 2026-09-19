@@ -2403,5 +2403,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "ItzSam210",
+    "modes": {
+      "IronAxe": "LT4"
+    },
+    "history": {
+      "IronAxe": [
+        {
+          "date": "19.09.2026",
+          "tier": "LT4"
+        }
+      ]
+    }
   }
 ]
