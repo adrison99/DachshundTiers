@@ -1462,7 +1462,8 @@
     "modes": {
       "UHCMace": "LT3",
       "AnchorPvP": "LT3",
-      "NetheriteSword": "LT3"
+      "NetheriteSword": "LT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "UHCMace": [
@@ -1478,6 +1479,12 @@
         }
       ],
       "NetheriteSword": [
+        {
+          "date": "19.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "IronAxe": [
         {
           "date": "19.09.2026",
           "tier": "LT3"
