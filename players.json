@@ -2368,5 +2368,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "mamls15",
+    "modes": {
+      "UHCMace": "LT3"
+    },
+    "history": {
+      "UHCMace": [
+        {
+          "date": "19.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
