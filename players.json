@@ -1223,13 +1223,17 @@
   {
     "username": "xTwT",
     "modes": {
-      "UHCMace": "LT4"
+      "UHCMace": "LT3"
     },
     "history": {
       "UHCMace": [
         {
           "date": "10.07.2026",
           "tier": "LT4"
+        },
+        {
+          "date": "20.09.2026",
+          "tier": "LT3"
         }
       ]
     }
