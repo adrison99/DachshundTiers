@@ -475,7 +475,8 @@
       "GoldSMP": "LT3",
       "AnchorPvP": "LT3",
       "NetheriteSword": "HT5",
-      "IronAxe": "LT3"
+      "IronAxe": "LT3",
+      "MolePVP": "LT4"
     },
     "history": {
       "GoldSMP": [
@@ -556,6 +557,12 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "MolePVP": [
+        {
+          "date": "22.09.2026",
+          "tier": "LT4"
         }
       ]
     }
