@@ -2084,7 +2084,8 @@
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
       "GoldSMP": "HT4",
-      "ShieldlessSMP": "LT3"
+      "ShieldlessSMP": "LT3",
+      "MolePVP": "HT4"
     },
     "history": {
       "AnchorPvP": [
@@ -2121,6 +2122,12 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "MolePVP": [
+        {
+          "date": "22.09.2026",
+          "tier": "HT4"
         }
       ]
     }
