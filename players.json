@@ -2458,13 +2458,20 @@
   {
     "username": "S3BAEU",
     "modes": {
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "IronAxe": "LT4"
     },
     "history": {
       "UHCMace": [
         {
           "date": "17.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "22.09.2026",
+          "tier": "LT4"
         }
       ]
     }
