@@ -575,7 +575,8 @@
       "IronAxe": "LT2",
       "NetheriteSword": "LT2",
       "GoldSMP": "HT3",
-      "UHCMace": "HT3"
+      "UHCMace": "HT3",
+      "MolePVP": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -656,6 +657,12 @@
         {
           "date": "20.07.2026",
           "tier": "HT3"
+        }
+      ],
+      "MolePVP": [
+        {
+          "date": "22.09.2026",
+          "tier": "LT3"
         }
       ]
     }
