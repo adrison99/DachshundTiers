@@ -112,6 +112,7 @@
             <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain" alt=""> AnchorPvP</button>
             <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain" alt=""> RandomPot</button>
             <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain" alt=""> ShieldlessSMP</button>
+            <button onclick="switchTab('MolePVP')" id="tab-MolePVP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><span class="text-base leading-none">⛏️</span> MolePVP</button>
         </nav>
 
         <!-- Tlačítko Zobrazit Retired -->
@@ -216,6 +217,16 @@
         };
 
         const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','RHT3','RLT3','HT4','LT4','RHT4','RLT4','HT5','LT5','RHT5','RLT5'];
+
+        // Kity, které mají na webu obrázek (PNG); ostatní (MolePVP) dostanou emoji lopaty
+        const PNG_KITS = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP'];
+        function kitLogo(mode, cls, emojiSize) {
+            const m = String(mode);
+            if (PNG_KITS.includes(m)) {
+                return `<img src="${m}.png" alt="${m}" class="${cls}">`;
+            }
+            return `<span class="inline-flex items-center justify-center ${cls} leading-none" style="font-size:${emojiSize || 16}px" title="${m}">⛏️</span>`;
+        }
 
         let playersData = [];
         let currentTab = 'Overall';
@@ -327,7 +338,7 @@
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
                         <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
                     </div>
-                    <img src="${item.mode}.png" alt="${item.mode}" class="w-4 h-4 object-contain ml-1">
+                    ${kitLogo(item.mode, 'w-4 h-4 object-contain ml-1', 16)}
                     <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
                     <span class="${arrowColor} text-xs font-black">${arrowIcon}</span>
                 `;
@@ -485,7 +496,7 @@
                         
                         const badgesHTML = sortedModes.map(([mode, t]) => `
                             <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm">
-                                <img src="${mode}.png" alt="${mode}" class="w-4 h-4 object-contain">
+                                ${kitLogo(mode, 'w-4 h-4 object-contain', 16)}
                                 <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
                             </div>
                         `).join('');
@@ -528,7 +539,7 @@
                                 return `
                                     <div class="flex flex-col items-center">
                                         <div class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
-                                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                                            ${kitLogo(mode, 'w-full h-full object-contain', 24)}
                                         </div>
                                         <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${t}</span>
                                     </div>
@@ -697,7 +708,7 @@
                     
                     badgeDiv.innerHTML = `
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
-                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                            ${kitLogo(mode, 'w-full h-full object-contain', 24)}
                         </div>
                         <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
                     `;
@@ -832,7 +843,7 @@
             const rowsContainer = document.getElementById('vs-kits-rows');
             rowsContainer.innerHTML = '';
 
-            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP'];
+            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP', 'MolePVP'];
 
             allKits.forEach(kit => {
                 const t1 = p1.modes ? p1.modes[kit] : null;
@@ -842,7 +853,7 @@
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${kit}.png" alt="${kit}" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold">${kitLogo(kit, 'w-4 h-4 object-contain', 16)}<span class="text-xs text-gray-500">${kit}</span></div>
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
