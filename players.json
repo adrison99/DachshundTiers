@@ -2303,7 +2303,8 @@
     "username": "ruzovypasik",
     "modes": {
       "NetheriteSword": "HT5",
-      "AnchorPvP": "LT3"
+      "AnchorPvP": "LT3",
+      "MolePVP": "LT5"
     },
     "history": {
       "NetheriteSword": [
@@ -2316,6 +2317,12 @@
         {
           "date": "15.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "MolePVP": [
+        {
+          "date": "22.09.2026",
+          "tier": "LT5"
         }
       ]
     }
