@@ -2491,5 +2491,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "hrnkoman",
+    "modes": {
+      "MolePVP": "LT3"
+    },
+    "history": {
+      "MolePVP": [
+        {
+          "date": "22.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
