@@ -309,7 +309,7 @@
       "UHCMace": "LT3",
       "GoldSMP": "LT5",
       "IronAxe": "HT4",
-      "NetheriteSword": "LT3"
+      "NetheriteSword": "LT4"
     },
     "history": {
       "GoldSMP": [
@@ -346,6 +346,10 @@
         {
           "date": "06.07.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "22.09.2026",
+          "tier": "LT4"
         }
       ]
     }
