@@ -2520,5 +2520,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "CrimsonWolf33",
+    "modes": {
+      "UHCMace": "HT5"
+    },
+    "history": {
+      "UHCMace": [
+        {
+          "date": "22.09.2026",
+          "tier": "HT5"
+        }
+      ]
+    }
   }
 ]
