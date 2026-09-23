@@ -11,6 +11,12 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://adrison99.github.io/DachshundTiers/logo.png">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230d0f12'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle'%3E%F0%9F%90%95%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonty: Chakra Petch (esports display) + Rubik (čitelné tělo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,26 +26,104 @@
     <style>
         :root {
             color-scheme: dark;
+            --accent: #f59e0b;
+            --font-display: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+            --font-body: 'Rubik', 'Segoe UI', system-ui, sans-serif;
         }
 
         html {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            font-family: var(--font-body);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-display);
         }
 
         body {
             background-color: #0d0f12;
             background-image:
-                radial-gradient(ellipse 80% 55% at 50% -12%, rgba(245, 158, 11, 0.09), transparent 62%),
-                radial-gradient(ellipse 55% 40% at 92% 8%, rgba(139, 92, 246, 0.07), transparent 60%),
-                radial-gradient(ellipse 45% 35% at 6% 18%, rgba(56, 189, 248, 0.05), transparent 60%);
+                radial-gradient(ellipse 80% 50% at 50% -12%, rgba(245, 158, 11, 0.10), transparent 62%),
+                radial-gradient(ellipse 55% 40% at 95% 6%, rgba(139, 92, 246, 0.08), transparent 60%),
+                radial-gradient(ellipse 45% 35% at 4% 16%, rgba(56, 189, 248, 0.06), transparent 60%);
             background-attachment: fixed;
             color: #e2e8f0;
         }
 
+        ::selection {
+            background: rgba(245, 158, 11, 0.35);
+            color: #ffffff;
+        }
+
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #0b0d11; }
+        ::-webkit-scrollbar-thumb { background: #232936; border-radius: 6px; border: 2px solid #0b0d11; }
+        ::-webkit-scrollbar-thumb:hover { background: #343d50; }
+
         :focus-visible {
-            outline: 2px solid #f59e0b;
+            outline: 2px solid var(--accent);
             outline-offset: 2px;
             border-radius: 8px;
+        }
+
+        /* Esports číslice / statistiky */
+        .num {
+            font-family: var(--font-display);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.03em;
+        }
+
+        /* ---- Atmosféra: aurora blob + grain ---- */
+        .aurora {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+        }
+        .aurora-a {
+            width: 62vmax; height: 62vmax;
+            top: -20vmax; left: -10vmax;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.20), transparent 65%);
+            animation: drift-a 26s ease-in-out infinite alternate;
+        }
+        .aurora-b {
+            width: 55vmax; height: 55vmax;
+            bottom: -22vmax; right: -12vmax;
+            background: radial-gradient(circle, rgba(67, 56, 202, 0.22), transparent 62%);
+            animation: drift-b 32s ease-in-out infinite alternate;
+        }
+        @keyframes drift-a { to { transform: translate(7vmax, 4vmax) scale(1.15); } }
+        @keyframes drift-b { to { transform: translate(-6vmax, -3vmax) scale(1.1); } }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+        }
+
+        /* ---- Vstupní animace hlavičky ---- */
+        @keyframes heroIn {
+            from { opacity: 0; transform: translateY(-14px); }
+            to { opacity: 1; transform: none; }
+        }
+        .hero-in {
+            animation: heroIn 0.6s cubic-bezier(0.22, 0.9, 0.35, 1) both;
+        }
+
+        /* ---- Scroll reveal (stagger) ---- */
+        .reveal { opacity: 0; transform: translateY(16px); }
+        .reveal.in {
+            animation: rise 0.55s cubic-bezier(0.22, 0.9, 0.35, 1) both;
+            animation-delay: calc(var(--i, 0) * 45ms);
+        }
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: none; }
         }
 
         .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -81,6 +165,10 @@
             box-shadow: 0 -12px 28px -6px rgba(139, 92, 246, 0.18);
             color: #a78bfa;
         }
+        .tier-header-1:hover, .tier-header-2:hover, .tier-header-3:hover,
+        .tier-header-4:hover, .tier-header-5:hover {
+            filter: brightness(1.18);
+        }
 
         .tier-count {
             display: inline-flex;
@@ -108,6 +196,36 @@
         }
         .player-card-ht:hover { border-color: #3b4160; }
         .player-card-lt:hover { border-color: #2c3246; }
+        .player-card-ht:hover {
+            border-color: color-mix(in srgb, var(--accent) 45%, #3b4160);
+            box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--accent) 35%, transparent);
+        }
+        .player-card-lt:hover {
+            border-color: color-mix(in srgb, var(--accent) 40%, #2c3246);
+            box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--accent) 30%, transparent);
+        }
+
+        /* Overall řádky */
+        .player-row:hover {
+            border-color: rgba(245, 158, 11, 0.45) !important;
+            box-shadow: 0 10px 32px -14px rgba(245, 158, 11, 0.30);
+        }
+
+        /* Pódium – pulzující záře 1. místa */
+        @keyframes crownPulse {
+            0%, 100% { box-shadow: 0 0 30px -4px rgba(234, 179, 8, 0.35); }
+            50% { box-shadow: 0 0 52px -4px rgba(234, 179, 8, 0.62); }
+        }
+        .podium-1 { animation: crownPulse 3.2s ease-in-out infinite; }
+
+        /* Zvýraznění shody ve vyhledávání */
+        .search-mark {
+            background: rgba(245, 158, 11, 0.28);
+            color: #fbbf24;
+            font-weight: 700;
+            border-radius: 3px;
+            padding: 0 2px;
+        }
 
         /* Skeleton loading */
         .skeleton {
@@ -119,6 +237,25 @@
         @keyframes shimmer {
             0% { background-position: 100% 0; }
             100% { background-position: -100% 0; }
+        }
+
+        /* Tier sloupce – perf (vykreslení mimo viewport) */
+        .tier-col {
+            content-visibility: auto;
+            contain-intrinsic-size: auto 350px;
+        }
+
+        /* Tlačítko zpět nahoru */
+        #back-to-top {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: none;
         }
 
         /* Modaly */
@@ -147,28 +284,58 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+            .aurora { animation: none !important; }
+            html { scroll-behavior: auto; }
+            .reveal { opacity: 1 !important; transform: none !important; }
+            .podium-1 { animation: none !important; }
         }
     </style>
 </head>
 <body class="p-4 md:p-8 bg-[#0d0f12] min-h-screen flex flex-col">
 
-    <div class="max-w-6xl mx-auto w-full flex-1">
+    <!-- Atmosféra v pozadí -->
+    <div class="aurora aurora-a" aria-hidden="true"></div>
+    <div class="aurora aurora-b" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="max-w-6xl mx-auto w-full flex-1 relative z-10">
+
         <!-- Hlavička -->
         <header class="flex flex-col lg:flex-row lg:justify-between items-center gap-4 mb-6 pb-6 border-b border-gray-800/70">
-            <div class="flex flex-wrap items-center gap-3 md:gap-5 justify-center md:justify-start">
+            <div class="flex flex-wrap items-center gap-3 md:gap-5 justify-center md:justify-start hero-in">
                 <a href="/" class="flex items-center shrink-0 hover:opacity-90 transition" aria-label="DachshundTiers – domů">
                     <img src="logo.png" alt="DachshundTiers Logo" class="h-24 md:h-28 w-auto object-contain drop-shadow-[0_0_25px_rgba(245,158,11,0.15)]">
                 </a>
 
                 <div class="flex flex-col items-center gap-2">
-                    <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
-                        <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
-                        </svg>
-                        <span id="player-count" class="font-black text-amber-400 text-base md:text-lg tracking-wide">–</span>
-                        <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">HRÁČŮ</span>
+                    <!-- Živé statistiky -->
+                    <div class="flex flex-wrap items-center justify-center gap-2.5">
+                        <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
+                            <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                            </svg>
+                            <span id="player-count" class="num font-black text-amber-400 text-base md:text-lg tracking-wide">–</span>
+                            <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">HRÁČŮ</span>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
+                            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                            </svg>
+                            <span id="stat-kits" class="num font-black text-cyan-400 text-base md:text-lg tracking-wide">–</span>
+                            <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">KITŮ</span>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
+                            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                            <span id="stat-records" class="num font-black text-emerald-400 text-base md:text-lg tracking-wide">–</span>
+                            <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">ZÁZNAMŮ</span>
+                        </div>
                     </div>
 
                     <div class="flex items-center gap-2 text-[11px] text-gray-500 font-semibold">
@@ -188,7 +355,8 @@
                 </div>
 
                 <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer"
-                   class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 hover:-translate-y-px transition">
+                   class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 hover:-translate-y-px transition hero-in"
+                   style="animation-delay: 80ms">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.14,68.5,68.5,0,0,1-10.75-5.13c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,72.68,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.75,5.13,74.12,74.12,0,0,0,6.85,11.14,105.62,105.62,0,0,0,31.05-18.83C129.92,50.12,124.16,27.23,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.87,46,53.7,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.11,46,95.94,53,91,65.69,84.69,65.69Z"/>
                     </svg>
@@ -196,7 +364,7 @@
                 </a>
             </div>
 
-            <div class="relative w-full lg:w-96">
+            <div class="relative w-full lg:w-96 hero-in" style="animation-delay: 140ms">
                 <svg class="w-5 h-5 text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
                 </svg>
@@ -208,7 +376,7 @@
         </header>
 
         <!-- Horní lišta: NEDÁVNO TESTOVÁNO -->
-        <div id="recent-tests-container" class="mb-6 hidden">
+        <div id="recent-tests-container" class="mb-6 hidden hero-in" style="animation-delay: 180ms">
             <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
                 <span>NEDÁVNO TESTOVÁNO</span>
                 <span class="text-gray-700">— DACHSHUNDTIERS</span>
@@ -217,7 +385,7 @@
         </div>
 
         <!-- Sticky navigace -->
-        <div class="sticky top-0 z-40 -mx-4 md:-mx-8 px-4 md:px-8 py-3 mb-6 bg-[#0d0f12]/85 backdrop-blur-md border-y border-gray-900/80">
+        <div class="sticky top-0 z-40 -mx-4 md:-mx-8 px-4 md:px-8 py-3 mb-6 bg-[#0d0f12]/85 backdrop-blur-xl border-y border-gray-900/80 shadow-lg shadow-black/20">
             <nav class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5" id="tabs" aria-label="Kity"></nav>
             <div id="retired-container" class="flex justify-center mt-3 hidden">
                 <button id="toggle-retired-btn" onclick="toggleRetired()"
@@ -231,7 +399,7 @@
     </div>
 
     <!-- Patička -->
-    <footer class="max-w-6xl mx-auto w-full mt-12 pt-6 border-t border-gray-900/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+    <footer class="relative z-10 max-w-6xl mx-auto w-full mt-12 pt-6 border-t border-gray-900/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
         <div class="flex items-center gap-2 font-bold tracking-wide">
             <span>🐕</span>
             <span class="text-gray-400">DACHSHUNDTIERS</span>
@@ -242,8 +410,18 @@
             <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition font-semibold">Discord</a>
             <span class="text-gray-800">·</span>
             <span>Data z <code class="text-gray-400 bg-gray-900/70 px-1.5 py-0.5 rounded">players.json</code></span>
+            <span class="text-gray-800">·</span>
+            <span>© 2026</span>
         </div>
     </footer>
+
+    <!-- Zpět nahoru -->
+    <button id="back-to-top" aria-label="Zpět nahoru" title="Zpět nahoru"
+            class="fixed bottom-5 right-5 z-40 w-11 h-11 rounded-xl flex items-center justify-center bg-[#1a1d29]/95 border border-gray-700/70 text-gray-300 hover:text-amber-400 hover:border-amber-500/50 shadow-xl shadow-black/40 backdrop-blur-md">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/>
+        </svg>
+    </button>
 
     <!-- Modaly -->
     <div id="modal" class="modal-overlay fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50" onclick="closeModalOnBackdrop(event, 'modal')" role="dialog" aria-modal="true" aria-label="Detail hráče">
@@ -251,14 +429,17 @@
             <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white hover:rotate-90 transition text-2xl leading-none" aria-label="Zavřít">&times;</button>
 
             <div class="flex flex-col items-center mt-2">
-                <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4 ring-1 ring-amber-500/20">
+                <div class="relative">
+                    <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4 ring-1 ring-amber-500/20"
+                         style="box-shadow: 0 0 40px -8px color-mix(in srgb, var(--accent) 45%, transparent);">
+                </div>
                 <h3 class="text-3xl font-black text-amber-400 tracking-wide" id="modal-username">---</h3>
                 <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
                 <p class="text-xs text-gray-400 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-white">---</span></p>
             </div>
 
             <div class="inline-flex items-center gap-2 bg-gray-950/60 border border-gray-800 px-5 py-2 rounded-full text-sm mb-6">
-                <span class="font-bold text-white"><span id="modal-points">0</span> bodů</span>
+                <span class="font-bold text-white"><span id="modal-points" class="num text-amber-400">0</span> bodů</span>
                 <span class="text-amber-500 font-extrabold" id="modal-title-label">---</span>
             </div>
 
@@ -294,17 +475,17 @@
             <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white hover:rotate-90 transition text-2xl leading-none" aria-label="Zavřít">&times;</button>
             <h3 class="text-lg font-bold text-gray-400 mb-6 border-b border-gray-800/60 pb-3">Porovnání hráčů</h3>
             <div class="flex items-center justify-between gap-4 mb-8">
-                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                <div id="vs-p1-card" class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center transition">
                     <img id="vs-p1-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
                     <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
-                    <span id="vs-p1-score" class="text-xs text-gray-500 mt-0.5">#0</span>
+                    <span id="vs-p1-score" class="num text-xs text-gray-500 mt-0.5">#0</span>
                     <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
                 </div>
-                <div class="font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
-                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                <div class="num font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
+                <div id="vs-p2-card" class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center transition">
                     <img id="vs-p2-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
                     <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
-                    <span id="vs-p2-score" class="text-xs text-gray-500 mt-0.5">#0</span>
+                    <span id="vs-p2-score" class="num text-xs text-gray-500 mt-0.5">#0</span>
                     <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
                 </div>
             </div>
@@ -341,6 +522,19 @@
         // Kity s obrázkem (PNG); ostatní dostanou emoji lopaty
         const PNG_KITS = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP'];
 
+        // Akcentní barva pro každý kit (esports identita)
+        const KIT_ACCENTS = {
+            'Overall': '#f59e0b',
+            'GoldSMP': '#eab308',
+            'NetheriteSword': '#9aa7bd',
+            'IronAxe': '#fb923c',
+            'UHCMace': '#f43f5e',
+            'AnchorPvP': '#22d3ee',
+            'RandomPot': '#c084fc',
+            'ShieldlessSMP': '#34d399',
+            'MolePVP': '#a3e635'
+        };
+
         function kitLogo(mode, cls, emojiSize) {
             const m = String(mode);
             if (PNG_KITS.includes(m)) {
@@ -359,12 +553,86 @@
             return [...png, ...extra];
         }
 
+        /* ---------- Helpers ---------- */
+        function esc(s) {
+            return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        function hexToRgba(hex, a) {
+            const n = parseInt(hex.slice(1), 16);
+            return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a === undefined ? 1 : a})`;
+        }
+        function highlight(text, q) {
+            const t = String(text);
+            const i = t.toLowerCase().indexOf(q);
+            if (!q || i === -1) return esc(t);
+            return esc(t.slice(0, i)) + `<mark class="search-mark">${esc(t.slice(i, i + q.length))}</mark>` + esc(t.slice(i + q.length));
+        }
+        function animateCount(el, target) {
+            if (!el) return;
+            const dur = 900, from = 0;
+            const t0 = performance.now();
+            const frame = (now) => {
+                const p = Math.min((now - t0) / dur, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(from + (target - from) * eased);
+                if (p < 1) requestAnimationFrame(frame);
+            };
+            requestAnimationFrame(frame);
+        }
+        function applyAccent(tab) {
+            const c = KIT_ACCENTS[tab] || '#f59e0b';
+            document.documentElement.style.setProperty('--accent', c);
+        }
+        function betterTier(t) {
+            const i = tierOrder.indexOf(t);
+            return i === -1 ? 99 : i;
+        }
+
         let playersData = [];
         let currentTab = 'Overall';
         let activeModalPlayer = null;
         let showRetired = false;
         let chartState = null;
         let searchIndex = -1;
+        let tabOrder = ['Overall'];
+
+        /* ---------- Scroll reveal ---------- */
+        const revealObserver = (typeof IntersectionObserver !== 'undefined')
+            ? new IntersectionObserver((entries) => {
+                entries.forEach(en => {
+                    if (en.isIntersecting) {
+                        en.target.classList.add('in');
+                        revealObserver.unobserve(en.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -40px 0px' })
+            : null;
+        // Záložní cesta nezávislá na IntersectionObserver: první screen se zobrazí
+        // vždy a prvky se odhalí i při scrollu tam, kde IO nedoručí callbacky.
+        // Když IO funguje, je tato cesta idempotentní (třída .in se jen duplikuje).
+        function revealCheck() {
+            const vh = window.innerHeight || document.documentElement.clientHeight;
+            document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+                const r = el.getBoundingClientRect();
+                if (r.top < vh + 80) el.classList.add('in');
+            });
+        }
+        let revealFrame = false;
+        function revealInViewport() {
+            if (revealFrame) return;
+            revealFrame = true;
+            requestAnimationFrame(() => { revealFrame = false; revealCheck(); });
+        }
+        window.addEventListener('scroll', revealInViewport, { passive: true });
+        function reveal(elements) {
+            (elements || []).forEach((el, i) => {
+                el.classList.add('reveal');
+                el.style.setProperty('--i', Math.min(i, 9));
+                if (!revealObserver) el.classList.add('in');
+                else revealObserver.observe(el);
+            });
+            if (revealObserver) setTimeout(revealCheck, 650);
+        }
 
         /* ---------- Modaly ---------- */
         function openModal(id) {
@@ -439,6 +707,11 @@
             return `${dd}.${mm}.${latest.getFullYear()}`;
         }
 
+        function countRecords() {
+            return playersData.reduce((acc, p) =>
+                acc + Object.values(p.history || {}).reduce((a, arr) => a + (arr || []).length, 0), 0);
+        }
+
         async function loadData() {
             const container = document.getElementById('leaderboard-container');
             renderSkeleton();
@@ -450,8 +723,9 @@
                 if (!Array.isArray(data)) throw new Error('Neplatný formát');
                 playersData = data;
 
-                const countElem = document.getElementById('player-count');
-                if (countElem) countElem.innerText = playersData.length;
+                animateCount(document.getElementById('player-count'), playersData.length);
+                animateCount(document.getElementById('stat-kits'), getAllKits().length);
+                animateCount(document.getElementById('stat-records'), countRecords());
 
                 const updateElem = document.getElementById('last-update');
                 if (updateElem) updateElem.innerText = getLastUpdateDate();
@@ -474,6 +748,7 @@
             if (!tabsEl) return;
 
             const kits = getAllKits();
+            tabOrder = ['Overall', ...kits];
             tabsEl.innerHTML = '';
 
             const overallBtn = document.createElement('button');
@@ -497,12 +772,16 @@
 
         function switchTab(tabId, skipRender) {
             currentTab = tabId;
+            applyAccent(tabId);
+
             document.querySelectorAll('#tabs button').forEach(btn => {
+                btn.removeAttribute('style');
                 btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white hover:bg-gray-900/60 transition flex items-center gap-2 whitespace-nowrap";
             });
             const activeBtn = document.getElementById('tab-' + tabId);
             if (activeBtn) {
-                activeBtn.className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black shadow-lg shadow-amber-500/20 flex items-center gap-2 whitespace-nowrap";
+                activeBtn.className = "px-5 py-2 rounded-lg font-semibold transition flex items-center gap-2 whitespace-nowrap text-black";
+                activeBtn.style.cssText = `background: var(--accent); box-shadow: 0 0 22px -4px var(--accent);`;
             }
 
             const retiredBox = document.getElementById('retired-container');
@@ -590,17 +869,23 @@
                     arrowColor = 'text-gray-400';
                 }
 
+                const isNew = (Date.now() - item.dateObj.getTime()) < 2 * 864e5;
                 const card = document.createElement('div');
-                card.className = "flex items-center gap-3 bg-[#13151f] border border-gray-800/80 px-3.5 py-2 rounded-xl flex-shrink-0 shadow-md hover:border-amber-500/30 hover:-translate-y-px transition";
+                card.className = `group flex items-center gap-3 ${isNew ? 'bg-[#171409]' : 'bg-[#13151f]'} border ${isNew ? 'border-amber-500/40 shadow-lg shadow-amber-500/10' : 'border-gray-800/80'} px-3.5 py-2 rounded-xl flex-shrink-0 shadow-md hover:border-amber-500/40 hover:-translate-y-px transition cursor-pointer`;
+                card.onclick = () => {
+                    const player = playersData.find(p => p.username === item.username);
+                    if (player) openPlayerModal(player);
+                };
                 card.innerHTML = `
-                    <img src="https://minotar.net/avatar/${item.username}/32" alt="${item.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
+                    <img src="https://minotar.net/avatar/${esc(item.username)}/32" alt="${esc(item.username)}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
                     <div class="flex flex-col">
-                        <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
-                        <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
+                        <span class="font-extrabold text-xs text-white leading-tight">${esc(item.username)}</span>
+                        <span class="text-[10px] text-gray-500 font-medium">${esc(item.dateStr)}</span>
                     </div>
                     ${kitLogo(item.mode, 'w-4 h-4 object-contain ml-1', 16)}
-                    <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
+                    <span class="num px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${esc(item.tier)}</span>
                     <span class="${arrowColor} text-xs font-black" aria-hidden="true">${arrowIcon}</span>
+                    ${isNew ? '<span class="text-[9px] font-black tracking-wider text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">NOVÝ</span>' : ''}
                 `;
                 listContainer.appendChild(card);
             });
@@ -675,8 +960,8 @@
 
             item.innerHTML = `
                 <div class="flex items-center gap-2.5 overflow-hidden">
-                    <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
-                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
+                    <img src="https://minotar.net/avatar/${esc(player.username)}/32" alt="${esc(player.username)}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
+                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${esc(player.username)}</span>
                 </div>
                 ${retiredBadge}
             `;
@@ -716,6 +1001,7 @@
                     const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
                     podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-5 mb-14 mt-8";
+                    const podiumCards = [];
 
                     const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
 
@@ -730,7 +1016,7 @@
                         let customHeightClass = "";
 
                         if (rankNum === 1) {
-                            rankBorderGlow = "border-amber-500 shadow-[0_0_45px_rgba(234,179,8,0.28)] z-10 md:-translate-y-4";
+                            rankBorderGlow = "border-amber-500 shadow-[0_0_45px_rgba(234,179,8,0.28)] z-10 md:-translate-y-4 podium-1";
                             avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
                             medalColor = "bg-amber-400";
                             customHeightClass = "md:w-[38%] py-10 px-8 bg-[#141622]";
@@ -750,12 +1036,13 @@
                         card.className = `w-full ${customHeightClass} border-2 ${rankBorderGlow} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-[1.02] relative`;
                         card.onclick = () => openPlayerModal(player);
                         card.setAttribute('role', 'button');
+                        podiumCards.push(card);
 
                         const sortedModes = getSortedModes(player.modes);
                         const badgesHTML = sortedModes.map(([mode, t]) => `
-                            <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm" title="${mode}">
+                            <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm" title="${esc(mode)}">
                                 ${kitLogo(mode, 'w-4 h-4 object-contain', 16)}
-                                <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
+                                <span class="num text-xs font-black text-amber-400 tracking-wide">${esc(t)}</span>
                             </div>
                         `).join('');
 
@@ -764,11 +1051,11 @@
 
                         card.innerHTML = `
                             <div class="w-10 h-10 rounded-xl ${medalColor} flex items-center justify-center text-xl mb-4 shadow-md" aria-hidden="true">${medal}</div>
-                            <img src="https://minotar.net/avatar/${player.username}/96" alt="${player.username}" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
-                            <h3 class="font-black text-white ${nameSize} tracking-wide text-center">${player.username}</h3>
+                            <img src="https://minotar.net/avatar/${esc(player.username)}/96" alt="${esc(player.username)}" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
+                            <h3 class="font-black text-white ${nameSize} tracking-wide text-center">${esc(player.username)}</h3>
                             <div class="flex items-center gap-2 mt-2 mb-6 flex-wrap justify-center">
-                                <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
-                                <span class="px-2.5 py-0.5 rounded text-[11px] font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
+                                <span class="num text-sm font-extrabold text-amber-400">${esc(player.overallScore)} bodů</span>
+                                <span class="px-2.5 py-0.5 rounded text-[11px] font-extrabold border ${rankInfo.bg}">${esc(rankInfo.title)}</span>
                             </div>
                             <div class="w-full bg-[#0a0b0e]/90 p-3 rounded-2xl border border-gray-900/80 flex flex-wrap gap-2 justify-center shadow-inner">${badgesHTML}</div>
                         `;
@@ -776,17 +1063,19 @@
                     });
 
                     container.appendChild(podiumContainer);
+                    reveal(podiumCards);
                 }
 
                 const listContainer = document.createElement('div');
                 listContainer.className = "space-y-3";
 
                 const restPlayers = processedPlayers.slice(3);
+                const rows = [];
 
                 restPlayers.forEach((player, index) => {
                     const rank = index + 4;
                     let borderClass = "border-gray-900 bg-gray-950/40";
-                    const rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
+                    const rankBadge = `<div class="num w-8 text-center font-bold text-gray-500">${rank}</div>`;
 
                     const rankInfo = getRankTitle(player);
                     const sortedModes = getSortedModes(player.modes);
@@ -794,29 +1083,30 @@
                     const badgesHTML = `
                         <div class="flex flex-wrap gap-3 items-center">
                             ${sortedModes.map(([mode, t]) => `
-                                <div class="flex flex-col items-center" title="${mode}">
+                                <div class="flex flex-col items-center" title="${esc(mode)}">
                                     <div class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
                                         ${kitLogo(mode, 'w-full h-full object-contain', 24)}
                                     </div>
-                                    <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${t}</span>
+                                    <span class="num text-xs font-black text-amber-400 tracking-wide mt-1">${esc(t)}</span>
                                 </div>
                             `).join('')}
                         </div>
                     `;
 
                     const row = document.createElement('div');
-                    row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/60 hover:border-gray-700/80 hover:-translate-y-px ${borderClass}`;
+                    row.className = `player-row flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/60 hover:-translate-y-px ${borderClass}`;
                     row.onclick = () => openPlayerModal(player);
                     row.setAttribute('role', 'button');
+                    rows.push(row);
                     row.innerHTML = `
                         <div class="flex items-center gap-4 min-w-0">
                             ${rankBadge}
-                            <img src="https://minotar.net/avatar/${player.username}/48" alt="${player.username}" class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700">
+                            <img src="https://minotar.net/avatar/${esc(player.username)}/48" alt="${esc(player.username)}" class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700">
                             <div class="flex flex-col justify-center min-w-0">
-                                <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight truncate">${player.username}</span>
+                                <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight truncate">${esc(player.username)}</span>
                                 <div class="flex items-center gap-2 mt-1.5 flex-wrap">
-                                    <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
-                                    <span class="px-2.5 py-0.5 rounded text-xs font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                                    <span class="num text-sm font-bold text-indigo-400">${esc(player.overallScore)} bodů</span>
+                                    <span class="px-2.5 py-0.5 rounded text-xs font-bold border ${rankInfo.bg}">${esc(rankInfo.title)}</span>
                                 </div>
                             </div>
                         </div>
@@ -835,14 +1125,17 @@
                 }
 
                 container.appendChild(listContainer);
+                reveal(rows);
             } else {
                 container.className = "grid grid-cols-1 md:grid-cols-5 gap-4";
 
                 const tiers = [1, 2, 3, 4, 5];
+                const cols = [];
 
                 tiers.forEach(tNum => {
                     const col = document.createElement('div');
-                    col.className = "bg-[#0b0c12] border border-gray-900 rounded-3xl overflow-hidden flex flex-col min-h-[350px] shadow-xl";
+                    col.className = "tier-col bg-[#0b0c12] border border-gray-900 rounded-3xl overflow-hidden flex flex-col min-h-[350px] shadow-xl";
+                    cols.push(col);
 
                     const activeFiltered = processedPlayers.filter(p => {
                         if (!p.modes || !p.modes[currentTab]) return false;
@@ -858,15 +1151,16 @@
                     const headerCount = activeFiltered.length + retiredFiltered.length;
 
                     col.innerHTML = `
-                        <div class="text-center py-3.5 tier-header-${tNum} font-black text-sm tracking-widest uppercase flex items-center justify-center gap-1">
+                        <div class="text-center py-3.5 tier-header-${tNum} font-black text-sm tracking-widest uppercase flex items-center justify-center gap-1 transition">
                             TIER ${tNum}
-                            <span class="tier-count">${headerCount}</span>
+                            <span class="tier-count num">${headerCount}</span>
                         </div>
                         <div class="flex flex-col gap-2 p-3 flex-grow" id="tier-list-${tNum}"></div>
                     `;
                     container.appendChild(col);
 
                     const listContainer = col.querySelector(`#tier-list-${tNum}`);
+                    const cards = [];
 
                     activeFiltered.sort((a, b) => {
                         const tA = a.modes[currentTab];
@@ -875,7 +1169,9 @@
                     });
 
                     activeFiltered.forEach(player => {
-                        listContainer.appendChild(renderPlayerCard(player, false));
+                        const card = renderPlayerCard(player, false);
+                        cards.push(card);
+                        listContainer.appendChild(card);
                     });
 
                     retiredFiltered.sort((a, b) => {
@@ -890,7 +1186,9 @@
                         listContainer.appendChild(retiredDivider);
 
                         retiredFiltered.forEach(player => {
-                            listContainer.appendChild(renderPlayerCard(player, true));
+                            const card = renderPlayerCard(player, true);
+                            cards.push(card);
+                            listContainer.appendChild(card);
                         });
                     }
 
@@ -900,7 +1198,10 @@
                         emptyBox.innerHTML = `<span class="text-lg text-gray-800" aria-hidden="true">•</span> Prázdné`;
                         listContainer.appendChild(emptyBox);
                     }
+
+                    reveal(cards);
                 });
+                reveal(cols);
             }
         }
 
@@ -937,10 +1238,10 @@
                     searchIndex = -1;
                 };
                 div.innerHTML = `
-                    <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
+                    <img src="https://minotar.net/avatar/${esc(player.username)}/32" alt="${esc(player.username)}" class="w-8 h-8 rounded bg-gray-800">
                     <div class="flex flex-col">
-                        <span class="font-bold text-sm">${player.username}</span>
-                        <span class="text-xs text-gray-500">Skóre: ${player.overallScore}</span>
+                        <span class="font-bold text-sm">${highlight(player.username, query)}</span>
+                        <span class="num text-xs text-gray-500">Skóre: ${esc(player.overallScore)}</span>
                     </div>
                 `;
                 dropdown.appendChild(div);
@@ -951,10 +1252,13 @@
 
         const searchInput = document.getElementById('search');
         const searchDropdown = document.getElementById('search-dropdown');
+        let searchTimer = null;
 
         searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimer);
             searchIndex = -1;
-            buildSearchResults(e.target.value.toLowerCase().trim());
+            const q = e.target.value.toLowerCase().trim();
+            searchTimer = setTimeout(() => buildSearchResults(q), 110);
         });
 
         searchInput.addEventListener('keydown', (e) => {
@@ -998,14 +1302,14 @@
                 player.overallScore = calculateOverallPoints(player).total;
             }
 
-            document.getElementById('modal-avatar').src = `https://minotar.net/avatar/${player.username}/100`;
+            document.getElementById('modal-avatar').src = `https://minotar.net/avatar/${esc(player.username)}/100`;
             document.getElementById('modal-username').innerText = player.username;
 
             const rankInfo = getRankTitle(player);
             document.getElementById('modal-rank-badge').innerText = rankInfo.title;
             document.getElementById('modal-points').innerText = player.overallScore;
             document.getElementById('modal-title-label').innerText = rankInfo.title === 'BEST CZECHIA' ? 'Legenda' : rankInfo.title;
-            document.getElementById('modal-favorite-kit').innerHTML = getFavoriteKit(player);
+            document.getElementById('modal-favorite-kit').innerHTML = `<span class="num text-amber-400">${esc(getFavoriteKit(player))}</span>`;
 
             const kitsContainer = document.getElementById('modal-kits-container');
             kitsContainer.innerHTML = '';
@@ -1023,7 +1327,7 @@
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110 group-hover:border-amber-500/60 group-hover:shadow-lg group-hover:shadow-amber-500/10">
                             ${kitLogo(mode, 'w-full h-full object-contain', 24)}
                         </div>
-                        <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
+                        <span class="num text-xs font-black text-amber-400 mt-0.5">${esc(tier)}</span>
                     `;
                     kitsContainer.appendChild(badgeDiv);
                 });
@@ -1069,12 +1373,12 @@
                 div.onclick = () => startComparison(player);
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
-                        <span class="font-bold text-sm">${player.username}</span>
+                        <img src="https://minotar.net/avatar/${esc(player.username)}/32" alt="${esc(player.username)}" class="w-8 h-8 rounded bg-gray-800">
+                        <span class="font-bold text-sm">${highlight(player.username, filterQuery.toLowerCase())}</span>
                     </div>
                     <div class="text-right text-xs text-gray-500">
-                        <span>${player.overallScore} bodů · </span>
-                        <span class="text-amber-500 font-bold">${rankInfo.title}</span>
+                        <span class="num">${esc(player.overallScore)} bodů · </span>
+                        <span class="text-amber-500 font-bold">${esc(rankInfo.title)}</span>
                     </div>
                 `;
                 listContainer.appendChild(div);
@@ -1093,15 +1397,29 @@
             const r1 = getRankTitle(p1);
             const r2 = getRankTitle(p2);
 
-            document.getElementById('vs-p1-avatar').src = `https://minotar.net/avatar/${p1.username}/60`;
+            document.getElementById('vs-p1-avatar').src = `https://minotar.net/avatar/${esc(p1.username)}/60`;
             document.getElementById('vs-p1-name').innerText = p1.username;
             document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
             document.getElementById('vs-p1-rank').innerText = r1.title;
 
-            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.username}/60`;
+            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${esc(p2.username)}/60`;
             document.getElementById('vs-p2-name').innerText = p2.username;
             document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
             document.getElementById('vs-p2-rank').innerText = r2.title;
+
+            // Zvýraznění celkového vítěze
+            const c1 = document.getElementById('vs-p1-card');
+            const c2 = document.getElementById('vs-p2-card');
+            if (p1.overallScore > p2.overallScore) {
+                c1.className = "flex-1 bg-gray-900/40 border-2 border-emerald-500/50 p-4 rounded-2xl flex flex-col items-center text-center transition shadow-lg shadow-emerald-500/10";
+                c2.className = "flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center transition";
+            } else if (p2.overallScore > p1.overallScore) {
+                c1.className = "flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center transition";
+                c2.className = "flex-1 bg-gray-900/40 border-2 border-emerald-500/50 p-4 rounded-2xl flex flex-col items-center text-center transition shadow-lg shadow-emerald-500/10";
+            } else {
+                c1.className = "flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center transition";
+                c2.className = "flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center transition";
+            }
 
             const rowsContainer = document.getElementById('vs-kits-rows');
             rowsContainer.innerHTML = '';
@@ -1112,12 +1430,26 @@
                 const t1 = p1.modes ? p1.modes[kit] : null;
                 const t2 = p2.modes ? p2.modes[kit] : null;
 
+                let b1 = 'text-amber-400 bg-gray-900 border-gray-800';
+                let b2 = 'text-amber-400 bg-gray-900 border-gray-800';
+                if (t1 && t2) {
+                    const i1 = betterTier(t1);
+                    const i2 = betterTier(t2);
+                    if (i1 < i2) b1 = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/40 shadow-sm';
+                    else if (i2 < i1) b2 = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/40 shadow-sm';
+                    else { b1 = 'text-gray-400 bg-gray-900 border-gray-800'; b2 = 'text-gray-400 bg-gray-900 border-gray-800'; }
+                } else if (t1 && !t2) {
+                    b1 = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/40 shadow-sm';
+                } else if (t2 && !t1) {
+                    b2 = 'text-emerald-400 bg-emerald-500/10 border-emerald-500/40 shadow-sm';
+                }
+
                 const row = document.createElement('div');
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
-                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold">${kitLogo(kit, 'w-4 h-4 object-contain', 16)}<span class="text-xs text-gray-500">${kit}</span></div>
-                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
+                    <div class="w-20 text-center"><span class="num px-3 py-1 rounded-lg text-xs font-black inline-block border ${b1}">${t1 ? esc(t1) : '<span class="text-gray-600">---</span>'}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold">${kitLogo(kit, 'w-4 h-4 object-contain', 16)}<span class="text-xs text-gray-500">${esc(kit)}</span></div>
+                    <div class="w-20 text-center"><span class="num px-3 py-1 rounded-lg text-xs font-black inline-block border ${b2}">${t2 ? esc(t2) : '<span class="text-gray-600">---</span>'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
             });
@@ -1126,7 +1458,7 @@
         }
 
         /* ---------- Tier Journey graf (vlastní canvas, bez externí knihovny) ---------- */
-        function drawTierChart(canvas, entries) {
+        function drawTierChart(canvas, entries, accent, animate) {
             const dpr = window.devicePixelRatio || 1;
             const rect = canvas.getBoundingClientRect();
             const W = Math.max(rect.width, 60);
@@ -1137,13 +1469,15 @@
 
             const ctx = canvas.getContext('2d');
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            ctx.clearRect(0, 0, W, H);
+
+            const col = accent || getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#f59e0b';
 
             const padL = 36, padR = 12, padT = 14, padB = 26;
             const iw = W - padL - padR;
             const ih = H - padT - padB;
 
-            ctx.font = '600 10px -apple-system, "Segoe UI", Roboto, sans-serif';
+            ctx.clearRect(0, 0, W, H);
+            ctx.font = '600 10px "Chakra Petch", sans-serif';
 
             if (!entries || entries.length === 0) {
                 ctx.fillStyle = '#475569';
@@ -1167,13 +1501,10 @@
 
             const points = entries.map((e, i) => ({ x: xPos(i), y: yPos(vals[i]), date: e.date, tier: e.tier }));
 
-            const lineColor = '#f59e0b';
-            const gridColor = '#1e293b';
-            const textColor = '#64748b';
-
-            ctx.strokeStyle = gridColor;
+            // Pozadí a osy (statické)
+            ctx.strokeStyle = '#1e293b';
             ctx.lineWidth = 1;
-            ctx.fillStyle = textColor;
+            ctx.fillStyle = '#64748b';
             ctx.textAlign = 'right';
             ctx.textBaseline = 'middle';
             const tickCount = 5;
@@ -1195,80 +1526,110 @@
             const every = n > 6 ? Math.ceil(n / 6) : 1;
             points.forEach((pt, i) => {
                 if (i % every !== 0 && i !== n - 1) return;
-                const short = String(pt.date);
-                ctx.fillText(short, pt.x, padT + ih + 8);
+                ctx.fillText(String(pt.date), pt.x, padT + ih + 8);
             });
-
-            // Linka
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = 2.5;
-            ctx.lineJoin = 'round';
-            ctx.lineCap = 'round';
-            ctx.beginPath();
-            points.forEach((pt, i) => {
-                if (i === 0) ctx.moveTo(pt.x, pt.y);
-                else ctx.lineTo(pt.x, pt.y);
-            });
-            ctx.stroke();
-
-            // Body
-            points.forEach(pt => {
-                ctx.beginPath();
-                ctx.arc(pt.x, pt.y, 4.5, 0, Math.PI * 2);
-                ctx.fillStyle = '#ffffff';
-                ctx.fill();
-                ctx.strokeStyle = lineColor;
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            });
-
-            // Gradient pod linkou
-            const grad = ctx.createLinearGradient(0, padT, 0, padT + ih);
-            grad.addColorStop(0, 'rgba(245, 158, 11, 0.16)');
-            grad.addColorStop(1, 'rgba(245, 158, 11, 0)');
-            ctx.beginPath();
-            ctx.moveTo(points[0].x, padT + ih);
-            points.forEach(pt => ctx.lineTo(pt.x, pt.y));
-            ctx.lineTo(points[n - 1].x, padT + ih);
-            ctx.closePath();
-            ctx.fillStyle = grad;
-            ctx.fill();
-
-            chartState = { canvas, entries, points, n };
-            renderChartTooltip(chartState);
-
-            // Hover
-            canvas.onmousemove = null;
-            canvas.onmouseleave = null;
-            canvas.onmousemove = (e) => {
-                if (!chartState) return;
-                const rect2 = canvas.getBoundingClientRect();
-                const mx = e.clientX - rect2.left;
-                const my = e.clientY - rect2.top;
-                let nearest = -1;
-                let bestDist = Infinity;
-                chartState.points.forEach((pt, i) => {
-                    const d = (pt.x - mx) ** 2 + (pt.y - my) ** 2;
-                    if (d < bestDist) { bestDist = d; nearest = i; }
-                });
-                if (nearest !== -1 && bestDist < 1600) {
-                    if (chartState.hover !== nearest) {
-                        chartState.hover = nearest;
-                        renderChartTooltip(chartState, true);
-                    }
-                } else if (chartState.hover !== undefined) {
-                    chartState.hover = undefined;
-                    renderChartTooltip(chartState, false);
-                }
-            };
-            canvas.onmouseleave = () => {
-                if (chartState) {
-                    chartState.hover = undefined;
-                    renderChartTooltip(chartState, false);
-                }
-            };
-
             ctx.textBaseline = 'alphabetic';
+
+            const grad = ctx.createLinearGradient(0, padT, 0, padT + ih);
+            grad.addColorStop(0, hexToRgba(col, 0.18));
+            grad.addColorStop(1, hexToRgba(col, 0));
+
+            const drawSeries = (p) => {
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(0, 0, W * p, H);
+                ctx.clip();
+
+                // Plocha pod linkou
+                ctx.beginPath();
+                ctx.moveTo(points[0].x, padT + ih);
+                points.forEach(pt => ctx.lineTo(pt.x, pt.y));
+                ctx.lineTo(points[n - 1].x, padT + ih);
+                ctx.closePath();
+                ctx.fillStyle = grad;
+                ctx.fill();
+
+                // Linka
+                ctx.strokeStyle = col;
+                ctx.lineWidth = 2.5;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                points.forEach((pt, i) => {
+                    if (i === 0) ctx.moveTo(pt.x, pt.y);
+                    else ctx.lineTo(pt.x, pt.y);
+                });
+                ctx.stroke();
+
+                // Body
+                points.forEach(pt => {
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, 4.5, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+                    ctx.strokeStyle = col;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                });
+
+                ctx.restore();
+            };
+
+            const attachHover = () => {
+                canvas.onmousemove = (e) => {
+                    if (!chartState) return;
+                    const rect2 = canvas.getBoundingClientRect();
+                    const mx = e.clientX - rect2.left;
+                    const my = e.clientY - rect2.top;
+                    let nearest = -1;
+                    let bestDist = Infinity;
+                    chartState.points.forEach((pt, i) => {
+                        const d = (pt.x - mx) ** 2 + (pt.y - my) ** 2;
+                        if (d < bestDist) { bestDist = d; nearest = i; }
+                    });
+                    if (nearest !== -1 && bestDist < 1600) {
+                        if (chartState.hover !== nearest) {
+                            chartState.hover = nearest;
+                            renderChartTooltip(chartState, true);
+                        }
+                    } else if (chartState.hover !== undefined) {
+                        chartState.hover = undefined;
+                        renderChartTooltip(chartState, false);
+                    }
+                };
+                canvas.onmouseleave = () => {
+                    if (chartState) {
+                        chartState.hover = undefined;
+                        renderChartTooltip(chartState, false);
+                    }
+                };
+            };
+
+            const finalize = () => {
+                chartState = { canvas, entries, points, n, accent: col };
+                renderChartTooltip(chartState);
+                attachHover();
+            };
+
+            const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (animate && !reduceMotion) {
+                const t0 = performance.now();
+                const dur = 550;
+                const step = (now) => {
+                    const p = Math.min((now - t0) / dur, 1);
+                    drawSeries(p);
+                    if (p < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        finalize();
+                    }
+                };
+                requestAnimationFrame(step);
+            } else {
+                drawSeries(1);
+                finalize();
+            }
         }
 
         function renderChartTooltip(state, force) {
@@ -1281,7 +1642,7 @@
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             ctx.clearRect(0, 0, W, H);
 
-            // překresli graf znovu (bez hover efektů)
+            const col = state.accent || '#f59e0b';
             const padL = 36, padR = 12, padT = 14, padB = 26;
             const iw = W - padL - padR;
             const ih = H - padT - padB;
@@ -1298,8 +1659,8 @@
             const xPos = i => (n === 1) ? padL + iw / 2 : padL + (i / (n - 1)) * iw;
             const points = entries.map((e, i) => ({ x: xPos(i), y: yPos(vals[i]), date: e.date, tier: e.tier }));
             const grad = ctx.createLinearGradient(0, padT, 0, padT + ih);
-            grad.addColorStop(0, 'rgba(245, 158, 11, 0.16)');
-            grad.addColorStop(1, 'rgba(245, 158, 11, 0)');
+            grad.addColorStop(0, hexToRgba(col, 0.18));
+            grad.addColorStop(1, hexToRgba(col, 0));
 
             ctx.clearRect(0, 0, W, H);
             ctx.strokeStyle = '#1e293b';
@@ -1310,7 +1671,7 @@
             ctx.lineTo(W - padR, padT + ih);
             ctx.stroke();
 
-            ctx.font = '600 10px -apple-system, "Segoe UI", Roboto, sans-serif';
+            ctx.font = '600 10px "Chakra Petch", sans-serif';
             ctx.fillStyle = '#64748b';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
@@ -1331,7 +1692,7 @@
             }
             ctx.textBaseline = 'alphabetic';
 
-            ctx.strokeStyle = '#f59e0b';
+            ctx.strokeStyle = col;
             ctx.lineWidth = 2.5;
             ctx.beginPath();
             points.forEach((pt, i) => {
@@ -1353,19 +1714,19 @@
                 ctx.arc(pt.x, pt.y, state.hover === points.indexOf(pt) ? 6 : 4.5, 0, Math.PI * 2);
                 ctx.fillStyle = '#ffffff';
                 ctx.fill();
-                ctx.strokeStyle = '#f59e0b';
+                ctx.strokeStyle = col;
                 ctx.lineWidth = 2;
                 ctx.stroke();
             });
 
             if (state.hover !== undefined && state.points[state.hover]) {
                 const pt = state.points[state.hover];
-                drawTooltip(ctx, pt, `${pt.date} · ${pt.tier}`, W);
+                drawTooltip(ctx, pt, `${pt.date} · ${pt.tier}`, W, col);
             }
         }
 
-        function drawTooltip(ctx, pt, text, W) {
-            ctx.font = '700 11px -apple-system, "Segoe UI", Roboto, sans-serif';
+        function drawTooltip(ctx, pt, text, W, col) {
+            ctx.font = '700 11px "Chakra Petch", sans-serif';
             const tw = ctx.measureText(text).width + 16;
             const th = 22;
             let bx = pt.x + 10;
@@ -1374,7 +1735,7 @@
             if (by < 4) by = pt.y + 10;
 
             ctx.fillStyle = 'rgba(15, 17, 25, 0.95)';
-            ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
+            ctx.strokeStyle = hexToRgba(col || '#f59e0b', 0.45);
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.roundRect(bx, by, tw, th, 6);
@@ -1397,20 +1758,32 @@
                 drawTierChart(canvas, []);
                 return;
             }
-            drawTierChart(canvas, player.history[gamemode]);
+            drawTierChart(canvas, player.history[gamemode], KIT_ACCENTS[gamemode], true);
         }
 
         window.addEventListener('resize', () => {
             if (chartState) {
-                drawTierChart(chartState.canvas, chartState.entries);
+                drawTierChart(chartState.canvas, chartState.entries, chartState.accent);
             }
         });
 
+        /* ---------- Zpět nahoru ---------- */
+        const backToTop = document.getElementById('back-to-top');
+        if (backToTop) {
+            window.addEventListener('scroll', () => {
+                backToTop.classList.toggle('show', window.scrollY > 600);
+            }, { passive: true });
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
         /* ---------- Globální klávesy ---------- */
         window.addEventListener('keydown', (e) => {
-            if (e.key === '/' &&
-                document.activeElement !== document.getElementById('search') &&
-                document.activeElement !== document.getElementById('compare-search-input')) {
+            const tag = document.activeElement && document.activeElement.tagName;
+            const typing = tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (document.activeElement && document.activeElement.isContentEditable);
+
+            if (e.key === '/' && !typing) {
                 e.preventDefault();
                 document.getElementById('search').focus();
             }
@@ -1418,6 +1791,14 @@
                 closeModal('vs-modal');
                 closeModal('compare-select-modal');
                 closeModal('modal');
+            }
+            // Šipky – přepínání záložek
+            if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !typing && tabOrder.length > 1) {
+                const idx = tabOrder.indexOf(currentTab);
+                if (idx !== -1) {
+                    const dir = e.key === 'ArrowRight' ? 1 : -1;
+                    switchTab(tabOrder[(idx + dir + tabOrder.length) % tabOrder.length]);
+                }
             }
         });
 
