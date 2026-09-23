@@ -2459,12 +2459,19 @@
   {
     "username": "ginger_cira",
     "modes": {
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "goldsmp": "LT3"
     },
     "history": {
       "UHCMace": [
         {
           "date": "17.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "goldsmp": [
+        {
+          "date": "23.09.2026",
           "tier": "LT3"
         }
       ]
