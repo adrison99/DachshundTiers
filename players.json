@@ -2570,5 +2570,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "Novak_Glazer",
+    "modes": {
+      "AnchorPvP": "LT3"
+    },
+    "history": {
+      "AnchorPvP": [
+        {
+          "date": "23.09.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
