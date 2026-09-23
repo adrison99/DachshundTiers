@@ -2024,7 +2024,7 @@
     "username": "Ethernyx_",
     "modes": {
       "UHCMace": "HT4",
-      "AnchorPvP": "LT5"
+      "AnchorPvP": "LT3"
     },
     "history": {
       "UHCMace": [
@@ -2037,6 +2037,10 @@
         {
           "date": "16.08.2026",
           "tier": "LT5"
+        },
+        {
+          "date": "23.09.2026",
+          "tier": "LT3"
         }
       ]
     }
