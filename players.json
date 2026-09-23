@@ -1911,7 +1911,8 @@
       "NetheriteSword": "HT3",
       "GoldSMP": "HT3",
       "RandomPot": "HT3",
-      "ShieldlessSMP": "HT3"
+      "ShieldlessSMP": "HT3",
+      "MolePVP": "LT3"
     },
     "history": {
       "UHCMace": [
@@ -2002,6 +2003,12 @@
         {
           "date": "13.09.2026",
           "tier": "HT3"
+        }
+      ],
+      "MolePVP": [
+        {
+          "date": "23.09.2026",
+          "tier": "LT3"
         }
       ]
     }
