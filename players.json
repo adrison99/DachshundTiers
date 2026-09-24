@@ -1746,7 +1746,7 @@
   {
     "username": "Crityx_",
     "modes": {
-      "AnchorPvP": "LT3 EVAL",
+      "AnchorPvP": "LT3E",
       "GoldSMP": "HT4"
     },
     "history": {
@@ -1757,7 +1757,7 @@
         },
         {
           "date": "17.08.2026",
-          "tier": "LT3 EVAL"
+          "tier": "LT3E"
         }
       ],
       "GoldSMP": [
