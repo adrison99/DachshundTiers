@@ -1018,7 +1018,7 @@
   {
     "username": "Kyokutan_",
     "modes": {
-      "IronAxe": "LT4",
+      "IronAxe": "LT3",
       "UHCMace": "HT5"
     },
     "history": {
@@ -1026,6 +1026,10 @@
         {
           "date": "09.07.2026",
           "tier": "LT4"
+        },
+        {
+          "date": "24.09.2026",
+          "tier": "LT3"
         }
       ],
       "UHCMace": [
