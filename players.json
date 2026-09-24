@@ -309,7 +309,7 @@
       "UHCMace": "LT3",
       "GoldSMP": "LT5",
       "IronAxe": "HT4",
-      "NetheriteSword": "LT4"
+      "NetheriteSword": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -346,10 +346,6 @@
         {
           "date": "06.07.2026",
           "tier": "LT3"
-        },
-        {
-          "date": "22.09.2026",
-          "tier": "LT4"
         }
       ]
     }
@@ -479,8 +475,7 @@
       "GoldSMP": "LT3",
       "AnchorPvP": "LT3",
       "NetheriteSword": "HT5",
-      "IronAxe": "LT3",
-      "MolePVP": "LT4"
+      "IronAxe": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -562,12 +557,6 @@
           "date": "13.09.2026",
           "tier": "LT3"
         }
-      ],
-      "MolePVP": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT4"
-        }
       ]
     }
   },
@@ -579,9 +568,7 @@
       "IronAxe": "LT2",
       "NetheriteSword": "LT2",
       "GoldSMP": "HT3",
-      "UHCMace": "HT3",
-      "MolePVP": "LT3",
-      "ShieldlessSMP": "LT3"
+      "UHCMace": "HT3"
     },
     "history": {
       "AnchorPvP": [
@@ -662,18 +649,6 @@
         {
           "date": "20.07.2026",
           "tier": "HT3"
-        }
-      ],
-      "MolePVP": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT3"
-        }
-      ],
-      "ShieldlessSMP": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT3"
         }
       ]
     }
@@ -1744,7 +1719,7 @@
     "username": "Adurytak",
     "modes": {
       "AnchorPvP": "LT5",
-      "NetheriteSword": "HT5",
+      "NetheriteSword": "LT5",
       "UHCMace": "LT3"
     },
     "history": {
@@ -1758,10 +1733,6 @@
         {
           "date": "15.09.2026",
           "tier": "LT5"
-        },
-        {
-          "date": "22.09.2026",
-          "tier": "HT5"
         }
       ],
       "UHCMace": [
@@ -1915,8 +1886,7 @@
       "NetheriteSword": "HT3",
       "GoldSMP": "HT3",
       "RandomPot": "HT3",
-      "ShieldlessSMP": "HT3",
-      "MolePVP": "LT3"
+      "ShieldlessSMP": "HT3"
     },
     "history": {
       "UHCMace": [
@@ -2008,12 +1978,6 @@
           "date": "13.09.2026",
           "tier": "HT3"
         }
-      ],
-      "MolePVP": [
-        {
-          "date": "23.09.2026",
-          "tier": "LT3"
-        }
       ]
     }
   },
@@ -2035,7 +1999,7 @@
     "username": "Ethernyx_",
     "modes": {
       "UHCMace": "HT4",
-      "AnchorPvP": "LT3"
+      "AnchorPvP": "LT5"
     },
     "history": {
       "UHCMace": [
@@ -2048,10 +2012,6 @@
         {
           "date": "16.08.2026",
           "tier": "LT5"
-        },
-        {
-          "date": "23.09.2026",
-          "tier": "LT3"
         }
       ]
     }
@@ -2099,8 +2059,7 @@
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
       "GoldSMP": "HT4",
-      "ShieldlessSMP": "LT3",
-      "MolePVP": "HT4"
+      "ShieldlessSMP": "LT3"
     },
     "history": {
       "AnchorPvP": [
@@ -2137,12 +2096,6 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
-        }
-      ],
-      "MolePVP": [
-        {
-          "date": "22.09.2026",
-          "tier": "HT4"
         }
       ]
     }
@@ -2247,8 +2200,7 @@
     "username": "Lukyk656",
     "modes": {
       "UHCMace": "LT3",
-      "IronAxe": "LT3",
-      "MolePVP": "LT3"
+      "IronAxe": "LT3"
     },
     "history": {
       "UHCMace": [
@@ -2266,12 +2218,6 @@
           "date": "13.09.2026",
           "tier": "LT3"
         }
-      ],
-      "MolePVP": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT3"
-        }
       ]
     }
   },
@@ -2285,10 +2231,6 @@
       "UHCMace": [
         {
           "date": "14.09.2026",
-          "tier": "LT3"
-        },
-        {
-          "date": "23.09.2026",
           "tier": "LT3"
         }
       ],
@@ -2365,17 +2307,12 @@
     "username": "ruzovypasik",
     "modes": {
       "NetheriteSword": "HT5",
-      "AnchorPvP": "LT3",
-      "MolePVP": "LT5"
+      "AnchorPvP": "LT3"
     },
     "history": {
       "NetheriteSword": [
         {
           "date": "15.09.2026",
-          "tier": "HT5"
-        },
-        {
-          "date": "22.09.2026",
           "tier": "HT5"
         }
       ],
@@ -2383,12 +2320,6 @@
         {
           "date": "15.09.2026",
           "tier": "LT3"
-        }
-      ],
-      "MolePVP": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT5"
         }
       ]
     }
@@ -2470,19 +2401,12 @@
   {
     "username": "ginger_cira",
     "modes": {
-      "UHCMace": "LT3",
-      "goldsmp": "LT3"
+      "UHCMace": "LT3"
     },
     "history": {
       "UHCMace": [
         {
           "date": "17.09.2026",
-          "tier": "LT3"
-        }
-      ],
-      "goldsmp": [
-        {
-          "date": "23.09.2026",
           "tier": "LT3"
         }
       ]
@@ -2491,20 +2415,13 @@
   {
     "username": "S3BAEU",
     "modes": {
-      "UHCMace": "LT3",
-      "IronAxe": "LT4"
+      "UHCMace": "LT3"
     },
     "history": {
       "UHCMace": [
         {
           "date": "17.09.2026",
           "tier": "LT3"
-        }
-      ],
-      "IronAxe": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT4"
         }
       ]
     }
@@ -2547,66 +2464,6 @@
         {
           "date": "20.09.2026",
           "tier": "HT5"
-        }
-      ]
-    }
-  },
-  {
-    "username": "hrnkoman",
-    "modes": {
-      "MolePVP": "LT3"
-    },
-    "history": {
-      "MolePVP": [
-        {
-          "date": "22.09.2026",
-          "tier": "LT3"
-        }
-      ]
-    }
-  },
-  {
-    "username": "CrimsonWolf33",
-    "modes": {
-      "UHCMace": "HT5"
-    },
-    "history": {
-      "UHCMace": [
-        {
-          "date": "22.09.2026",
-          "tier": "HT5"
-        }
-      ]
-    }
-  },
-  {
-    "username": "dobre_rano",
-    "modes": {
-      "AnchorPvP": "LT3"
-    },
-    "history": {
-      "AnchorPvP": [
-        {
-          "date": "23.09.2026",
-          "tier": "LT3"
-        },
-        {
-          "date": "23.09.2026",
-          "tier": "LT3"
-        }
-      ]
-    }
-  },
-  {
-    "username": "Novak_Glazer",
-    "modes": {
-      "AnchorPvP": "LT3"
-    },
-    "history": {
-      "AnchorPvP": [
-        {
-          "date": "23.09.2026",
-          "tier": "LT3"
         }
       ]
     }
