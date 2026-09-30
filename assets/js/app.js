@@ -1,5 +1,5 @@
 import { loadPlayers } from './data.js';
-import { parseHash } from './router.js';
+import { parseHash, createGuard } from './router.js';
 import { allKits } from './ui.js';
 
 const loaders = {
@@ -16,18 +16,22 @@ const loaders = {
 
 const $ = s => document.querySelector(s);
 let ctx = null;
+const guard = createGuard();
 
 async function route() {
   if (!ctx) return;
+  const id = guard.next();
   const { name, params } = parseHash(location.hash);
   const active = name === 'kit' ? 'kits' : name;
   document.querySelectorAll('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.route === active));
   const root = $('#view');
   try {
     const mod = await loaders[name]();
+    if (!guard.isCurrent(id)) return;
     root.replaceChildren();
     mod.render(root, ctx, params);
   } catch {
+    if (!guard.isCurrent(id)) return;
     root.innerHTML = '<div class="empty"><p>Stránku se nepodařilo zobrazit.</p><a class="btn" href="#/">Zpět na úvod</a></div>';
   }
   window.scrollTo(0, 0);

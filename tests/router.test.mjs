@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseHash } from '../assets/js/router.js';
+import { parseHash, createGuard } from '../assets/js/router.js';
 
 test('základní trasy', () => {
   assert.deepEqual(parseHash(''), { name: 'home', params: {} });
@@ -21,4 +21,18 @@ test('neznámá nebo poškozená cesta → domů', () => {
   assert.equal(parseHash('#/neexistuje').name, 'home');
   assert.equal(parseHash('#/hrac/%E0%A4%A').name, 'home');
   assert.equal(parseHash('#/kity/a/b/c').name, 'home');
+});
+
+test('názvy vlastností Object.prototype nejsou trasy → domů', () => {
+  for (const h of ['#/constructor', '#/toString', '#/__proto__', '#/hasOwnProperty']) {
+    assert.deepEqual(parseHash(h), { name: 'home', params: {} });
+  }
+});
+test('createGuard: jen poslední navigace je aktuální', () => {
+  const g = createGuard();
+  const a = g.next();
+  assert.ok(g.isCurrent(a));
+  const b = g.next();
+  assert.ok(!g.isCurrent(a));
+  assert.ok(g.isCurrent(b));
 });

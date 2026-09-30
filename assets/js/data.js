@@ -31,7 +31,7 @@ export async function loadPlayers({ fetchImpl = globalThis.fetch, timeoutMs = LI
   try {
     const rows = await fetchJson(
       fetchImpl,
-      `${SUPABASE_URL}/rest/v1/public_players?select=*`,
+      `${SUPABASE_URL}/rest/v1/public_players?select=username,modes,history,peak`,
       { headers: { apikey: SUPABASE_ANON_KEY } },
       timeoutMs,
     );

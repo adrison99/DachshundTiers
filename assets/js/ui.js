@@ -42,7 +42,7 @@ export function head(name, size = 40) {
 
 export function badges(player) {
   return Object.entries(player.modes).map(([kit, tier]) =>
-    `<span class="badge" style="--k:${accent(kit)}" title="${esc(kit)}">${kitLogo(kit)}${esc(normalizeTier(tier))}</span>`).join('');
+    `<span class="badge" style="--k:${accent(kit)}" title="${esc(kit)}">${kitLogo(kit)}<span class="sr-only">${esc(kit)} </span>${esc(normalizeTier(tier))}</span>`).join('');
 }
 
 export function allKits(players) {

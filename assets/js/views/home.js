@@ -63,7 +63,15 @@ export function render(root, ctx) {
 
   function renderTabs() {
     $('#tabs').innerHTML = ['Overall', ...kits].map(k =>
-      `<button type="button" class="tab${k === state.kit ? ' active' : ''}" data-k="${esc(k)}" style="--k:${accent(k)}">${k === 'Overall' ? '' : kitLogo(k)}${esc(k)}</button>`).join('');
+      `<button type="button" class="tab${k === state.kit ? ' active' : ''}" aria-pressed="${k === state.kit}" data-k="${esc(k)}" style="--k:${accent(k)}">${k === 'Overall' ? '' : kitLogo(k)}${esc(k)}</button>`).join('');
+  }
+
+  function markTab() {
+    $('#tabs').querySelectorAll('[data-k]').forEach(b => {
+      const on = b.dataset.k === state.kit;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
   }
 
   function renderBoard() {
@@ -96,7 +104,7 @@ export function render(root, ctx) {
         <span data-head="${esc(c.username)}" data-size="32"></span>
         <div>
           <div class="rail-item-title">${link(c.username, 'hrac', c.username)}</div>
-          <div class="rail-item-note">${kitLogo(c.kit)}${c.from ? `${tierBadge(c.from)}<span class="arrow">→</span>` : ''}${tierBadge(c.to)}<span>${fmtDate(c.date)}</span></div>
+          <div class="rail-item-note">${kitLogo(c.kit)}<span class="sr-only">${esc(c.kit)}</span>${c.from ? `${tierBadge(c.from)}<span class="arrow">→</span>` : ''}${tierBadge(c.to)}<span>${fmtDate(c.date)}</span></div>
         </div>
       </li>`).join('') : '<li class="empty">Zatím žádné změny.</li>'));
     fillHeads($('#feed'));
@@ -107,7 +115,7 @@ export function render(root, ctx) {
     if (!b) return;
     state.kit = b.dataset.k;
     state.shown = PAGE;
-    renderTabs();
+    markTab();
     renderBoard();
   });
   $('#search').addEventListener('input', e => { state.query = e.target.value; state.shown = PAGE; renderBoard(); });
