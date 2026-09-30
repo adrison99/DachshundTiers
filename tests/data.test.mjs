@@ -57,3 +57,13 @@ test('live vrátí prázdné pole → platný prázdný stav, ne záloha', async
   assert.equal(r.source, 'live');
   assert.deepEqual(r.players, []);
 });
+
+test('placeholder IGN discord-<id> se nezobrazuje (únik Discord ID)', () => {
+  const r = normalizePlayers([
+    { username: 'discord-1098304858865553581', modes: { X: 'LT3' } },
+    { username: 'Discord-42', modes: { X: 'LT3' } },
+    { username: 'discord-fan', modes: { X: 'LT3' } },
+    { username: 'ok', modes: { X: 'LT3' } },
+  ]);
+  assert.deepEqual(r.map(p => p.username), ['discord-fan', 'ok']);
+});

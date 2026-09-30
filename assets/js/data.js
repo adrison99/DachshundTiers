@@ -1,11 +1,12 @@
 import { SUPABASE_URL, SUPABASE_ANON_KEY, LIVE_TIMEOUT_MS, FALLBACK_URL } from './config.js';
 
 const isObj = v => v && typeof v === 'object' && !Array.isArray(v);
+const PLACEHOLDER_IGN = /^discord-\d+$/i;
 
 export function normalizePlayers(rows) {
   if (!Array.isArray(rows)) return [];
   return rows
-    .filter(r => isObj(r) && typeof r.username === 'string' && r.username.trim() && isObj(r.modes) && Object.keys(r.modes).length)
+    .filter(r => isObj(r) && typeof r.username === 'string' && r.username.trim() && !PLACEHOLDER_IGN.test(r.username.trim()) && isObj(r.modes) && Object.keys(r.modes).length)
     .map(r => ({
       username: r.username,
       modes: r.modes,
