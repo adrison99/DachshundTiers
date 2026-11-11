@@ -1,58 +1,870 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DachshundTiers – Tier list hráčů</title>
-    <meta name="description" content="DACHSHUNDTIERS – žebříček tier testů, kity, statistiky a porovnání hráčů. Officiální tier list.">
-    <meta name="theme-color" content="#0a0b0f">
-    <meta property="og:title" content="DachshundTiers">
-    <meta property="og:description" content="Tier list hráčů, kity a statistiky z DACHSHUNDTIERS serveru.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://adrison99.github.io/DachshundTiers/logo.png">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0b0f'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle'%3E%F0%9F%90%95%3C/text%3E%3C/svg%3E">
+    <title>DachshundTiers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        body { background-color: #0d0f12; color: #e2e8f0; font-family: sans-serif; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://visage.surgeplay.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+
+        /* Tier Styles (Záře + Barvy) */
+        .tier-header-1 {
+            border-top: 3px solid #f59e0b;
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(245, 158, 11, 0.25);
+            color: #fbbf24;
+        }
+        .tier-header-2 {
+            border-top: 3px solid #94a3b8;
+            background: linear-gradient(180deg, rgba(148, 163, 184, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(148, 163, 184, 0.15);
+            color: #cbd5e1;
+        }
+        .tier-header-3 {
+            border-top: 3px solid #ea580c;
+            background: linear-gradient(180deg, rgba(234, 88, 12, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(234, 88, 12, 0.2);
+            color: #f97316;
+        }
+        .tier-header-4 {
+            border-top: 3px solid #6366f1;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+        }
+        .tier-header-5 {
+            border-top: 3px solid #8b5cf6;
+            background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+        }
+
+        /* HT a LT odlišení */
+        .player-card-ht {
+            background-color: #1a1d28;
+            border: 1px solid #272c3d;
+        }
+        .player-card-lt {
+            background-color: #11131a;
+            border: 1px solid #1e2230;
+        }
+    </style>
 </head>
-<body>
-    <header class="site-header">
-        <a class="brand" href="#/"><img src="logo.png" alt="DachshundTiers"></a>
-        <nav class="site-nav" aria-label="Hlavní navigace">
-            <a class="nav-link" data-route="home" href="#/">Domů</a>
-            <a class="nav-link" data-route="kits" href="#/kity">Kity</a>
-            <a class="nav-link" data-route="stats" href="#/statistiky">Statistiky</a>
-            <a class="nav-link" data-route="compare" href="#/porovnani">Porovnání</a>
-            <a class="nav-link" data-route="calc" href="#/kalkulacka">Kalkulačka</a>
+<body class="p-4 md:p-8 bg-[#0d0f12]">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
+            <div class="flex flex-wrap items-center gap-3 md:gap-6 justify-center md:justify-start">
+                <a href="/" class="flex items-center">
+                    <img src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain">
+                </a>
+
+                <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
+                    <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                    </svg>
+                    <span id="player-count" class="font-black text-amber-400 text-base md:text-lg tracking-wide">0</span>
+                    <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">HRÁČŮ</span>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 transition">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.14,68.5,68.5,0,0,1-10.75-5.13c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,72.68,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.75,5.13,74.12,74.12,0,0,0,6.85,11.14,105.62,105.62,0,0,0,31.05-18.83C129.92,50.12,124.16,27.23,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.87,46,53.7,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.11,46,95.94,53,91,65.69,84.69,65.69Z"/>
+                        </svg>
+                        Discord
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative w-full md:w-80">
+                <input type="text" id="search" placeholder="Vyhledat hráče... (stiskni /)" autocomplete="off" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
+                <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] border border-gray-800 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
+            </div>
+        </header>
+
+        <!-- Horní lišta: NEDÁVNO TESTOVÁNO -->
+        <div id="recent-tests-container" class="mb-8 hidden">
+            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <span>NEDÁVNO TESTOVÁNO</span>
+                <span class="text-gray-700">— DACHSHUNDTIERS</span>
+            </h4>
+            <div id="recent-tests-list" class="flex gap-3 overflow-x-auto pb-2 custom-scroll"></div>
+        </div>
+
+        <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
+            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain" alt=""> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain" alt=""> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain" alt=""> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain" alt=""> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain" alt=""> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain" alt=""> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain" alt=""> ShieldlessSMP</button>
         </nav>
-    </header>
 
-    <div id="banner" class="banner" role="status" hidden></div>
+        <!-- Tlačítko Zobrazit Retired -->
+        <div id="retired-container" class="flex justify-center mb-8 hidden">
+            <button id="toggle-retired-btn" onclick="toggleRetired()" class="px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs">
+                <span class="font-black text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded text-[10px]">R</span> Zobrazit retired
+            </button>
+        </div>
 
-    <div id="gate" class="gate" role="status" aria-live="polite">
-        <div class="gate-card">
-            <p class="gate-title">Načítám tierlist</p>
-            <div class="gate-bar"><span></span></div>
-            <ul class="gate-steps">
-                <li>Stahuji tiery a historii testů</li>
-                <li>Sestavuji žebříček</li>
-            </ul>
+        <main id="leaderboard-container"></main>
+    </div>
+
+    <!-- Modaly -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'modal')">
+        <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] border border-gray-800 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
+            <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            
+            <div class="flex flex-col items-center mt-2">
+                <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4">
+                <h3 class="text-3xl font-black text-amber-400 tracking-wide" id="modal-username">---</h3>
+                <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
+                <p class="text-xs text-gray-400 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-white">---</span></p>
+            </div>
+
+            <div class="inline-flex items-center gap-2 bg-gray-950/60 border border-gray-800 px-4 py-2 rounded-full text-sm mb-6">
+                <span class="font-bold text-white"><span id="modal-points">0</span> bodů</span>
+                <span class="text-amber-500 font-extrabold" id="modal-title-label">---</span>
+            </div>
+
+            <div class="border-t border-gray-800/60 pt-5 mb-6">
+                <div class="flex flex-wrap justify-center gap-4" id="modal-kits-container"></div>
+            </div>
+
+            <div class="border-t border-gray-800/60 pt-4">
+                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider text-left mb-2">Tier Journey</h4>
+                <div class="w-full h-44 bg-gray-950/40 border border-gray-900 rounded-xl p-2">
+                    <canvas id="historyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="flex gap-2 justify-center mt-6">
+                <button onclick="openCompareSelection()" class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
+            </div>
         </div>
     </div>
 
-    <main id="view" class="view"></main>
+    <div id="compare-select-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'compare-select-modal')">
+        <div class="bg-gray-950 border border-gray-800 p-6 rounded-3xl w-full max-w-lg relative shadow-2xl">
+            <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <h3 class="text-2xl font-black text-white mb-1">Výběr hráče pro porovnání</h3>
+            <p class="text-gray-500 text-xs mb-4">Porovnání s <span id="compare-with-name" class="font-bold text-gray-400">---</span></p>
+            <input type="text" id="compare-search-input" placeholder="Jméno hráče..." autocomplete="off" class="w-full bg-gray-900/60 border border-gray-800 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 mb-4">
+            <div id="compare-players-list" class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1"></div>
+        </div>
+    </div>
 
-    <footer class="site-footer">
-        <span>© 2024–2026 DachshundTiers</span>
-        <nav aria-label="Patička">
-            <a href="#/info">Informace</a>
-            <a href="#/soukromi">Ochrana soukromí</a>
-        </nav>
-    </footer>
+    <div id="vs-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'vs-modal')">
+        <div class="bg-gradient-to-b from-[#161722] to-[#0d0e12] border border-gray-800 p-6 rounded-3xl w-full max-w-2xl relative shadow-2xl">
+            <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <h3 class="text-lg font-bold text-gray-400 mb-6 border-b border-gray-800/60 pb-3">Porovnání hráčů</h3>
+            <div class="flex items-center justify-between gap-4 mb-8">
+                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                    <img id="vs-p1-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
+                    <span id="vs-p1-score" class="text-xs text-gray-500 mt-0.5">#0</span>
+                    <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
+                </div>
+                <div class="font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
+                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
+                    <img id="vs-p2-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                    <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
+                    <span id="vs-p2-score" class="text-xs text-gray-500 mt-0.5">#0</span>
+                    <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
+                </div>
+            </div>
+            <div class="space-y-2" id="vs-kits-rows"></div>
+        </div>
+    </div>
 
-    <script type="module" src="assets/js/app.js"></script>
+    <script>
+        const tierConfig = {
+            'HT1': { points: 60, label: 'HT1' },
+            'LT1': { points: 48, label: 'LT1' },
+            'RHT1': { points: 54, label: 'RHT1' },
+            'RLT1': { points: 44, label: 'RLT1' },
+            'HT2': { points: 32, label: 'HT2' },
+            'LT2': { points: 24, label: 'LT2' },
+            'RHT2': { points: 29, label: 'RHT2' },
+            'RLT2': { points: 22, label: 'RLT2' },
+            'HT3': { points: 16, label: 'HT3' },
+            'LT3': { points: 10, label: 'LT3' },
+            'RHT3': { points: 14, label: 'RHT3' },
+            'RLT3': { points: 8, label: 'RLT3' },
+            'HT4': { points: 5,  label: 'HT4' },
+            'LT4': { points: 3,  label: 'LT4' },
+            'RHT4': { points: 4,  label: 'RHT4' },
+            'RLT4': { points: 2,  label: 'RLT4' },
+            'HT5': { points: 2,  label: 'HT5' },
+            'LT5': { points: 1,  label: 'LT5' },
+            'RHT5': { points: 1,  label: 'RHT5' },
+            'RLT5': { points: 1,  label: 'RLT5' }
+        };
+
+        const tierOrder = ['HT1','LT1','RHT1','RLT1','HT2','LT2','RHT2','RLT2','HT3','LT3','RHT3','RLT3','HT4','LT4','RHT4','RLT4','HT5','LT5','RHT5','RLT5'];
+
+        let playersData = [];
+        let currentTab = 'Overall';
+        let chartInstance = null;
+        let activeModalPlayer = null;
+        let showRetired = false;
+
+        function getSortedModes(modes) {
+            if (!modes) return [];
+            return Object.entries(modes).sort((a, b) => {
+                const idxA = tierOrder.indexOf(a[1]);
+                const idxB = tierOrder.indexOf(b[1]);
+                return (idxA !== -1 ? idxA : 999) - (idxB !== -1 ? idxB : 999);
+            });
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== document.getElementById('search') && document.activeElement !== document.getElementById('compare-search-input')) {
+                e.preventDefault();
+                document.getElementById('search').focus();
+            }
+            if (e.key === 'Escape') {
+                closeModal('modal');
+                closeModal('compare-select-modal');
+                closeModal('vs-modal');
+            }
+        });
+
+        async function loadData() {
+            try {
+                const response = await fetch('players.json?v=' + new Date().getTime());
+                playersData = await response.json();
+                
+                const countElem = document.getElementById('player-count');
+                if (countElem) countElem.innerText = playersData.length;
+
+                renderRecentTests();
+                render();
+            } catch (e) {
+                console.error("Chyba při načítání players.json", e);
+            }
+        }
+
+        function renderRecentTests() {
+            const container = document.getElementById('recent-tests-container');
+            const listContainer = document.getElementById('recent-tests-list');
+            if (!container || !listContainer) return;
+
+            const recentTests = [];
+
+            playersData.forEach(player => {
+                if (!player.history) return;
+
+                Object.keys(player.history).forEach(mode => {
+                    const modeEntries = player.history[mode];
+                    modeEntries.forEach((entry, idx) => {
+                        const parts = entry.date.split('.');
+                        if (parts.length === 3) {
+                            const dateObj = new Date(parts[2], parts[1] - 1, parts[0]);
+                            
+                            let trend = 'up';
+                            if (idx > 0) {
+                                const prevTier = modeEntries[idx - 1].tier;
+                                const prevIdx = tierOrder.indexOf(prevTier);
+                                const currIdx = tierOrder.indexOf(entry.tier);
+                                if (currIdx > prevIdx) trend = 'down';
+                                else if (currIdx === prevIdx) trend = 'same';
+                            }
+
+                            recentTests.push({
+                                username: player.username,
+                                mode: mode,
+                                tier: entry.tier,
+                                dateStr: entry.date,
+                                dateObj: dateObj,
+                                trend: trend
+                            });
+                        }
+                    });
+                });
+            });
+
+            if (recentTests.length === 0) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            recentTests.sort((a, b) => b.dateObj - a.dateObj);
+
+            const latest = recentTests.slice(0, 8);
+            listContainer.innerHTML = '';
+
+            latest.forEach(item => {
+                let arrowIcon = '▲';
+                let arrowColor = 'text-emerald-400';
+                if (item.trend === 'down') {
+                    arrowIcon = '▼';
+                    arrowColor = 'text-red-400';
+                } else if (item.trend === 'same') {
+                    arrowIcon = '•';
+                    arrowColor = 'text-gray-400';
+                }
+
+                const card = document.createElement('div');
+                card.className = "flex items-center gap-3 bg-[#13151f] border border-gray-800/80 px-3.5 py-2 rounded-xl flex-shrink-0 shadow-md hover:border-gray-700 transition";
+                card.innerHTML = `
+                    <img src="https://minotar.net/avatar/${item.username}/32" alt="${item.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
+                        <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
+                    </div>
+                    <img src="${item.mode}.png" alt="${item.mode}" class="w-4 h-4 object-contain ml-1">
+                    <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
+                    <span class="${arrowColor} text-xs font-black">${arrowIcon}</span>
+                `;
+                listContainer.appendChild(card);
+            });
+
+            container.classList.remove('hidden');
+        }
+
+        function calculateOverallPoints(player) {
+            let total = 0;
+            let hasRetired = false;
+            if (player && player.modes) {
+                for (let m in player.modes) {
+                    const tier = player.modes[m];
+                    const cfg = tierConfig[tier];
+                    if (cfg) total += cfg.points;
+                    if (tier.startsWith('R')) hasRetired = true;
+                }
+            }
+            return { total, hasRetired };
+        }
+
+        function getFavoriteKit(player) {
+            if (!player.modes || Object.keys(player.modes).length === 0) return 'Žádný';
+            const sorted = getSortedModes(player.modes);
+            if (sorted.length === 0) return 'Žádný';
+            const [bestKit, bestTier] = sorted[0];
+            return `${bestKit} (${bestTier})`;
+        }
+
+        function getRankTitle(player) {
+            if (player.isBestCZSK) {
+                return { title: 'BEST CZECHIA', bg: 'bg-red-500/20 text-yellow-400 border-red-500/50 shadow-sm' };
+            }
+            const points = player.overallScore || 0;
+            if (points >= 240) return { title: 'THE BEST', bg: 'bg-red-500/20 text-red-400 border-red-500/30' };
+            if (points >= 210) return { title: 'Legenda', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
+            if (points >= 180) return { title: 'Elita', bg: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' };
+            if (points >= 120) return { title: 'Expert', bg: 'bg-amber-500/20 text-amber-400 border-amber-500/30' };
+            if (points >= 70)  return { title: 'Úspěšný', bg: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' };
+            if (points >= 30)  return { title: 'Pokročilý', bg: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' };
+            return { title: 'Začátečník', bg: 'bg-slate-500/20 text-slate-400 border-slate-500/30' };
+        }
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('#tabs button').forEach(btn => {
+                btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2";
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
+            }
+
+            const retiredBox = document.getElementById('retired-container');
+            if (tabId === 'Overall') {
+                retiredBox.classList.add('hidden');
+            } else {
+                retiredBox.classList.remove('hidden');
+            }
+
+            render();
+        }
+
+        function toggleRetired() {
+            showRetired = !showRetired;
+            const toggleBtn = document.getElementById('toggle-retired-btn');
+            if (showRetired) {
+                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-amber-400 bg-amber-500/10 border border-amber-500/40 transition flex items-center gap-2 text-xs shadow-lg shadow-amber-500/10";
+            } else {
+                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs";
+            }
+            render();
+        }
+
+        function renderPlayerCard(player, isRetired = false) {
+            const rawTier = player.modes[currentTab];
+            const isHT = rawTier.includes('HT');
+            
+            const cardClass = isHT ? 'player-card-ht' : 'player-card-lt';
+            
+            const item = document.createElement('div');
+            item.className = `flex items-center justify-between p-2.5 ${cardClass} rounded-2xl cursor-pointer transition group duration-200 hover:scale-[1.02] shadow-sm`;
+            item.onclick = () => openPlayerModal(player);
+            
+            let retiredBadge = isRetired ? `<span class="px-2 py-0.5 bg-[#201625] border border-[#3b2048] text-[#d884f3] font-black text-[10px] rounded-md tracking-wider">R</span>` : '';
+
+            item.innerHTML = `
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
+                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
+                </div>
+                ${retiredBadge}
+            `;
+            return item;
+        }
+
+        function render() {
+            const container = document.getElementById('leaderboard-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            let processedPlayers = playersData.map(p => {
+                const score = calculateOverallPoints(p);
+                return { ...p, overallScore: score.total, isRetired: score.hasRetired };
+            });
+
+            if (currentTab === 'Overall') {
+                container.className = "space-y-6";
+                processedPlayers.sort((a, b) => {
+                    if (a.isBestCZSK && !b.isBestCZSK) return -1;
+                    if (!a.isBestCZSK && b.isBestCZSK) return 1;
+                    if (a.isRetired !== b.isRetired) return a.isRetired ? 1 : -1;
+                    return b.overallScore - a.overallScore;
+                });
+
+                if (processedPlayers.length >= 3) {
+                    const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
+                    const podiumContainer = document.createElement('div');
+                    podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-5 mb-14 mt-8";
+
+                    top3.forEach((player, idx) => {
+                        const rankNum = idx === 1 ? 1 : (idx === 0 ? 2 : 3);
+                        const rankInfo = getRankTitle(player);
+
+                        const card = document.createElement('div');
+                        
+                        let rankBorderGlow = "";
+                        let avatarBorder = "";
+                        let badgeColor = "bg-amber-700 text-white";
+                        let customHeightClass = "";
+
+                        if (rankNum === 1) {
+                            rankBorderGlow = "border-amber-500 shadow-[0_0_40px_rgba(234,179,8,0.25)] z-10 md:-translate-y-4";
+                            avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
+                            badgeColor = "bg-amber-400 text-black";
+                            customHeightClass = "md:w-[38%] py-10 px-8 bg-[#141622]";
+                        } else if (rankNum === 2) {
+                            rankBorderGlow = "border-slate-500/60 shadow-[0_0_20px_rgba(203,213,225,0.15)]";
+                            avatarBorder = "border-slate-300";
+                            badgeColor = "bg-slate-300 text-black";
+                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a]";
+                        } else if (rankNum === 3) {
+                            rankBorderGlow = "border-amber-800/60 shadow-[0_0_20px_rgba(180,83,9,0.15)]";
+                            avatarBorder = "border-amber-700";
+                            badgeColor = "bg-amber-700 text-white";
+                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a]";
+                        }
+
+                        card.className = `w-full ${customHeightClass} border-2 ${rankBorderGlow} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-[1.02] relative`;
+                        card.onclick = () => openPlayerModal(player);
+
+                        const sortedModes = getSortedModes(player.modes);
+                        
+                        const badgesHTML = sortedModes.map(([mode, t]) => `
+                            <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm">
+                                <img src="${mode}.png" alt="${mode}" class="w-4 h-4 object-contain">
+                                <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
+                            </div>
+                        `).join('');
+
+                        const avatarSize = rankNum === 1 ? 'w-24 h-24' : 'w-20 h-20';
+                        const nameSize = rankNum === 1 ? 'text-2xl' : 'text-xl';
+
+                        card.innerHTML = `
+                            <div class="w-8 h-8 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-md">${rankNum}</div>
+                            <img src="https://minotar.net/avatar/${player.username}/96" alt="${player.username}" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
+                            <h3 class="font-black text-white ${nameSize} tracking-wide text-center">${player.username}</h3>
+                            <div class="flex items-center gap-2 mt-2 mb-6">
+                                <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
+                                <span class="px-2.5 py-0.5 rounded text-[11px] font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
+                            </div>
+                            <div class="w-full bg-[#0a0b0e]/90 p-3 rounded-2xl border border-gray-900/80 flex flex-wrap gap-2 justify-center shadow-inner">${badgesHTML}</div>
+                        `;
+                        podiumContainer.appendChild(card);
+                    });
+
+                    container.appendChild(podiumContainer);
+                }
+
+                const listContainer = document.createElement('div');
+                listContainer.className = "space-y-3";
+
+                const restPlayers = processedPlayers.slice(3);
+
+                restPlayers.forEach((player, index) => {
+                    const rank = index + 4;
+                    let borderClass = "border-gray-900 bg-gray-950/40";
+                    let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
+
+                    const rankInfo = getRankTitle(player);
+                    const sortedModes = getSortedModes(player.modes);
+
+                    const badgesHTML = `
+                        <div class="flex flex-wrap gap-3 items-center">
+                            ${sortedModes.map(([mode, t]) => {
+                                return `
+                                    <div class="flex flex-col items-center">
+                                        <div class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
+                                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                                        </div>
+                                        <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${t}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+
+                    const row = document.createElement('div');
+                    row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
+                    row.onclick = () => openPlayerModal(player);
+                    row.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            ${rankBadge}
+                            <img src="https://minotar.net/avatar/${player.username}/48" alt="${player.username}" class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700">
+                            <div class="flex flex-col justify-center">
+                                <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
+                                <div class="flex items-center gap-2 mt-1.5">
+                                    <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
+                                    <span class="px-2.5 py-0.5 rounded text-xs font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">${badgesHTML}</div>
+                    `;
+                    listContainer.appendChild(row);
+                });
+
+                container.appendChild(listContainer);
+            } else {
+                container.className = "grid grid-cols-1 md:grid-cols-5 gap-4";
+
+                const tiers = [1, 2, 3, 4, 5];
+
+                tiers.forEach(tNum => {
+                    const col = document.createElement('div');
+                    col.className = "bg-[#0b0c12] border border-gray-900 rounded-3xl overflow-hidden flex flex-col min-h-[350px] shadow-xl";
+
+                    col.innerHTML = `
+                        <div class="text-center py-3.5 tier-header-${tNum} font-black text-sm tracking-widest uppercase">
+                            TIER ${tNum}
+                        </div>
+                        <div class="flex flex-col gap-2 p-3 flex-grow" id="tier-list-${tNum}"></div>
+                    `;
+                    container.appendChild(col);
+
+                    const listContainer = col.querySelector(`#tier-list-${tNum}`);
+
+                    const activeFiltered = processedPlayers.filter(p => {
+                        if (!p.modes || !p.modes[currentTab]) return false;
+                        const tStr = p.modes[currentTab];
+                        return tStr.includes(tNum.toString()) && !tStr.startsWith('R');
+                    });
+
+                    activeFiltered.sort((a, b) => {
+                        const tA = a.modes[currentTab];
+                        const tB = b.modes[currentTab];
+                        return tierOrder.indexOf(tA) - tierOrder.indexOf(tB);
+                    });
+
+                    activeFiltered.forEach(player => {
+                        listContainer.appendChild(renderPlayerCard(player, false));
+                    });
+
+                    if (showRetired) {
+                        const retiredFiltered = processedPlayers.filter(p => {
+                            if (!p.modes || !p.modes[currentTab]) return false;
+                            const tStr = p.modes[currentTab];
+                            return tStr.includes(tNum.toString()) && tStr.startsWith('R');
+                        });
+
+                        retiredFiltered.sort((a, b) => {
+                            const tA = a.modes[currentTab];
+                            const tB = b.modes[currentTab];
+                            return tierOrder.indexOf(tA) - tierOrder.indexOf(tB);
+                        });
+
+                        if (retiredFiltered.length > 0) {
+                            const retiredDivider = document.createElement('div');
+                            retiredDivider.className = "my-2 border-t border-gray-800/80";
+                            listContainer.appendChild(retiredDivider);
+
+                            retiredFiltered.forEach(player => {
+                                listContainer.appendChild(renderPlayerCard(player, true));
+                            });
+                        }
+                    }
+
+                    if (activeFiltered.length === 0 && (!showRetired || listContainer.children.length === 0)) {
+                        listContainer.innerHTML = `<div class="m-auto text-gray-700 font-bold text-xs tracking-wider uppercase">Prázdné</div>`;
+                    }
+                });
+            }
+        }
+
+        const searchInput = document.getElementById('search');
+        const searchDropdown = document.getElementById('search-dropdown');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                searchDropdown.classList.add('hidden');
+                return;
+            }
+
+            const matches = playersData.map(p => {
+                const score = calculateOverallPoints(p);
+                return { ...p, overallScore: score.total };
+            }).filter(p => p.username && p.username.toLowerCase().includes(query));
+
+            if (matches.length > 0) {
+                searchDropdown.innerHTML = '';
+                matches.forEach(player => {
+                    const div = document.createElement('div');
+                    div.className = "flex items-center gap-3 p-3 hover:bg-gray-900/80 cursor-pointer border-b border-gray-900 last:border-0 transition text-white";
+                    div.onclick = () => {
+                        openPlayerModal(player);
+                        searchDropdown.classList.add('hidden');
+                        searchInput.value = '';
+                    };
+                    div.innerHTML = `
+                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-sm">${player.username}</span>
+                            <span class="text-xs text-gray-500">Skóre: ${player.overallScore}</span>
+                        </div>
+                    `;
+                    searchDropdown.appendChild(div);
+                });
+                searchDropdown.classList.remove('hidden');
+            } else {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        function openPlayerModal(player) {
+            activeModalPlayer = player;
+            if (!player.overallScore) {
+                player.overallScore = calculateOverallPoints(player).total;
+            }
+
+            document.getElementById('modal-avatar').src = `https://minotar.net/avatar/${player.username}/100`;
+            document.getElementById('modal-username').innerText = player.username;
+            
+            const rankInfo = getRankTitle(player);
+            document.getElementById('modal-rank-badge').innerText = rankInfo.title;
+            document.getElementById('modal-points').innerText = player.overallScore;
+            document.getElementById('modal-title-label').innerText = rankInfo.title === 'BEST CZECHIA' ? 'Legenda' : rankInfo.title;
+            document.getElementById('modal-favorite-kit').innerHTML = getFavoriteKit(player);
+
+            const kitsContainer = document.getElementById('modal-kits-container');
+            kitsContainer.innerHTML = '';
+
+            if (player.modes) {
+                const sortedModes = getSortedModes(player.modes);
+                sortedModes.forEach(([mode, tier]) => {
+                    const badgeDiv = document.createElement('div');
+                    badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
+                    badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
+                    
+                    badgeDiv.innerHTML = `
+                        <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
+                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                        </div>
+                        <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
+                    `;
+                    kitsContainer.appendChild(badgeDiv);
+                });
+
+                if (sortedModes.length > 0) {
+                    loadHistoryChart(player.username, sortedModes[0][0]);
+                }
+            } else {
+                if (chartInstance) chartInstance.destroy();
+            }
+
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function loadHistoryChart(username, gamemode) {
+            const player = playersData.find(p => p.username === username);
+            const ctx = document.getElementById('historyChart').getContext('2d');
+            
+            if (chartInstance) chartInstance.destroy();
+
+            if (!player || !player.history || !player.history[gamemode]) {
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: ['Žádná data'], datasets: [] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
+
+            const historyEntries = player.history[gamemode];
+            const labels = historyEntries.map(h => h.date);
+            const dataPoints = historyEntries.map(h => {
+                const idx = tierOrder.indexOf(h.tier);
+                return idx !== -1 ? (tierOrder.length - idx) : 0;
+            });
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
+                        borderWidth: 3,
+                        tension: 0.2,
+                        pointBackgroundColor: '#fff',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            grid: { color: '#1e293b' },
+                            ticks: {
+                                color: '#64748b',
+                                font: { size: 10, weight: 'bold' },
+                                callback: function(value) {
+                                    return tierOrder[tierOrder.length - value] || '';
+                                }
+                            }
+                        },
+                        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function openCompareSelection() {
+            if (!activeModalPlayer) return;
+            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('compare-with-name').innerText = activeModalPlayer.username;
+            document.getElementById('compare-search-input').value = '';
+            buildCompareList('');
+            document.getElementById('compare-select-modal').classList.remove('hidden');
+        }
+
+        function buildCompareList(filterQuery) {
+            const listContainer = document.getElementById('compare-players-list');
+            listContainer.innerHTML = '';
+
+            const filtered = playersData.map(p => {
+                return { ...p, overallScore: calculateOverallPoints(p).total };
+            }).filter(p => p.username !== activeModalPlayer.username && p.username.toLowerCase().includes(filterQuery.toLowerCase()));
+
+            filtered.forEach((player) => {
+                const rankInfo = getRankTitle(player);
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between p-3 bg-gray-900/40 hover:bg-gray-900/80 border border-gray-800 rounded-xl cursor-pointer transition text-white";
+                div.onclick = () => startComparison(player);
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
+                        <span class="font-bold text-sm">${player.username}</span>
+                    </div>
+                    <div class="text-right text-xs text-gray-500">
+                        <span>${player.overallScore} bodů · </span>
+                        <span class="text-amber-500 font-bold">${rankInfo.title}</span>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        document.getElementById('compare-search-input').addEventListener('input', (e) => {
+            buildCompareList(e.target.value);
+        });
+
+        function startComparison(opponent) {
+            document.getElementById('compare-select-modal').classList.add('hidden');
+            
+            const p1 = activeModalPlayer;
+            const p2 = opponent;
+            const r1 = getRankTitle(p1);
+            const r2 = getRankTitle(p2);
+
+            document.getElementById('vs-p1-avatar').src = `https://minotar.net/avatar/${p1.username}/60`;
+            document.getElementById('vs-p1-name').innerText = p1.username;
+            document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
+            document.getElementById('vs-p1-rank').innerText = r1.title;
+
+            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.username}/60`;
+            document.getElementById('vs-p2-name').innerText = p2.username;
+            document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
+            document.getElementById('vs-p2-rank').innerText = r2.title;
+
+            const rowsContainer = document.getElementById('vs-kits-rows');
+            rowsContainer.innerHTML = '';
+
+            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP'];
+
+            allKits.forEach(kit => {
+                const t1 = p1.modes ? p1.modes[kit] : null;
+                const t2 = p2.modes ? p2.modes[kit] : null;
+
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
+                row.innerHTML = `
+                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${kit}.png" alt="${kit}" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
+                `;
+                rowsContainer.appendChild(row);
+            });
+
+            document.getElementById('vs-modal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            if (modalId === 'vs-modal') {
+                document.getElementById('compare-select-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeModalOnBackdrop(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+
+        window.onload = loadData;
+    </script>
 </body>
 </html>
