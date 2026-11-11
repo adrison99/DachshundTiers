@@ -66,8 +66,8 @@
     <div class="max-w-6xl mx-auto">
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
             <div class="flex flex-wrap items-center gap-3 md:gap-6 justify-center md:justify-start">
-                <a href="/" class="flex items-center">
-                    <img src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain">
+                <a href="./" class="flex items-center">
+                    <img id="logo-img" src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain">
                 </a>
 
                 <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
@@ -223,6 +223,11 @@
         let activeModalPlayer = null;
         let showRetired = false;
 
+        // Pomocná funkce pro správnou cestu k obrázkům na GitHub Pages
+        function getImgPath(filename) {
+            return filename; 
+        }
+
         function getSortedModes(modes) {
             if (!modes) return [];
             return Object.entries(modes).sort((a, b) => {
@@ -246,6 +251,9 @@
 
         async function loadData() {
             try {
+                // Oprava cest pro logo
+                document.getElementById('logo-img').src = getImgPath('logo.png');
+
                 const response = await fetch('players.json?v=' + new Date().getTime());
                 playersData = await response.json();
                 
@@ -327,7 +335,7 @@
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
                         <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
                     </div>
-                    <img src="${item.mode}.png" alt="${item.mode}" class="w-4 h-4 object-contain ml-1">
+                    <img src="${getImgPath(item.mode + '.png')}" alt="${item.mode}" class="w-4 h-4 object-contain ml-1">
                     <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
                     <span class="${arrowColor} text-xs font-black">${arrowIcon}</span>
                 `;
@@ -485,7 +493,7 @@
                         
                         const badgesHTML = sortedModes.map(([mode, t]) => `
                             <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm">
-                                <img src="${mode}.png" alt="${mode}" class="w-4 h-4 object-contain">
+                                <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-4 h-4 object-contain">
                                 <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
                             </div>
                         `).join('');
@@ -528,7 +536,7 @@
                                 return `
                                     <div class="flex flex-col items-center">
                                         <div class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
-                                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                                            <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-full h-full object-contain">
                                         </div>
                                         <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${t}</span>
                                     </div>
@@ -697,7 +705,7 @@
                     
                     badgeDiv.innerHTML = `
                         <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
-                            <img src="${mode}.png" alt="${mode}" class="w-full h-full object-contain">
+                            <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-full h-full object-contain">
                         </div>
                         <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
                     `;
@@ -824,7 +832,7 @@
             document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
             document.getElementById('vs-p1-rank').innerText = r1.title;
 
-            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.username}/60`;
+            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.json?.username || p2.username}/60`; // safe fallback
             document.getElementById('vs-p2-name').innerText = p2.username;
             document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
             document.getElementById('vs-p2-rank').innerText = r2.title;
@@ -842,7 +850,7 @@
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${kit}.png" alt="${kit}" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
