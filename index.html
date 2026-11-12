@@ -298,15 +298,20 @@
             return filename; 
         }
 
-        // Hlavička hráče (Crafatar)
+        // Hlavička hráče (Crafatar / NameMC styl)
         function getSkinUrl(username) {
             return `https://crafatar.com/avatars/${username}?size=160&default=MHF_Steve&overlay`;
         }
 
-        // Spolehlivá ochrana proti neexistujícím nickům – natvrdo přepne na výchozí hlavu Steva
         function handleImageError(imgElement) {
-            imgElement.onerror = null; // Zabrání zacyklení
-            imgElement.src = "https://crafatar.com/avatars/MHF_Steve?size=160";
+            if (!imgElement.dataset.fallbackTried) {
+                imgElement.dataset.fallbackTried = "true";
+                const username = imgElement.alt || "Steve";
+                imgElement.src = `https://visage.surgeplay.com/face/160/${username}`;
+            } else if (!imgElement.dataset.fallbackFinal) {
+                imgElement.dataset.fallbackFinal = "true";
+                imgElement.src = "https://crafatar.com/avatars/MHF_Steve?size=160";
+            }
         }
 
         function getSortedModes(modes) {
@@ -588,7 +593,7 @@
                         const rankInfo = getRankTitle(player);
 
                         const card = document.createElement('div');
-                        card.setAttribute('data-rank', rankNum);
+                        card.setAttribute('data-rank', rankNum); // Nastavení data-rank pro obří číslo na pozadí
 
                         let rankBorderGlow = "";
                         let badgeColor = "bg-amber-600 text-white";
@@ -671,7 +676,7 @@
                     `;
 
                     const row = document.createElement('div');
-                    row.setAttribute('data-rank', rank);
+                    row.setAttribute('data-rank', rank); // Nastavení data-rank pro obří číslo na pozadí i u zbylých hráčů v žebříčku
                     row.className = `flex items-center justify-between p-4 rounded-xl border border-amber-500/20 bg-[#0c0c10] cursor-pointer transition duration-200 hover:bg-[#121217] hover:border-amber-500/50 shadow-[0_0_15px_rgba(0,0,0,0.5)] player-card-ranked`;
                     row.onclick = () => openPlayerModal(player);
                     row.innerHTML = `
