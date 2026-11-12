@@ -469,13 +469,13 @@
                 });
 
                 if (processedPlayers.length >= 3) {
-                    // Podle přání: První (index 1 v poli top3) bude nejvýše, druhý a třetí níže
+                    // Pořadí: [2. místo, 1. místo, 3. místo] -> 1. místo bude uprostřed a výš
                     const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
                     podiumContainer.className = "flex flex-col md:flex-row justify-center items-end gap-5 mb-14 mt-12";
 
                     top3.forEach((player, idx) => {
-                        const rankNum = idx === 1 ? 1 : (idx === 0 ? 2 : 3);
+                        const rankNum = idx === 0 ? 2 : (idx === 1 ? 1 : 3);
                         const rankInfo = getRankTitle(player);
 
                         const card = document.createElement('div');
@@ -486,20 +486,20 @@
                         let customHeightClass = "";
 
                         if (rankNum === 1) {
-                            rankBorderGlow = "border-amber-500 shadow-[0_0_40px_rgba(234,179,8,0.25)] z-10 md:-translate-y-8"; // 1. místo výrazně výš
+                            rankBorderGlow = "border-amber-500 shadow-[0_0_40px_rgba(234,179,8,0.25)] z-10 md:-translate-y-8"; // 1. místo uprostřed nahoře
                             avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
                             badgeColor = "bg-amber-400 text-black";
-                            customHeightClass = "md:w-[38%] py-10 px-8 bg-[#141622]";
+                            customHeightClass = "md:w-[38%] py-10 px-8 bg-[#141622] order-first md:order-none";
                         } else if (rankNum === 2) {
                             rankBorderGlow = "border-slate-500/60 shadow-[0_0_20px_rgba(203,213,225,0.15)]";
                             avatarBorder = "border-slate-300";
                             badgeColor = "bg-slate-300 text-black";
-                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a]";
+                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a] order-2 md:order-none";
                         } else if (rankNum === 3) {
                             rankBorderGlow = "border-amber-800/60 shadow-[0_0_20px_rgba(180,83,9,0.15)]";
                             avatarBorder = "border-amber-700";
                             badgeColor = "bg-amber-700 text-white";
-                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a]";
+                            customHeightClass = "md:w-[31%] py-7 px-6 bg-[#11131a] order-3 md:order-none";
                         }
 
                         card.className = `w-full ${customHeightClass} border-2 ${rankBorderGlow} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-[1.02] relative`;
@@ -507,7 +507,6 @@
 
                         const sortedModes = getSortedModes(player.modes);
                         
-                        // Zvětšené ikonky cca 150px ekvivalent v gridu (w-16 h-16 / w-20 h-20)
                         const badgesHTML = sortedModes.map(([mode, t]) => {
                             const badgeStyle = getTierBadgeStyle(t);
                             return `
