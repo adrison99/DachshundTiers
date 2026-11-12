@@ -12,6 +12,11 @@
         }
     </script>
     <style>
+        /* Plynulé scrollování celé stránky */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body { background-color: #07080a; color: #f3f4f6; font-family: sans-serif; }
 
         .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -139,7 +144,7 @@
         </footer>
     </div>
 
-    <!-- Modaly (S přidaným scrollováním max-h-[90vh] overflow-y-auto custom-scroll) -->
+    <!-- Modaly -->
     <div id="modal" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'modal')">
         <div class="bg-gradient-to-b from-[#141210] to-[#08080a] border border-amber-500/40 p-6 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto custom-scroll relative shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center">
             <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-amber-500/60 hover:text-amber-400 text-2xl">&times;</button>
@@ -242,9 +247,9 @@
             return filename; 
         }
 
-        // Správný 3D render skinu podle IGN (NameMC styl přes Crafthead API)
+        // Stabilní 3D render skinu podle jména hráče (Crafatar API - spolehlivě vrací skin podle IGN)
         function getSkinUrl(username) {
-            return `https://crafthead.net/body/isometric/${username}`;
+            return `https://crafatar.com/renders/body/${username}?scale=2&default=MHF_Steve&overlay`;
         }
 
         function getSortedModes(modes) {
