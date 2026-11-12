@@ -105,13 +105,13 @@
 
         <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
             <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-16 h-16 object-contain" alt=""> GoldSMP</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-16 h-16 object-contain" alt=""> NetheriteSword</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-16 h-16 object-contain" alt=""> IronAxe</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-16 h-16 object-contain" alt=""> UHCMace</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-16 h-16 object-contain" alt=""> AnchorPvP</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-16 h-16 object-contain" alt=""> RandomPot</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-16 h-16 object-contain" alt=""> ShieldlessSMP</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-12 h-12 object-contain" alt=""> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-12 h-12 object-contain" alt=""> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-12 h-12 object-contain" alt=""> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-12 h-12 object-contain" alt=""> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-12 h-12 object-contain" alt=""> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-12 h-12 object-contain" alt=""> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-12 h-12 object-contain" alt=""> ShieldlessSMP</button>
         </nav>
 
         <!-- Tlačítko Zobrazit Retired -->
@@ -236,6 +236,22 @@
             });
         }
 
+        // Pomocná funkce pro stylování podle tieru (barva textu/rámečku)
+        function getTierBadgeStyle(tier) {
+            const t = tier.toUpperCase();
+            if (t.includes('1')) {
+                return 'border-amber-400 bg-amber-500/10 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.3)]';
+            } else if (t.includes('2')) {
+                return 'border-slate-300 bg-slate-500/10 text-slate-200 shadow-[0_0_15px_rgba(203,213,225,0.2)]';
+            } else if (t.includes('3')) {
+                return 'border-orange-500 bg-orange-500/10 text-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.2)]';
+            } else if (t.includes('4')) {
+                return 'border-indigo-500 bg-indigo-500/10 text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.2)]';
+            } else {
+                return 'border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(139,92,246,0.2)]';
+            }
+        }
+
         window.addEventListener('keydown', (e) => {
             if (e.key === '/' && document.activeElement !== document.getElementById('search') && document.activeElement !== document.getElementById('compare-search-input')) {
                 e.preventDefault();
@@ -325,6 +341,7 @@
                     arrowColor = 'text-gray-400';
                 }
 
+                const badgeStyle = getTierBadgeStyle(item.tier);
                 const card = document.createElement('div');
                 card.className = "flex items-center gap-3 bg-[#13151f] border border-gray-800/80 px-3.5 py-2.5 rounded-xl flex-shrink-0 shadow-md hover:border-gray-700 transition";
                 card.innerHTML = `
@@ -333,8 +350,8 @@
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
                         <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
                     </div>
-                    <img src="${getImgPath(item.mode + '.png')}" alt="${item.mode}" class="w-12 h-12 object-contain ml-1">
-                    <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
+                    <img src="${getImgPath(item.mode + '.png')}" alt="${item.mode}" class="w-10 h-10 object-contain ml-1">
+                    <span class="px-2 py-0.5 rounded border font-black text-xs ${badgeStyle}">${item.tier}</span>
                     <span class="${arrowColor} text-xs font-black">${arrowIcon}</span>
                 `;
                 listContainer.appendChild(card);
@@ -489,12 +506,16 @@
 
                         const sortedModes = getSortedModes(player.modes);
                         
-                        const badgesHTML = sortedModes.map(([mode, t]) => `
-                            <div class="flex items-center gap-3 bg-gray-950/80 px-4 py-3 rounded-2xl border border-gray-800/80 shadow-sm">
-                                <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-12 h-12 object-contain">
-                                <span class="text-sm font-black text-amber-400 tracking-wide">${t}</span>
-                            </div>
-                        `).join('');
+                        // Zde vytvoříme elegantní kulatý / zaoblený design jako na screenshotu č. 2
+                        const badgesHTML = sortedModes.map(([mode, t]) => {
+                            const badgeStyle = getTierBadgeStyle(t);
+                            return `
+                                <div class="flex flex-col items-center justify-center p-2 rounded-2xl border ${badgeStyle} bg-gray-950/60 min-w-[70px] shadow-sm">
+                                    <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-12 h-12 object-contain mb-1">
+                                    <span class="text-xs font-black tracking-wide">${t}</span>
+                                </div>
+                            `;
+                        }).join('');
 
                         const avatarSize = rankNum === 1 ? 'w-24 h-24' : 'w-20 h-20';
                         const nameSize = rankNum === 1 ? 'text-2xl' : 'text-xl';
@@ -507,7 +528,7 @@
                                 <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
                                 <span class="px-2.5 py-0.5 rounded text-[11px] font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
                             </div>
-                            <div class="w-full bg-[#0a0b0e]/90 p-4 rounded-2xl border border-gray-900/80 flex flex-wrap gap-3 justify-center shadow-inner">${badgesHTML}</div>
+                            <div class="w-full bg-[#0a0b0e]/90 p-4 rounded-2xl border border-gray-900/80 flex flex-wrap gap-2.5 justify-center shadow-inner">${badgesHTML}</div>
                         `;
                         podiumContainer.appendChild(card);
                     });
@@ -529,14 +550,13 @@
                     const sortedModes = getSortedModes(player.modes);
 
                     const badgesHTML = `
-                        <div class="flex flex-wrap gap-4 items-center">
+                        <div class="flex flex-wrap gap-2.5 items-center">
                             ${sortedModes.map(([mode, t]) => {
+                                const badgeStyle = getTierBadgeStyle(t);
                                 return `
-                                    <div class="flex flex-col items-center">
-                                        <div class="w-20 h-20 rounded-2xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-3 shadow-inner">
-                                            <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-full h-full object-contain">
-                                        </div>
-                                        <span class="text-xs font-black text-amber-400 tracking-wide mt-1.5">${t}</span>
+                                    <div class="flex flex-col items-center justify-center p-2 rounded-2xl border ${badgeStyle} bg-gray-950/60 min-w-[65px] shadow-sm">
+                                        <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-10 h-10 object-contain mb-1">
+                                        <span class="text-xs font-black tracking-wide">${t}</span>
                                     </div>
                                 `;
                             }).join('')}
@@ -697,15 +717,16 @@
             if (player.modes) {
                 const sortedModes = getSortedModes(player.modes);
                 sortedModes.forEach(([mode, tier]) => {
+                    const badgeStyle = getTierBadgeStyle(tier);
                     const badgeDiv = document.createElement('div');
-                    badgeDiv.className = "flex flex-col items-center gap-2 cursor-pointer group relative";
+                    badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
                     
                     badgeDiv.innerHTML = `
-                        <div class="w-24 h-24 rounded-3xl flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-4 transition group-hover:scale-110 shadow-inner">
-                            <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-full h-full object-contain">
+                        <div class="flex flex-col items-center justify-center p-3 rounded-2xl border ${badgeStyle} bg-gray-950/80 min-w-[75px] transition group-hover:scale-110 shadow-md">
+                            <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-14 h-14 object-contain mb-1">
+                            <span class="text-xs font-black tracking-wide">${tier}</span>
                         </div>
-                        <span class="text-sm font-black text-amber-400 mt-1">${tier}</span>
                     `;
                     kitsContainer.appendChild(badgeDiv);
                 });
@@ -847,9 +868,9 @@
                 const row = document.createElement('div');
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
-                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-3 text-sm text-gray-400 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-12 h-12 object-contain"><span class="text-xs text-gray-300 font-bold">${kit}</span></div>
-                    <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
+                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
+                    <div class="flex items-center gap-3 text-sm text-gray-400 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-8 h-8 object-contain"><span class="text-xs text-gray-300 font-bold">${kit}</span></div>
+                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
             });
