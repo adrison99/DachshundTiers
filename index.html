@@ -104,14 +104,14 @@
         </div>
 
         <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
-            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-5 h-5 object-contain" alt=""> GoldSMP</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-5 h-5 object-contain" alt=""> NetheriteSword</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-5 h-5 object-contain" alt=""> IronAxe</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-5 h-5 object-contain" alt=""> UHCMace</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-5 h-5 object-contain" alt=""> AnchorPvP</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-5 h-5 object-contain" alt=""> RandomPot</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-5 h-5 object-contain" alt=""> ShieldlessSMP</button>
+            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-8 h-8 object-contain" alt=""> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-8 h-8 object-contain" alt=""> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-8 h-8 object-contain" alt=""> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-8 h-8 object-contain" alt=""> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-8 h-8 object-contain" alt=""> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-8 h-8 object-contain" alt=""> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-8 h-8 object-contain" alt=""> ShieldlessSMP</button>
         </nav>
 
         <!-- Tlačítko Zobrazit Retired -->
@@ -223,7 +223,6 @@
         let activeModalPlayer = null;
         let showRetired = false;
 
-        // Pomocná funkce pro správnou cestu k obrázkům na GitHub Pages
         function getImgPath(filename) {
             return filename; 
         }
@@ -251,7 +250,6 @@
 
         async function loadData() {
             try {
-                // Oprava cest pro logo
                 document.getElementById('logo-img').src = getImgPath('logo.png');
 
                 const response = await fetch('players.json?v=' + new Date().getTime());
@@ -335,7 +333,7 @@
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
                         <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
                     </div>
-                    <img src="${getImgPath(item.mode + '.png')}" alt="${item.mode}" class="w-4 h-4 object-contain ml-1">
+                    <img src="${getImgPath(item.mode + '.png')}" alt="${item.mode}" class="w-6 h-6 object-contain ml-1">
                     <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/30 text-amber-400 font-black text-xs">${item.tier}</span>
                     <span class="${arrowColor} text-xs font-black">${arrowIcon}</span>
                 `;
@@ -388,7 +386,7 @@
             });
             const activeBtn = document.getElementById(`tab-${tabId}`);
             if (activeBtn) {
-                activeBtn.className = "px-5 py-2 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
+                activeBtn.className = "px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
             }
 
             const retiredBox = document.getElementById('retired-container');
@@ -492,8 +490,8 @@
                         const sortedModes = getSortedModes(player.modes);
                         
                         const badgesHTML = sortedModes.map(([mode, t]) => `
-                            <div class="flex items-center gap-1.5 bg-gray-950/80 px-2.5 py-1.5 rounded-xl border border-gray-800/80 shadow-sm">
-                                <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-4 h-4 object-contain">
+                            <div class="flex items-center gap-1.5 bg-gray-950/80 px-3 py-2 rounded-xl border border-gray-800/80 shadow-sm">
+                                <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-6 h-6 object-contain">
                                 <span class="text-xs font-black text-amber-400 tracking-wide">${t}</span>
                             </div>
                         `).join('');
@@ -535,7 +533,7 @@
                             ${sortedModes.map(([mode, t]) => {
                                 return `
                                     <div class="flex flex-col items-center">
-                                        <div class="w-10 h-10 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
+                                        <div class="w-12 h-12 rounded-xl bg-gray-900 border border-gray-700/80 flex items-center justify-center p-2 shadow-inner">
                                             <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-full h-full object-contain">
                                         </div>
                                         <span class="text-xs font-black text-amber-400 tracking-wide mt-1">${t}</span>
@@ -704,7 +702,7 @@
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
                     
                     badgeDiv.innerHTML = `
-                        <div class="w-12 h-12 rounded-full flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2 transition group-hover:scale-110">
+                        <div class="w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-black bg-gray-900 border border-gray-700/80 p-2.5 transition group-hover:scale-110">
                             <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-full h-full object-contain">
                         </div>
                         <span class="text-xs font-black text-amber-400 mt-0.5">${tier}</span>
@@ -832,7 +830,7 @@
             document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
             document.getElementById('vs-p1-rank').innerText = r1.title;
 
-            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.json?.username || p2.username}/60`; // safe fallback
+            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.json?.username || p2.username}/60`;
             document.getElementById('vs-p2-name').innerText = p2.username;
             document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
             document.getElementById('vs-p2-rank').innerText = r2.title;
@@ -850,7 +848,7 @@
                 row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
                 row.innerHTML = `
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-4 h-4 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-6 h-6 object-contain"><span class="text-xs text-gray-500">${kit}</span></div>
                     <div class="w-20 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
