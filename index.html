@@ -736,4 +736,275 @@
                         const retiredFiltered = processedPlayers.filter(p => {
                             if (!p.modes || !p.modes[currentTab]) return false;
                             const tStr = p.modes[currentTab];
-                            return tStr.includes(t
+                            return tStr.includes(tNum.toString()) && tStr.startsWith('R');
+                        });
+
+                        retiredFiltered.sort((a, b) => {
+                            const tA = a.modes[currentTab];
+                            const tB = b.modes[currentTab];
+                            return tierOrder.indexOf(tA) - tierOrder.indexOf(tB);
+                        });
+
+                        if (retiredFiltered.length > 0) {
+                            const retiredDivider = document.createElement('div');
+                            retiredDivider.className = "my-2 border-t border-amber-500/20";
+                            listContainer.appendChild(retiredDivider);
+
+                            retiredFiltered.forEach(player => {
+                                listContainer.appendChild(renderPlayerCard(player, true));
+                            });
+                        }
+                    }
+
+                    if (activeFiltered.length === 0 && (!showRetired || listContainer.children.length === 0)) {
+                        listContainer.innerHTML = `<div class="m-auto text-amber-500/40 font-bold text-xs tracking-wider uppercase">Prázdné</div>`;
+                    }
+                });
+            }
+        }
+
+        const searchInput = document.getElementById('search');
+        const searchDropdown = document.getElementById('search-dropdown');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                searchDropdown.classList.add('hidden');
+                return;
+            }
+
+            const matches = playersData.map(p => {
+                const score = calculateOverallPoints(p);
+                return { ...p, overallScore: score.total };
+            }).filter(p => p.username && p.username.toLowerCase().includes(query));
+
+            if (matches.length > 0) {
+                searchDropdown.innerHTML = '';
+                matches.forEach(player => {
+                    const div = document.createElement('div');
+                    div.className = "flex items-center gap-3 p-3 hover:bg-[#141218] cursor-pointer border-b border-amber-500/10 last:border-0 transition text-white";
+                    div.onclick = () => {
+                        openPlayerModal(player);
+                        searchDropdown.classList.add('hidden');
+                        searchInput.value = '';
+                    };
+                    div.innerHTML = `
+                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="w-8 h-8 rounded-lg object-contain bg-[#08080c] p-0.5 border border-amber-500/20">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-sm">${player.username}</span>
+                            <span class="text-xs text-amber-500/60">Skóre: ${player.overallScore}</span>
+                        </div>
+                    `;
+                    searchDropdown.appendChild(div);
+                });
+                searchDropdown.classList.remove('hidden');
+            } else {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add('hidden');
+            }
+        });
+
+        function openPlayerModal(player) {
+            activeModalPlayer = player;
+            if (!player.overallScore) {
+                player.overallScore = calculateOverallPoints(player).total;
+            }
+
+            document.getElementById('modal-avatar').src = getSkinUrl(player.username);
+            document.getElementById('modal-username').innerText = player.username;
+            
+            const rankInfo = getRankTitle(player);
+            document.getElementById('modal-rank-badge').innerText = rankInfo.title;
+            document.getElementById('modal-points').innerText = player.overallScore;
+            document.getElementById('modal-title-label').innerText = rankInfo.title === 'BEST CZECHIA' ? 'Legenda' : rankInfo.title;
+            document.getElementById('modal-favorite-kit').innerHTML = getFavoriteKit(player);
+
+            const kitsContainer = document.getElementById('modal-kits-container');
+            kitsContainer.innerHTML = '';
+
+            if (player.modes) {
+                const sortedModes = getSortedModes(player.modes);
+                sortedModes.forEach(([mode, tier]) => {
+                    const badgeStyle = getTierBadgeStyle(tier);
+                    const badgeDiv = document.createElement('div');
+                    badgeDiv.className = "flex flex-col items-center gap-1 cursor-pointer group relative";
+                    badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
+                    
+                    badgeDiv.innerHTML = `
+                        <div class="flex flex-col items-center justify-center p-3.5 rounded-2xl border ${badgeStyle} bg-[#08080c] min-w-[90px] transition group-hover:scale-110 shadow-md">
+                            <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-16 h-16 object-contain mb-1.5">
+                            <span class="text-xs font-black tracking-wide">${tier}</span>
+                        </div>
+                    `;
+                    kitsContainer.appendChild(badgeDiv);
+                });
+
+                if (sortedModes.length > 0) {
+                    loadHistoryChart(player.username, sortedModes[0][0]);
+                }
+            } else {
+                if (chartInstance) chartInstance.destroy();
+            }
+
+            document.getElementById('modal').classList.remove('hidden');
+        }
+
+        function loadHistoryChart(username, gamemode) {
+            const player = playersData.find(p => p.username === username);
+            const ctx = document.getElementById('historyChart').getContext('2d');
+            
+            if (chartInstance) chartInstance.destroy();
+
+            if (!player || !player.history || !player.history[gamemode]) {
+                chartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: { labels: ['Žádná data'], datasets: [] },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+                return;
+            }
+
+            const historyEntries = player.history[gamemode];
+            const labels = historyEntries.map(h => h.date);
+            const dataPoints = historyEntries.map(h => {
+                const idx = tierOrder.indexOf(h.tier);
+                return idx !== -1 ? (tierOrder.length - idx) : 0;
+            });
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dataPoints,
+                        borderColor: '#f59e0b',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.2,
+                        pointBackgroundColor: '#fbbf24',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            grid: { color: 'rgba(245, 158, 11, 0.1)' },
+                            ticks: {
+                                color: '#d97706',
+                                font: { size: 10, weight: 'bold' },
+                                callback: function(value) {
+                                    return tierOrder[tierOrder.length - value] || '';
+                                }
+                            }
+                        },
+                        x: { grid: { color: 'rgba(245, 158, 11, 0.1)' }, ticks: { color: '#d97706', font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        function openCompareSelection() {
+            if (!activeModalPlayer) return;
+            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('compare-with-name').innerText = activeModalPlayer.username;
+            document.getElementById('compare-search-input').value = '';
+            buildCompareList('');
+            document.getElementById('compare-select-modal').classList.remove('hidden');
+        }
+
+        function buildCompareList(filterQuery) {
+            const listContainer = document.getElementById('compare-players-list');
+            listContainer.innerHTML = '';
+
+            const filtered = playersData.map(p => {
+                return { ...p, overallScore: calculateOverallPoints(p).total };
+            }).filter(p => p.username !== activeModalPlayer.username && p.username.toLowerCase().includes(filterQuery.toLowerCase()));
+
+            filtered.forEach((player) => {
+                const rankInfo = getRankTitle(player);
+                const div = document.createElement('div');
+                div.className = "flex items-center justify-between p-3 bg-[#121216] hover:bg-[#1a1712] border border-amber-500/20 rounded-xl cursor-pointer transition text-white shadow-sm";
+                div.onclick = () => startComparison(player);
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="w-8 h-8 rounded-lg object-contain bg-[#08080c] p-0.5 border border-amber-500/20">
+                        <span class="font-bold text-sm">${player.username}</span>
+                    </div>
+                    <div class="text-right text-xs text-gray-400">
+                        <span>${player.overallScore} bodů · </span>
+                        <span class="text-amber-400 font-bold">${rankInfo.title}</span>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        document.getElementById('compare-search-input').addEventListener('input', (e) => {
+            buildCompareList(e.target.value);
+        });
+
+        function startComparison(opponent) {
+            document.getElementById('compare-select-modal').classList.add('hidden');
+            
+            const p1 = activeModalPlayer;
+            const p2 = opponent;
+            const r1 = getRankTitle(p1);
+            const r2 = getRankTitle(p2);
+
+            document.getElementById('vs-p1-avatar').src = getSkinUrl(p1.username);
+            document.getElementById('vs-p1-name').innerText = p1.username;
+            document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
+            document.getElementById('vs-p1-rank').innerText = r1.title;
+
+            document.getElementById('vs-p2-avatar').src = getSkinUrl(p2.username);
+            document.getElementById('vs-p2-name').innerText = p2.username;
+            document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
+            document.getElementById('vs-p2-rank').innerText = r2.title;
+
+            const rowsContainer = document.getElementById('vs-kits-rows');
+            rowsContainer.innerHTML = '';
+
+            const allKits = ['GoldSMP', 'NetheriteSword', 'IronAxe', 'UHCMace', 'AnchorPvP', 'RandomPot', 'ShieldlessSMP', 'MolePvP'];
+
+            allKits.forEach(kit => {
+                const t1 = p1.modes ? p1.modes[kit] : null;
+                const t2 = p2.modes ? p2.modes[kit] : null;
+
+                const row = document.createElement('div');
+                row.className = "flex items-center justify-between p-2.5 bg-[#0a0a0d] border border-amber-500/20 rounded-xl";
+                row.innerHTML = `
+                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-300 bg-[#141210] border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]' : 'text-zinc-600'}">${t1 || '---'}</span></div>
+                    <div class="flex items-center gap-3 text-sm text-gray-300 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-8 h-8 object-contain"><span class="text-xs text-amber-200/90 font-bold">${kit}</span></div>
+                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-300 bg-[#141210] border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]' : 'text-zinc-600'}">${t2 || '---'}</span></div>
+                `;
+                rowsContainer.appendChild(row);
+            });
+
+            document.getElementById('vs-modal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            if (modalId === 'vs-modal') {
+                document.getElementById('compare-select-modal').classList.remove('hidden');
+            }
+        }
+
+        function closeModalOnBackdrop(event, modalId) {
+            if (event.target.id === modalId) {
+                closeModal(modalId);
+            }
+        }
+
+        window.onload = loadData;
+    </script>
+</body>
+</html>
