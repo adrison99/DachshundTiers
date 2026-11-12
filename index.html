@@ -150,7 +150,7 @@
             <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-amber-500/60 hover:text-amber-400 text-2xl">&times;</button>
             
             <div class="flex flex-col items-center mt-2">
-                <img id="modal-avatar" src="" alt="" onerror="handleImageError(this)" class="w-24 h-40 object-contain drop-shadow-[0_0_20px_rgba(245,158,11,0.3)] mb-4">
+                <img id="modal-avatar" src="" alt="" class="w-20 h-20 rounded-xl object-contain drop-shadow-[0_0_20px_rgba(245,158,11,0.3)] mb-4 bg-[#101014] p-1.5 border border-amber-500/30">
                 <h3 class="text-3xl font-black text-amber-400 tracking-wide drop-shadow-[0_0_10px_rgba(245,158,11,0.3)]" id="modal-username">---</h3>
                 <p class="text-amber-500/70 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
                 <p class="text-xs text-gray-400 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-amber-300">---</span></p>
@@ -194,14 +194,14 @@
             <h3 class="text-lg font-bold text-amber-400/80 mb-6 border-b border-amber-500/20 pb-3">Porovnání hráčů</h3>
             <div class="flex items-center justify-between gap-4 mb-8">
                 <div class="flex-1 bg-[#121216] border border-amber-500/30 p-4 rounded-2xl flex flex-col items-center text-center shadow-[0_0_15px_rgba(245,158,11,0.1)]">
-                    <img id="vs-p1-avatar" src="" alt="" onerror="handleImageError(this)" class="w-12 h-20 object-contain mb-2">
+                    <img id="vs-p1-avatar" src="" alt="" class="w-14 h-14 rounded-xl object-contain mb-2 bg-[#101014] p-1 border border-amber-500/30">
                     <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
                     <span id="vs-p1-score" class="text-xs text-amber-500/70 mt-0.5">#0</span>
                     <span id="vs-p1-rank" class="text-xs font-bold text-amber-400 mt-1">---</span>
                 </div>
                 <div class="font-black text-amber-500 text-xl tracking-tighter px-2 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">VS</div>
                 <div class="flex-1 bg-[#121216] border border-amber-500/30 p-4 rounded-2xl flex flex-col items-center text-center shadow-[0_0_15px_rgba(245,158,11,0.1)]">
-                    <img id="vs-p2-avatar" src="" alt="" onerror="handleImageError(this)" class="w-12 h-20 object-contain mb-2">
+                    <img id="vs-p2-avatar" src="" alt="" class="w-14 h-14 rounded-xl object-contain mb-2 bg-[#101014] p-1 border border-amber-500/30">
                     <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
                     <span id="vs-p2-score" class="text-xs text-amber-500/70 mt-0.5">#0</span>
                     <span id="vs-p2-rank" class="text-xs font-bold text-amber-400 mt-1">---</span>
@@ -247,19 +247,9 @@
             return filename; 
         }
 
-        // Primární 3D render skinu podle jména přes Crafatar API
+        // 2D hlavička hráče (NameMC styl přes Crafatar API)
         function getSkinUrl(username) {
-            return `https://crafatar.com/renders/body/${username}?scale=2&default=MHF_Steve&overlay`;
-        }
-
-        // Bezpečnostní pojistka: Pokud 3D render selže, přepne se na spolehlivou 2D hlavu/avatar
-        function handleImageError(imgElement) {
-            if (!imgElement.dataset.fallback) {
-                imgElement.dataset.fallback = "true";
-                // Zkusíme stáhnout alespoň 2D hlavu/avatar hráče namísto rozbitého obrázku
-                const altUrl = imgElement.src.replace('/renders/body/', '/avatars/').split('?')[0];
-                imgElement.src = altUrl;
-            }
+            return `https://crafatar.com/avatars/${username}?size=100&default=MHF_Steve&overlay`;
         }
 
         function getSortedModes(modes) {
@@ -379,7 +369,7 @@
                 const card = document.createElement('div');
                 card.className = "flex items-center gap-3 bg-[#0e0e12] border border-amber-500/20 px-3.5 py-2.5 rounded-xl flex-shrink-0 shadow-[0_0_15px_rgba(0,0,0,0.6)] hover:border-amber-500/50 transition";
                 card.innerHTML = `
-                    <img src="${getSkinUrl(item.username)}" alt="${item.username}" onerror="handleImageError(this)" class="w-6 h-10 object-contain flex-shrink-0">
+                    <img src="${getSkinUrl(item.username)}" alt="${item.username}" class="w-8 h-8 rounded-lg object-contain flex-shrink-0 bg-[#08080c] p-0.5 border border-amber-500/20">
                     <div class="flex flex-col">
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
                         <span class="text-[10px] text-amber-500/60 font-medium">${item.dateStr}</span>
@@ -475,7 +465,7 @@
 
             item.innerHTML = `
                 <div class="flex items-center gap-3 overflow-hidden">
-                    <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="w-8 h-12 object-contain flex-shrink-0 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                    <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-8 h-8 rounded-lg object-contain flex-shrink-0 bg-[#08080c] p-0.5 border border-amber-500/20 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
                     <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-300 transition">${player.username}</span>
                 </div>
                 ${retiredBadge}
@@ -546,14 +536,14 @@
                             `;
                         }).join('');
 
-                        const skinSize = rankNum === 1 ? 'w-24 h-40' : 'w-20 h-32';
+                        const skinSize = rankNum === 1 ? 'w-16 h-16' : 'w-14 h-14';
                         const nameSize = rankNum === 1 ? 'text-2xl' : 'text-xl';
 
                         card.innerHTML = `
                             <div class="w-8 h-8 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-md">${rankNum}</div>
-                            <div class="flex items-center justify-center gap-6 mb-4 w-full">
+                            <div class="flex items-center justify-center gap-4 mb-4 w-full">
                                 <span class="text-5xl font-black text-white italic tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">${rankNum}.</span>
-                                <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="${skinSize} object-contain drop-shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                                <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="${skinSize} rounded-2xl object-contain bg-[#101014] p-1.5 border border-amber-500/30 drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]">
                             </div>
                             <h3 class="font-black text-white ${nameSize} tracking-wide text-center drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">${player.username}</h3>
                             <div class="flex items-center gap-2 mt-2 mb-6">
@@ -600,7 +590,7 @@
                     row.innerHTML = `
                         <div class="flex items-center gap-4">
                             ${rankBadge}
-                            <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="w-10 h-16 object-contain drop-shadow-[0_0_8px_rgba(245,158,11,0.2)]">
+                            <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-11 h-11 rounded-xl object-contain bg-[#101014] p-1 border border-amber-500/30 drop-shadow-[0_0_8px_rgba(245,158,11,0.2)]">
                             <div class="flex flex-col justify-center">
                                 <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
                                 <div class="flex items-center gap-2 mt-1.5">
@@ -707,7 +697,7 @@
                         searchInput.value = '';
                     };
                     div.innerHTML = `
-                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="w-6 h-10 object-contain">
+                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-8 h-8 rounded-lg object-contain bg-[#08080c] p-0.5 border border-amber-500/20">
                         <div class="flex flex-col">
                             <span class="font-bold text-sm">${player.username}</span>
                             <span class="text-xs text-amber-500/60">Skóre: ${player.overallScore}</span>
@@ -853,7 +843,7 @@
                 div.onclick = () => startComparison(player);
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" onerror="handleImageError(this)" class="w-6 h-10 object-contain">
+                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-8 h-8 rounded-lg object-contain bg-[#08080c] p-0.5 border border-amber-500/20">
                         <span class="font-bold text-sm">${player.username}</span>
                     </div>
                     <div class="text-right text-xs text-gray-400">
