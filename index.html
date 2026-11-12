@@ -12,74 +12,83 @@
         }
     </script>
     <style>
-        body { background-color: #0d0f12; color: #e2e8f0; font-family: sans-serif; }
+        body { background-color: #07080a; color: #f3f4f6; font-family: sans-serif; }
 
         .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
-        .custom-scroll::-webkit-scrollbar-track { background: #0b0c10; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #050507; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #d97706; border-radius: 3px; }
 
-        /* Tier Styles (Záře + Barvy) */
+        /* Černo-zlaté svítící styly */
+        .gold-glow {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
+            border-color: #f59e0b !important;
+        }
+
+        .gold-glow-lg {
+            box-shadow: 0 0 45px rgba(245, 158, 11, 0.35);
+            border-color: #fbbf24 !important;
+        }
+
         .tier-header-1 {
             border-top: 3px solid #f59e0b;
-            background: linear-gradient(180deg, rgba(245, 158, 11, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
-            box-shadow: 0 -10px 25px -5px rgba(245, 158, 11, 0.25);
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.2) 0%, rgba(10, 10, 15, 0.6) 100%);
+            box-shadow: 0 -10px 30px -5px rgba(245, 158, 11, 0.4);
             color: #fbbf24;
         }
         .tier-header-2 {
-            border-top: 3px solid #94a3b8;
-            background: linear-gradient(180deg, rgba(148, 163, 184, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
-            box-shadow: 0 -10px 25px -5px rgba(148, 163, 184, 0.15);
-            color: #cbd5e1;
+            border-top: 3px solid #d4d4d8;
+            background: linear-gradient(180deg, rgba(212, 212, 216, 0.15) 0%, rgba(10, 10, 15, 0.6) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(212, 212, 216, 0.2);
+            color: #e4e4e7;
         }
         .tier-header-3 {
-            border-top: 3px solid #ea580c;
-            background: linear-gradient(180deg, rgba(234, 88, 12, 0.12) 0%, rgba(20, 22, 34, 0.4) 100%);
-            box-shadow: 0 -10px 25px -5px rgba(234, 88, 12, 0.2);
-            color: #f97316;
+            border-top: 3px solid #d97706;
+            background: linear-gradient(180deg, rgba(217, 119, 6, 0.18) 0%, rgba(10, 10, 15, 0.6) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(217, 119, 6, 0.3);
+            color: #f59e0b;
         }
         .tier-header-4 {
-            border-top: 3px solid #6366f1;
-            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
-            box-shadow: 0 -10px 25px -5px rgba(99, 102, 241, 0.15);
-            color: #818cf8;
-        }
-        .tier-header-5 {
-            border-top: 3px solid #8b5cf6;
-            background: linear-gradient(180deg, rgba(139, 92, 246, 0.1) 0%, rgba(20, 22, 34, 0.4) 100%);
-            box-shadow: 0 -10px 25px -5px rgba(139, 92, 246, 0.15);
+            border-top: 3px solid #7c3aed;
+            background: linear-gradient(180deg, rgba(124, 58, 237, 0.15) 0%, rgba(10, 10, 15, 0.6) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(124, 58, 237, 0.2);
             color: #a78bfa;
         }
+        .tier-header-5 {
+            border-top: 3px solid #4f46e5;
+            background: linear-gradient(180deg, rgba(79, 70, 229, 0.15) 0%, rgba(10, 10, 15, 0.6) 100%);
+            box-shadow: 0 -10px 25px -5px rgba(79, 70, 229, 0.2);
+            color: #818cf8;
+        }
 
-        /* HT a LT odlišení */
         .player-card-ht {
-            background-color: #1a1d28;
-            border: 1px solid #272c3d;
+            background-color: #121218;
+            border: 1px solid #2a2212;
         }
         .player-card-lt {
-            background-color: #11131a;
-            border: 1px solid #1e2230;
+            background-color: #0b0b0e;
+            border: 1px solid #1a160d;
         }
     </style>
 </head>
-<body class="p-4 md:p-8 bg-[#0d0f12]">
+<body class="p-4 md:p-8 bg-[#07080a]">
 
     <div class="max-w-6xl mx-auto">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-800 pb-6 gap-4">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-amber-500/20 pb-6 gap-4">
             <div class="flex flex-wrap items-center gap-3 md:gap-6 justify-center md:justify-start">
                 <a href="./" class="flex items-center">
-                    <img id="logo-img" src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain">
+                    <img id="logo-img" src="logo.png" alt="DachshundTiers Logo" class="h-28 md:h-32 w-auto object-contain filter drop-shadow-[0_0_15px_rgba(245,158,11,0.3)]">
                 </a>
 
-                <div class="flex items-center gap-2.5 bg-[#141722] border border-gray-800 px-4 py-2 rounded-full shadow-inner">
+                <div class="flex items-center gap-2.5 bg-[#101014] border border-amber-500/30 px-4 py-2 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.1)]">
                     <svg class="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
                     </svg>
                     <span id="player-count" class="font-black text-amber-400 text-base md:text-lg tracking-wide">0</span>
-                    <span class="text-xs font-bold text-gray-400 tracking-wider uppercase">HRÁČŮ</span>
+                    <span class="text-xs font-bold text-amber-500/70 tracking-wider uppercase">HRÁČŮ</span>
                 </div>
                 
                 <div class="flex items-center gap-2">
-                    <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/20 hover:scale-105 transition">
+                    <a href="https://discord.gg/pUCcGwP5Gz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#5865F2]/30 hover:scale-105 transition">
                         <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
                             <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.85-11.14,68.5,68.5,0,0,1-10.75-5.13c.91-.66,1.8-1.34,2.65-2a75.58,75.58,0,0,0,72.68,0c.85.69,1.74,1.37,2.65,2a68.42,68.42,0,0,1-10.75,5.13,74.12,74.12,0,0,0,6.85,11.14,105.62,105.62,0,0,0,31.05-18.83C129.92,50.12,124.16,27.23,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.87,46,53.7,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.11,46,95.94,53,91,65.69,84.69,65.69Z"/>
                         </svg>
@@ -89,103 +98,108 @@
             </div>
             
             <div class="relative w-full md:w-80">
-                <input type="text" id="search" placeholder="Vyhledat hráče... (stiskni /)" autocomplete="off" class="w-full bg-gray-900 border border-gray-700 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-amber-500">
-                <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#12141c] border border-gray-800 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
+                <input type="text" id="search" placeholder="Vyhledat hráče... (stiskni /)" autocomplete="off" class="w-full bg-[#101014] border border-amber-500/30 text-white px-4 py-2 rounded-xl focus:outline-none focus:border-amber-400 focus:shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                <div id="search-dropdown" class="absolute left-0 right-0 mt-2 bg-[#0c0c10] border border-amber-500/30 rounded-xl max-h-60 overflow-y-auto hidden z-50 shadow-2xl custom-scroll"></div>
             </div>
         </header>
 
         <!-- Horní lišta: NEDÁVNO TESTOVÁNO -->
         <div id="recent-tests-container" class="mb-8 hidden">
-            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+            <h4 class="text-xs font-black text-amber-500/70 uppercase tracking-widest mb-3 flex items-center gap-2">
                 <span>NEDÁVNO TESTOVÁNO</span>
-                <span class="text-gray-700">— DACHSHUNDTIERS</span>
+                <span class="text-amber-600/40">— DACHSHUNDTIERS</span>
             </h4>
             <div id="recent-tests-list" class="flex gap-3 overflow-x-auto pb-2 custom-scroll"></div>
         </div>
 
-        <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-gray-950 p-2 rounded-xl border border-gray-900" id="tabs">
-            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2">Overall 🏆</button>
-            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="GoldSMP.png" class="w-12 h-12 object-contain" alt=""> GoldSMP</button>
-            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-12 h-12 object-contain" alt=""> NetheriteSword</button>
-            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="IronAxe.png" class="w-12 h-12 object-contain" alt=""> IronAxe</button>
-            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="UHCMace.png" class="w-12 h-12 object-contain" alt=""> UHCMace</button>
-            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-12 h-12 object-contain" alt=""> AnchorPvP</button>
-            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="RandomPot.png" class="w-12 h-12 object-contain" alt=""> RandomPot</button>
-            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-12 h-12 object-contain" alt=""> ShieldlessSMP</button>
-            <button onclick="switchTab('MolePvP')" id="tab-MolePvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2"><img src="MolePvP.png" class="w-12 h-12 object-contain" alt=""> MolePvP</button>
+        <nav class="flex flex-wrap items-center justify-start gap-2 mb-6 bg-[#0c0c10] p-2 rounded-xl border border-amber-500/20 shadow-[0_0_20px_rgba(0,0,0,0.8)]" id="tabs">
+            <button onclick="switchTab('Overall')" id="tab-Overall" class="px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.4)] flex items-center gap-2">Overall 🏆</button>
+            <button onclick="switchTab('GoldSMP')" id="tab-GoldSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="GoldSMP.png" class="w-12 h-12 object-contain" alt=""> GoldSMP</button>
+            <button onclick="switchTab('NetheriteSword')" id="tab-NetheriteSword" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="NetheriteSword.png" class="w-12 h-12 object-contain" alt=""> NetheriteSword</button>
+            <button onclick="switchTab('IronAxe')" id="tab-IronAxe" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="IronAxe.png" class="w-12 h-12 object-contain" alt=""> IronAxe</button>
+            <button onclick="switchTab('UHCMace')" id="tab-UHCMace" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="UHCMace.png" class="w-12 h-12 object-contain" alt=""> UHCMace</button>
+            <button onclick="switchTab('AnchorPvP')" id="tab-AnchorPvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="AnchorPvP.png" class="w-12 h-12 object-contain" alt=""> AnchorPvP</button>
+            <button onclick="switchTab('RandomPot')" id="tab-RandomPot" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="RandomPot.png" class="w-12 h-12 object-contain" alt=""> RandomPot</button>
+            <button onclick="switchTab('ShieldlessSMP')" id="tab-ShieldlessSMP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="ShieldlessSMP.png" class="w-12 h-12 object-contain" alt=""> ShieldlessSMP</button>
+            <button onclick="switchTab('MolePvP')" id="tab-MolePvP" class="px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2"><img src="MolePvP.png" class="w-12 h-12 object-contain" alt=""> MolePvP</button>
         </nav>
 
         <!-- Tlačítko Zobrazit Retired -->
         <div id="retired-container" class="flex justify-center mb-8 hidden">
-            <button id="toggle-retired-btn" onclick="toggleRetired()" class="px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs">
-                <span class="font-black text-gray-500 bg-gray-800 px-1.5 py-0.5 rounded text-[10px]">R</span> Zobrazit retired
+            <button id="toggle-retired-btn" onclick="toggleRetired()" class="px-4 py-2 rounded-full font-bold text-gray-400 hover:text-amber-300 bg-[#101014] border border-amber-500/30 hover:border-amber-500 transition flex items-center gap-2 text-xs shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                <span class="font-black text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded text-[10px]">R</span> Zobrazit retired
             </button>
         </div>
 
         <main id="leaderboard-container"></main>
+
+        <!-- Patička -->
+        <footer class="mt-16 text-center border-t border-amber-500/20 pt-6 text-xs text-amber-500/60 font-semibold tracking-wider">
+            Vytvořeno 2026 — DachshundTiers ⚡ Všechna práva vyhrazena.
+        </footer>
     </div>
 
     <!-- Modaly -->
-    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'modal')">
-        <div class="bg-gradient-to-b from-[#181a26] to-[#0f1015] border border-gray-800 p-6 rounded-3xl w-full max-w-xl relative shadow-2xl text-center">
-            <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
+    <div id="modal" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'modal')">
+        <div class="bg-gradient-to-b from-[#141210] to-[#08080a] border border-amber-500/40 p-6 rounded-3xl w-full max-w-xl relative shadow-[0_0_50px_rgba(245,158,11,0.2)] text-center">
+            <button onclick="closeModal('modal')" class="absolute top-5 right-5 text-amber-500/60 hover:text-amber-400 text-2xl">&times;</button>
             
             <div class="flex flex-col items-center mt-2">
-                <img id="modal-avatar" src="" alt="" class="w-24 h-24 rounded-2xl bg-gray-900 border-2 border-gray-800 shadow-xl mb-4">
-                <h3 class="text-3xl font-black text-amber-400 tracking-wide" id="modal-username">---</h3>
-                <p class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
-                <p class="text-xs text-gray-400 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-white">---</span></p>
+                <img id="modal-avatar" src="" alt="" class="w-24 h-40 object-contain drop-shadow-[0_0_20px_rgba(245,158,11,0.3)] mb-4">
+                <h3 class="text-3xl font-black text-amber-400 tracking-wide drop-shadow-[0_0_10px_rgba(245,158,11,0.3)]" id="modal-username">---</h3>
+                <p class="text-amber-500/70 text-xs font-bold uppercase tracking-widest mt-1 mb-2" id="modal-rank-badge">RANKED PLAYER</p>
+                <p class="text-xs text-gray-400 mb-4 font-medium">Nejlepší kit: <span id="modal-favorite-kit" class="font-bold text-amber-300">---</span></p>
             </div>
 
-            <div class="inline-flex items-center gap-2 bg-gray-950/60 border border-gray-800 px-4 py-2 rounded-full text-sm mb-6">
+            <div class="inline-flex items-center gap-2 bg-[#101014] border border-amber-500/30 px-4 py-2 rounded-full text-sm mb-6 shadow-[0_0_15px_rgba(245,158,11,0.1)]">
                 <span class="font-bold text-white"><span id="modal-points">0</span> bodů</span>
-                <span class="text-amber-500 font-extrabold" id="modal-title-label">---</span>
+                <span class="text-amber-400 font-extrabold" id="modal-title-label">---</span>
             </div>
 
-            <div class="border-t border-gray-800/60 pt-5 mb-6">
+            <div class="border-t border-amber-500/20 pt-5 mb-6">
                 <div class="flex flex-wrap justify-center gap-4" id="modal-kits-container"></div>
             </div>
 
-            <div class="border-t border-gray-800/60 pt-4">
-                <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wider text-left mb-2">Tier Journey</h4>
-                <div class="w-full h-44 bg-gray-950/40 border border-gray-900 rounded-xl p-2">
+            <div class="border-t border-amber-500/20 pt-4">
+                <h4 class="text-xs font-bold text-amber-500/70 uppercase tracking-wider text-left mb-2">Tier Journey</h4>
+                <div class="w-full h-44 bg-[#0a0a0d] border border-amber-500/20 rounded-xl p-2 shadow-inner">
                     <canvas id="historyChart"></canvas>
                 </div>
             </div>
 
             <div class="flex gap-2 justify-center mt-6">
-                <button onclick="openCompareSelection()" class="bg-[#202330] hover:bg-[#2a2e40] text-gray-400 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition">Porovnat</button>
+                <button onclick="openCompareSelection()" class="bg-[#1c1810] hover:bg-[#2b2415] border border-amber-500/40 text-amber-300 hover:text-white px-5 py-2 rounded-full font-bold text-sm transition shadow-[0_0_15px_rgba(245,158,11,0.15)]">Porovnat</button>
             </div>
         </div>
     </div>
 
-    <div id="compare-select-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'compare-select-modal')">
-        <div class="bg-gray-950 border border-gray-800 p-6 rounded-3xl w-full max-w-lg relative shadow-2xl">
-            <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
-            <h3 class="text-2xl font-black text-white mb-1">Výběr hráče pro porovnání</h3>
-            <p class="text-gray-500 text-xs mb-4">Porovnání s <span id="compare-with-name" class="font-bold text-gray-400">---</span></p>
-            <input type="text" id="compare-search-input" placeholder="Jméno hráče..." autocomplete="off" class="w-full bg-gray-900/60 border border-gray-800 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500 mb-4">
+    <div id="compare-select-modal" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'compare-select-modal')">
+        <div class="bg-[#0c0c10] border border-amber-500/40 p-6 rounded-3xl w-full max-w-lg relative shadow-[0_0_40px_rgba(245,158,11,0.2)]">
+            <button onclick="closeModal('compare-select-modal')" class="absolute top-5 right-5 text-amber-500/60 hover:text-amber-400 text-2xl">&times;</button>
+            <h3 class="text-2xl font-black text-amber-300 mb-1">Výběr hráče pro porovnání</h3>
+            <p class="text-gray-400 text-xs mb-4">Porovnání s <span id="compare-with-name" class="font-bold text-amber-400">---</span></p>
+            <input type="text" id="compare-search-input" placeholder="Jméno hráče..." autocomplete="off" class="w-full bg-[#121216] border border-amber-500/30 text-white px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-400 mb-4">
             <div id="compare-players-list" class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1"></div>
         </div>
     </div>
 
-    <div id="vs-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'vs-modal')">
-        <div class="bg-gradient-to-b from-[#161722] to-[#0d0e12] border border-gray-800 p-6 rounded-3xl w-full max-w-2xl relative shadow-2xl">
-            <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-2xl">&times;</button>
-            <h3 class="text-lg font-bold text-gray-400 mb-6 border-b border-gray-800/60 pb-3">Porovnání hráčů</h3>
+    <div id="vs-modal" class="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center hidden p-4 z-50" onclick="closeModalOnBackdrop(event, 'vs-modal')">
+        <div class="bg-gradient-to-b from-[#141210] to-[#08080a] border border-amber-500/40 p-6 rounded-3xl w-full max-w-2xl relative shadow-[0_0_50px_rgba(245,158,11,0.2)]">
+            <button onclick="closeModal('vs-modal')" class="absolute top-5 right-5 text-amber-500/60 hover:text-amber-400 text-2xl">&times;</button>
+            <h3 class="text-lg font-bold text-amber-400/80 mb-6 border-b border-amber-500/20 pb-3">Porovnání hráčů</h3>
             <div class="flex items-center justify-between gap-4 mb-8">
-                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
-                    <img id="vs-p1-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                <div class="flex-1 bg-[#121216] border border-amber-500/30 p-4 rounded-2xl flex flex-col items-center text-center shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                    <img id="vs-p1-avatar" src="" alt="" class="w-12 h-20 object-contain mb-2">
                     <span id="vs-p1-name" class="font-black text-white text-base tracking-wide">---</span>
-                    <span id="vs-p1-score" class="text-xs text-gray-500 mt-0.5">#0</span>
-                    <span id="vs-p1-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
+                    <span id="vs-p1-score" class="text-xs text-amber-500/70 mt-0.5">#0</span>
+                    <span id="vs-p1-rank" class="text-xs font-bold text-amber-400 mt-1">---</span>
                 </div>
-                <div class="font-black text-amber-500 text-xl tracking-tighter px-2">VS</div>
-                <div class="flex-1 bg-gray-900/40 border border-gray-800/80 p-4 rounded-2xl flex flex-col items-center text-center">
-                    <img id="vs-p2-avatar" src="" alt="" class="w-14 h-14 rounded-xl bg-gray-800 mb-2">
+                <div class="font-black text-amber-500 text-xl tracking-tighter px-2 drop-shadow-[0_0_10px_rgba(245,158,11,0.5)]">VS</div>
+                <div class="flex-1 bg-[#121216] border border-amber-500/30 p-4 rounded-2xl flex flex-col items-center text-center shadow-[0_0_15px_rgba(245,158,11,0.1)]">
+                    <img id="vs-p2-avatar" src="" alt="" class="w-12 h-20 object-contain mb-2">
                     <span id="vs-p2-name" class="font-black text-white text-base tracking-wide">---</span>
-                    <span id="vs-p2-score" class="text-xs text-gray-500 mt-0.5">#0</span>
-                    <span id="vs-p2-rank" class="text-xs font-bold text-indigo-400 mt-1">---</span>
+                    <span id="vs-p2-score" class="text-xs text-amber-500/70 mt-0.5">#0</span>
+                    <span id="vs-p2-rank" class="text-xs font-bold text-amber-400 mt-1">---</span>
                 </div>
             </div>
             <div class="space-y-2 max-h-80 overflow-y-auto custom-scroll pr-1" id="vs-kits-rows"></div>
@@ -228,6 +242,11 @@
             return filename; 
         }
 
+        // NameMC skin 3D render (isometric z boku jako na ukázce)
+        function getSkinUrl(username) {
+            return `https://crafthead.net/body/isometric/${username}`;
+        }
+
         function getSortedModes(modes) {
             if (!modes) return [];
             return Object.entries(modes).sort((a, b) => {
@@ -240,15 +259,15 @@
         function getTierBadgeStyle(tier) {
             const t = tier.toUpperCase();
             if (t.includes('1')) {
-                return 'border-amber-400 bg-amber-500/10 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.3)]';
+                return 'border-amber-400 bg-amber-500/15 text-amber-300 shadow-[0_0_15px_rgba(251,191,36,0.35)]';
             } else if (t.includes('2')) {
-                return 'border-slate-300 bg-slate-500/10 text-slate-200 shadow-[0_0_15px_rgba(203,213,225,0.2)]';
+                return 'border-zinc-300 bg-zinc-500/15 text-zinc-200 shadow-[0_0_15px_rgba(212,212,216,0.25)]';
             } else if (t.includes('3')) {
-                return 'border-orange-500 bg-orange-500/10 text-orange-400 shadow-[0_0_15px_rgba(249,115,22,0.2)]';
+                return 'border-amber-600 bg-amber-600/15 text-amber-400 shadow-[0_0_15px_rgba(217,119,6,0.3)]';
             } else if (t.includes('4')) {
-                return 'border-indigo-500 bg-indigo-500/10 text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.2)]';
+                return 'border-purple-500 bg-purple-500/15 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.3)]';
             } else {
-                return 'border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(139,92,246,0.2)]';
+                return 'border-indigo-500 bg-indigo-500/15 text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.3)]';
             }
         }
 
@@ -332,23 +351,23 @@
 
             latest.forEach(item => {
                 let arrowIcon = '▲';
-                let arrowColor = 'text-emerald-400';
+                let arrowColor = 'text-amber-400';
                 if (item.trend === 'down') {
                     arrowIcon = '▼';
                     arrowColor = 'text-red-400';
                 } else if (item.trend === 'same') {
                     arrowIcon = '•';
-                    arrowColor = 'text-gray-400';
+                    arrowColor = 'text-zinc-500';
                 }
 
                 const badgeStyle = getTierBadgeStyle(item.tier);
                 const card = document.createElement('div');
-                card.className = "flex items-center gap-3 bg-[#13151f] border border-gray-800/80 px-3.5 py-2.5 rounded-xl flex-shrink-0 shadow-md hover:border-gray-700 transition";
+                card.className = "flex items-center gap-3 bg-[#0e0e12] border border-amber-500/20 px-3.5 py-2.5 rounded-xl flex-shrink-0 shadow-[0_0_15px_rgba(0,0,0,0.6)] hover:border-amber-500/50 transition";
                 card.innerHTML = `
-                    <img src="https://minotar.net/avatar/${item.username}/32" alt="${item.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0">
+                    <img src="${getSkinUrl(item.username)}" alt="${item.username}" class="w-6 h-10 object-contain flex-shrink-0">
                     <div class="flex flex-col">
                         <span class="font-extrabold text-xs text-white leading-tight">${item.username}</span>
-                        <span class="text-[10px] text-gray-500 font-medium">${item.dateStr}</span>
+                        <span class="text-[10px] text-amber-500/60 font-medium">${item.dateStr}</span>
                     </div>
                     <img src="${getImgPath(item.mode + '.png')}" alt="${item.mode}" class="w-12 h-12 object-contain ml-1">
                     <span class="px-2 py-0.5 rounded border font-black text-xs ${badgeStyle}">${item.tier}</span>
@@ -384,26 +403,26 @@
 
         function getRankTitle(player) {
             if (player.isBestCZSK) {
-                return { title: 'BEST CZECHIA', bg: 'bg-red-500/20 text-yellow-400 border-red-500/50 shadow-sm' };
+                return { title: 'BEST CZECHIA', bg: 'bg-amber-500/20 text-amber-300 border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)]' };
             }
             const points = player.overallScore || 0;
-            if (points >= 240) return { title: 'THE BEST', bg: 'bg-red-500/20 text-red-400 border-red-500/30' };
-            if (points >= 210) return { title: 'Legenda', bg: 'bg-purple-500/20 text-purple-400 border-purple-500/30' };
-            if (points >= 180) return { title: 'Elita', bg: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' };
-            if (points >= 120) return { title: 'Expert', bg: 'bg-amber-500/20 text-amber-400 border-amber-500/30' };
+            if (points >= 240) return { title: 'THE BEST', bg: 'bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]' };
+            if (points >= 210) return { title: 'Legenda', bg: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' };
+            if (points >= 180) return { title: 'Elita', bg: 'bg-amber-600/20 text-amber-400 border-amber-600/30' };
+            if (points >= 120) return { title: 'Expert', bg: 'bg-orange-500/20 text-orange-400 border-orange-500/30' };
             if (points >= 70)  return { title: 'Úspěšný', bg: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' };
-            if (points >= 30)  return { title: 'Pokročilý', bg: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' };
-            return { title: 'Začátečník', bg: 'bg-slate-500/20 text-slate-400 border-slate-500/30' };
+            if (points >= 30)  return { title: 'Pokročilý', bg: 'bg-zinc-500/20 text-zinc-300 border-zinc-500/30' };
+            return { title: 'Začátečník', bg: 'bg-zinc-800 text-zinc-400 border-zinc-700' };
         }
 
         function switchTab(tabId) {
             currentTab = tabId;
             document.querySelectorAll('#tabs button').forEach(btn => {
-                btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-white transition flex items-center gap-2";
+                btn.className = "px-4 py-2 rounded-lg font-bold text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 transition flex items-center gap-2";
             });
             const activeBtn = document.getElementById(`tab-${tabId}`);
             if (activeBtn) {
-                activeBtn.className = "px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black flex items-center gap-2";
+                activeBtn.className = "px-5 py-2.5 rounded-lg font-bold transition bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.4)] flex items-center gap-2";
             }
 
             const retiredBox = document.getElementById('retired-container');
@@ -420,9 +439,9 @@
             showRetired = !showRetired;
             const toggleBtn = document.getElementById('toggle-retired-btn');
             if (showRetired) {
-                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-amber-400 bg-amber-500/10 border border-amber-500/40 transition flex items-center gap-2 text-xs shadow-lg shadow-amber-500/10";
+                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-amber-300 bg-amber-500/15 border border-amber-500/60 transition flex items-center gap-2 text-xs shadow-[0_0_15px_rgba(245,158,11,0.2)]";
             } else {
-                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-gray-400 hover:text-white bg-gray-900 border border-gray-800 hover:border-gray-700 transition flex items-center gap-2 text-xs";
+                toggleBtn.className = "px-4 py-2 rounded-full font-bold text-gray-400 hover:text-amber-300 bg-[#101014] border border-amber-500/30 hover:border-amber-500 transition flex items-center gap-2 text-xs";
             }
             render();
         }
@@ -434,15 +453,15 @@
             const cardClass = isHT ? 'player-card-ht' : 'player-card-lt';
             
             const item = document.createElement('div');
-            item.className = `flex items-center justify-between p-2.5 ${cardClass} rounded-2xl cursor-pointer transition group duration-200 hover:scale-[1.02] shadow-sm`;
+            item.className = `flex items-center justify-between p-2.5 ${cardClass} rounded-2xl cursor-pointer transition group duration-200 hover:scale-[1.02] shadow-sm hover:border-amber-500/60`;
             item.onclick = () => openPlayerModal(player);
             
-            let retiredBadge = isRetired ? `<span class="px-2 py-0.5 bg-[#201625] border border-[#3b2048] text-[#d884f3] font-black text-[10px] rounded-md tracking-wider">R</span>` : '';
+            let retiredBadge = isRetired ? `<span class="px-2 py-0.5 bg-[#1f1610] border border-amber-500/40 text-amber-300 font-black text-[10px] rounded-md tracking-wider">R</span>` : '';
 
             item.innerHTML = `
-                <div class="flex items-center gap-2.5 overflow-hidden">
-                    <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-7 h-7 rounded-lg bg-gray-800 flex-shrink-0 border border-gray-700/50">
-                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-400 transition">${player.username}</span>
+                <div class="flex items-center gap-3 overflow-hidden">
+                    <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-8 h-12 object-contain flex-shrink-0 drop-shadow-[0_0_8px_rgba(245,158,11,0.3)]">
+                    <span class="font-bold text-xs text-white truncate tracking-wide group-hover:text-amber-300 transition">${player.username}</span>
                 </div>
                 ${retiredBadge}
             `;
@@ -469,7 +488,6 @@
                 });
 
                 if (processedPlayers.length >= 3) {
-                    // Pořadí: [2. místo, 1. místo, 3. místo] -> 1. místo uprostřed
                     const top3 = [processedPlayers[1], processedPlayers[0], processedPlayers[2]];
                     const podiumContainer = document.createElement('div');
                     podiumContainer.className = "flex flex-col md:flex-row justify-center items-start gap-5 mb-14 mt-8";
@@ -481,56 +499,54 @@
                         const card = document.createElement('div');
                         
                         let rankBorderGlow = "";
-                        let avatarBorder = "";
-                        let badgeColor = "bg-amber-700 text-white";
+                        let badgeColor = "bg-amber-600 text-white";
                         let customHeightClass = "";
 
-                        // Zde 2. a 3. místo dostalo horní odsazení (md:mt-16), takže jsou oproti 1. místu posunuté zřetelně dolů
                         if (rankNum === 1) {
-                            rankBorderGlow = "border-amber-500 shadow-[0_0_40px_rgba(234,179,8,0.25)] z-10";
-                            avatarBorder = "border-amber-400 ring-4 ring-amber-500/20";
+                            rankBorderGlow = "gold-glow-lg z-10 bg-[#16120d]";
                             badgeColor = "bg-amber-400 text-black";
-                            customHeightClass = "md:w-[38%] py-8 px-8 bg-[#141622] order-first md:order-none";
+                            customHeightClass = "md:w-[38%] py-8 px-8 order-first md:order-none";
                         } else if (rankNum === 2) {
-                            rankBorderGlow = "border-slate-500/60 shadow-[0_0_20px_rgba(203,213,225,0.15)]";
-                            avatarBorder = "border-slate-300";
-                            badgeColor = "bg-slate-300 text-black";
-                            customHeightClass = "md:w-[31%] py-8 px-6 bg-[#11131a] order-2 md:order-none md:mt-16";
+                            rankBorderGlow = "gold-glow bg-[#100f12]";
+                            badgeColor = "bg-zinc-300 text-black";
+                            customHeightClass = "md:w-[31%] py-8 px-6 order-2 md:order-none md:mt-16";
                         } else if (rankNum === 3) {
-                            rankBorderGlow = "border-amber-800/60 shadow-[0_0_20px_rgba(180,83,9,0.15)]";
-                            avatarBorder = "border-amber-700";
+                            rankBorderGlow = "gold-glow bg-[#120e0a]";
                             badgeColor = "bg-amber-700 text-white";
-                            customHeightClass = "md:w-[31%] py-8 px-6 bg-[#11131a] order-3 md:order-none md:mt-16";
+                            customHeightClass = "md:w-[31%] py-8 px-6 order-3 md:order-none md:mt-16";
                         }
 
-                        card.className = `w-full ${customHeightClass} border-2 ${rankBorderGlow} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-[1.02] relative`;
+                        card.className = `w-full ${customHeightClass} border-2 ${rankBorderGlow} rounded-3xl flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-[1.02] relative shadow-[0_0_30px_rgba(0,0,0,0.9)]`;
                         card.onclick = () => openPlayerModal(player);
 
                         const sortedModes = getSortedModes(player.modes);
                         
-                        // Všechny karty mají stejnou strukturu mřížky vedle sebe
                         const badgesHTML = sortedModes.map(([mode, t]) => {
                             const badgeStyle = getTierBadgeStyle(t);
                             return `
-                                <div class="flex flex-col items-center justify-center p-3 rounded-2xl border ${badgeStyle} bg-gray-950/60 min-w-[85px] shadow-sm">
+                                <div class="flex flex-col items-center justify-center p-3 rounded-2xl border ${badgeStyle} bg-[#08080c] min-w-[85px] shadow-sm">
                                     <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-16 h-16 object-contain mb-1.5">
                                     <span class="text-xs font-black tracking-wide">${t}</span>
                                 </div>
                             `;
                         }).join('');
 
-                        const avatarSize = rankNum === 1 ? 'w-24 h-24' : 'w-20 h-20';
+                        const skinSize = rankNum === 1 ? 'w-24 h-40' : 'w-20 h-32';
                         const nameSize = rankNum === 1 ? 'text-2xl' : 'text-xl';
 
+                        // Tady přidáno velké číslo (např. 1., 2., 3.) vedle skinu přesně jako na ukázce
                         card.innerHTML = `
                             <div class="w-8 h-8 rounded-xl ${badgeColor} flex items-center justify-center font-black text-sm mb-4 shadow-md">${rankNum}</div>
-                            <img src="https://minotar.net/avatar/${player.username}/96" alt="${player.username}" class="${avatarSize} rounded-2xl bg-gray-900 border-2 ${avatarBorder} mb-3 shadow-xl">
-                            <h3 class="font-black text-white ${nameSize} tracking-wide text-center">${player.username}</h3>
+                            <div class="flex items-center justify-center gap-6 mb-4 w-full">
+                                <span class="text-5xl font-black text-white italic tracking-tighter drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">${rankNum}.</span>
+                                <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="${skinSize} object-contain drop-shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                            </div>
+                            <h3 class="font-black text-white ${nameSize} tracking-wide text-center drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">${player.username}</h3>
                             <div class="flex items-center gap-2 mt-2 mb-6">
                                 <span class="text-sm font-extrabold text-amber-400">${player.overallScore} bodů</span>
                                 <span class="px-2.5 py-0.5 rounded text-[11px] font-extrabold border ${rankInfo.bg}">${rankInfo.title}</span>
                             </div>
-                            <div class="w-full bg-[#0a0b0e]/90 p-4 rounded-2xl border border-gray-900/80 flex flex-wrap gap-3 justify-center shadow-inner">${badgesHTML}</div>
+                            <div class="w-full bg-[#050508] p-4 rounded-2xl border border-amber-500/20 flex flex-wrap gap-3 justify-center shadow-inner">${badgesHTML}</div>
                         `;
                         podiumContainer.appendChild(card);
                     });
@@ -545,8 +561,7 @@
 
                 restPlayers.forEach((player, index) => {
                     const rank = index + 4;
-                    let borderClass = "border-gray-900 bg-gray-950/40";
-                    let rankBadge = `<div class="w-8 text-center font-bold text-gray-500">${rank}</div>`;
+                    let rankBadge = `<div class="w-8 text-center font-extrabold text-amber-500/70 text-lg">${rank}.</div>`;
 
                     const rankInfo = getRankTitle(player);
                     const sortedModes = getSortedModes(player.modes);
@@ -556,7 +571,7 @@
                             ${sortedModes.map(([mode, t]) => {
                                 const badgeStyle = getTierBadgeStyle(t);
                                 return `
-                                    <div class="flex flex-col items-center justify-center p-3 rounded-2xl border ${badgeStyle} bg-gray-950/60 min-w-[80px] shadow-sm">
+                                    <div class="flex flex-col items-center justify-center p-3 rounded-2xl border ${badgeStyle} bg-[#08080c] min-w-[80px] shadow-sm">
                                         <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-16 h-16 object-contain mb-1.5">
                                         <span class="text-xs font-black tracking-wide">${t}</span>
                                     </div>
@@ -566,16 +581,16 @@
                     `;
 
                     const row = document.createElement('div');
-                    row.className = `flex items-center justify-between p-4 rounded-xl border cursor-pointer transition duration-200 hover:bg-gray-900/50 ${borderClass}`;
+                    row.className = `flex items-center justify-between p-4 rounded-xl border border-amber-500/20 bg-[#0c0c10] cursor-pointer transition duration-200 hover:bg-[#121217] hover:border-amber-500/50 shadow-[0_0_15px_rgba(0,0,0,0.5)]`;
                     row.onclick = () => openPlayerModal(player);
                     row.innerHTML = `
                         <div class="flex items-center gap-4">
                             ${rankBadge}
-                            <img src="https://minotar.net/avatar/${player.username}/48" alt="${player.username}" class="w-12 h-12 rounded-xl bg-gray-800 border border-gray-700">
+                            <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-10 h-16 object-contain drop-shadow-[0_0_8px_rgba(245,158,11,0.2)]">
                             <div class="flex flex-col justify-center">
                                 <span class="font-bold text-white tracking-wide text-base md:text-lg leading-tight">${player.username}</span>
                                 <div class="flex items-center gap-2 mt-1.5">
-                                    <span class="text-sm font-bold text-indigo-400">${player.overallScore} bodů</span>
+                                    <span class="text-sm font-bold text-amber-400">${player.overallScore} bodů</span>
                                     <span class="px-2.5 py-0.5 rounded text-xs font-bold border ${rankInfo.bg}">${rankInfo.title}</span>
                                 </div>
                             </div>
@@ -593,7 +608,7 @@
 
                 tiers.forEach(tNum => {
                     const col = document.createElement('div');
-                    col.className = "bg-[#0b0c12] border border-gray-900 rounded-3xl overflow-hidden flex flex-col min-h-[350px] shadow-xl";
+                    col.className = "bg-[#09090d] border border-amber-500/20 rounded-3xl overflow-hidden flex flex-col min-h-[350px] shadow-[0_0_20px_rgba(0,0,0,0.8)]";
 
                     col.innerHTML = `
                         <div class="text-center py-3.5 tier-header-${tNum} font-black text-sm tracking-widest uppercase">
@@ -636,7 +651,7 @@
 
                         if (retiredFiltered.length > 0) {
                             const retiredDivider = document.createElement('div');
-                            retiredDivider.className = "my-2 border-t border-gray-800/80";
+                            retiredDivider.className = "my-2 border-t border-amber-500/20";
                             listContainer.appendChild(retiredDivider);
 
                             retiredFiltered.forEach(player => {
@@ -646,7 +661,7 @@
                     }
 
                     if (activeFiltered.length === 0 && (!showRetired || listContainer.children.length === 0)) {
-                        listContainer.innerHTML = `<div class="m-auto text-gray-700 font-bold text-xs tracking-wider uppercase">Prázdné</div>`;
+                        listContainer.innerHTML = `<div class="m-auto text-amber-500/40 font-bold text-xs tracking-wider uppercase">Prázdné</div>`;
                     }
                 });
             }
@@ -671,17 +686,17 @@
                 searchDropdown.innerHTML = '';
                 matches.forEach(player => {
                     const div = document.createElement('div');
-                    div.className = "flex items-center gap-3 p-3 hover:bg-gray-900/80 cursor-pointer border-b border-gray-900 last:border-0 transition text-white";
+                    div.className = "flex items-center gap-3 p-3 hover:bg-[#141218] cursor-pointer border-b border-amber-500/10 last:border-0 transition text-white";
                     div.onclick = () => {
                         openPlayerModal(player);
                         searchDropdown.classList.add('hidden');
                         searchInput.value = '';
                     };
                     div.innerHTML = `
-                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
+                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-6 h-10 object-contain">
                         <div class="flex flex-col">
                             <span class="font-bold text-sm">${player.username}</span>
-                            <span class="text-xs text-gray-500">Skóre: ${player.overallScore}</span>
+                            <span class="text-xs text-amber-500/60">Skóre: ${player.overallScore}</span>
                         </div>
                     `;
                     searchDropdown.appendChild(div);
@@ -704,7 +719,7 @@
                 player.overallScore = calculateOverallPoints(player).total;
             }
 
-            document.getElementById('modal-avatar').src = `https://minotar.net/avatar/${player.username}/100`;
+            document.getElementById('modal-avatar').src = getSkinUrl(player.username);
             document.getElementById('modal-username').innerText = player.username;
             
             const rankInfo = getRankTitle(player);
@@ -725,7 +740,7 @@
                     badgeDiv.onclick = () => loadHistoryChart(player.username, mode);
                     
                     badgeDiv.innerHTML = `
-                        <div class="flex flex-col items-center justify-center p-3.5 rounded-2xl border ${badgeStyle} bg-gray-950/80 min-w-[90px] transition group-hover:scale-110 shadow-md">
+                        <div class="flex flex-col items-center justify-center p-3.5 rounded-2xl border ${badgeStyle} bg-[#08080c] min-w-[90px] transition group-hover:scale-110 shadow-md">
                             <img src="${getImgPath(mode + '.png')}" alt="${mode}" class="w-16 h-16 object-contain mb-1.5">
                             <span class="text-xs font-black tracking-wide">${tier}</span>
                         </div>
@@ -772,10 +787,10 @@
                     datasets: [{
                         data: dataPoints,
                         borderColor: '#f59e0b',
-                        backgroundColor: 'rgba(245, 158, 11, 0.05)',
+                        backgroundColor: 'rgba(245, 158, 11, 0.1)',
                         borderWidth: 3,
                         tension: 0.2,
-                        pointBackgroundColor: '#fff',
+                        pointBackgroundColor: '#fbbf24',
                         pointRadius: 4
                     }]
                 },
@@ -785,16 +800,16 @@
                     plugins: { legend: { display: false } },
                     scales: {
                         y: {
-                            grid: { color: '#1e293b' },
+                            grid: { color: 'rgba(245, 158, 11, 0.1)' },
                             ticks: {
-                                color: '#64748b',
+                                color: '#d97706',
                                 font: { size: 10, weight: 'bold' },
                                 callback: function(value) {
                                     return tierOrder[tierOrder.length - value] || '';
                                 }
                             }
                         },
-                        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b', font: { size: 10 } } }
+                        x: { grid: { color: 'rgba(245, 158, 11, 0.1)' }, ticks: { color: '#d97706', font: { size: 10 } } }
                     }
                 }
             });
@@ -820,16 +835,16 @@
             filtered.forEach((player) => {
                 const rankInfo = getRankTitle(player);
                 const div = document.createElement('div');
-                div.className = "flex items-center justify-between p-3 bg-gray-900/40 hover:bg-gray-900/80 border border-gray-800 rounded-xl cursor-pointer transition text-white";
+                div.className = "flex items-center justify-between p-3 bg-[#121216] hover:bg-[#1a1712] border border-amber-500/20 rounded-xl cursor-pointer transition text-white shadow-sm";
                 div.onclick = () => startComparison(player);
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <img src="https://minotar.net/avatar/${player.username}/32" alt="${player.username}" class="w-8 h-8 rounded bg-gray-800">
+                        <img src="${getSkinUrl(player.username)}" alt="${player.username}" class="w-6 h-10 object-contain">
                         <span class="font-bold text-sm">${player.username}</span>
                     </div>
-                    <div class="text-right text-xs text-gray-500">
+                    <div class="text-right text-xs text-gray-400">
                         <span>${player.overallScore} bodů · </span>
-                        <span class="text-amber-500 font-bold">${rankInfo.title}</span>
+                        <span class="text-amber-400 font-bold">${rankInfo.title}</span>
                     </div>
                 `;
                 listContainer.appendChild(div);
@@ -848,12 +863,12 @@
             const r1 = getRankTitle(p1);
             const r2 = getRankTitle(p2);
 
-            document.getElementById('vs-p1-avatar').src = `https://minotar.net/avatar/${p1.username}/60`;
+            document.getElementById('vs-p1-avatar').src = getSkinUrl(p1.username);
             document.getElementById('vs-p1-name').innerText = p1.username;
             document.getElementById('vs-p1-score').innerText = `${p1.overallScore} bodů`;
             document.getElementById('vs-p1-rank').innerText = r1.title;
 
-            document.getElementById('vs-p2-avatar').src = `https://minotar.net/avatar/${p2.json?.username || p2.username}/60`;
+            document.getElementById('vs-p2-avatar').src = getSkinUrl(p2.username);
             document.getElementById('vs-p2-name').innerText = p2.username;
             document.getElementById('vs-p2-score').innerText = `${p2.overallScore} bodů`;
             document.getElementById('vs-p2-rank').innerText = r2.title;
@@ -868,11 +883,11 @@
                 const t2 = p2.modes ? p2.modes[kit] : null;
 
                 const row = document.createElement('div');
-                row.className = "flex items-center justify-between p-2.5 bg-gray-950/40 border border-gray-900 rounded-xl";
+                row.className = "flex items-center justify-between p-2.5 bg-[#0a0a0d] border border-amber-500/20 rounded-xl";
                 row.innerHTML = `
-                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t1 || '---'}</span></div>
-                    <div class="flex items-center gap-3 text-sm text-gray-400 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-8 h-8 object-contain"><span class="text-xs text-gray-300 font-bold">${kit}</span></div>
-                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-400 bg-gray-900 border border-gray-800' : 'text-gray-600'}">${t2 || '---'}</span></div>
+                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t1 ? 'text-amber-300 bg-[#141210] border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]' : 'text-zinc-600'}">${t1 || '---'}</span></div>
+                    <div class="flex items-center gap-3 text-sm text-gray-300 font-bold"><img src="${getImgPath(kit + '.png')}" alt="${kit}" class="w-8 h-8 object-contain"><span class="text-xs text-amber-200/90 font-bold">${kit}</span></div>
+                    <div class="w-24 text-center"><span class="px-3 py-1 rounded-lg text-xs font-black inline-block ${t2 ? 'text-amber-300 bg-[#141210] border border-amber-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]' : 'text-zinc-600'}">${t2 || '---'}</span></div>
                 `;
                 rowsContainer.appendChild(row);
             });
