@@ -43,7 +43,7 @@
       "UHCMace": "HT3",
       "IronAxe": "LT2",
       "AnchorPvP": "HT3",
-      "RandomPot": "LT3",
+      "RandomPot": "HT3",
       "ShieldlessSMP": "HT3"
     },
     "history": {
@@ -109,6 +109,10 @@
         {
           "date": "08.07.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "13.11.2026",
+          "tier": "HT3"
         }
       ],
       "ShieldlessSMP": [
