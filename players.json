@@ -2059,7 +2059,7 @@
     "username": "DarkHonzaCz",
     "modes": {
       "AnchorPvP": "HT3",
-      "IronAxe": "HT3",
+      "IronAxe": "LT2",
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
       "GoldSMP": "HT4",
@@ -2076,6 +2076,10 @@
         {
           "date": "13.09.2026",
           "tier": "HT3"
+        },
+        {
+          "date": "14.11.2026",
+          "tier": "LT2"
         }
       ],
       "NetheriteSword": [
