@@ -2501,5 +2501,26 @@
         }
       ]
     }
+  },
+  {
+    "username": "zoriQD",
+    "modes": {
+      "NetheriteSword": "LT3",
+      "IronAxe": "LT3"
+    },
+    "history": {
+      "NetheriteSword": [
+        {
+          "date": "14.11.2026",
+          "tier": "LT3"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "14.11.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
