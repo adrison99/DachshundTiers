@@ -892,15 +892,20 @@
   {
     "username": "Alexobelda",
     "modes": {
-      "NetheriteSword": "HT4",
+      "NetheriteSword": "LT5",
       "UHCMace": "HT5",
-      "GoldSMP": "LT4"
+      "GoldSMP": "LT4",
+      "IronAxe": "HT5"
     },
     "history": {
       "NetheriteSword": [
         {
           "date": "07.07.2026",
           "tier": "HT4"
+        },
+        {
+          "date": "14.11.2026",
+          "tier": "LT5"
         }
       ],
       "UHCMace": [
@@ -913,6 +918,12 @@
         {
           "date": "13.08.2026",
           "tier": "LT4"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "14.11.2026",
+          "tier": "HT5"
         }
       ]
     }
