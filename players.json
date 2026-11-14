@@ -1316,7 +1316,7 @@
     "modes": {
       "AnchorPvP": "HT4",
       "UHCMace": "LT3",
-      "IronAxe": "LT3",
+      "IronAxe": "HT3",
       "ShieldlessSMP": "LT4",
       "RandomPot": "LT3",
       "NetheriteSword": "LT3",
@@ -1343,6 +1343,10 @@
         {
           "date": "12.07.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "14.11.2026",
+          "tier": "HT3"
         }
       ],
       "ShieldlessSMP": [
