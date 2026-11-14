@@ -1319,7 +1319,7 @@
       "IronAxe": "HT3",
       "ShieldlessSMP": "LT4",
       "RandomPot": "LT3",
-      "NetheriteSword": "LT3",
+      "NetheriteSword": "HT3",
       "GoldSMP": "LT3"
     },
     "history": {
@@ -1365,6 +1365,10 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "14.11.2026",
+          "tier": "HT3"
         }
       ],
       "GoldSMP": [
