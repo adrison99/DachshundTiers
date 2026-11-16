@@ -2003,7 +2003,7 @@
       "NetheriteSword": "LT3",
       "GoldSMP": "LT3",
       "RandomPot": "LT3",
-      "ShieldlessSMP": "HT3",
+      "ShieldlessSMP": "LT3",
       "MolePvP": "LT3"
     },
     "history": {
@@ -2111,6 +2111,10 @@
         {
           "date": "13.09.2026",
           "tier": "HT3"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ],
       "MolePvP": [
