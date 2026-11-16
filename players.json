@@ -2000,7 +2000,7 @@
       "UHCMace": "HT2",
       "IronAxe": "LT2",
       "AnchorPvP": "HT3",
-      "NetheriteSword": "HT3",
+      "NetheriteSword": "LT3",
       "GoldSMP": "HT3",
       "RandomPot": "HT3",
       "ShieldlessSMP": "HT3"
@@ -2064,6 +2064,10 @@
         {
           "date": "24.08.2026",
           "tier": "HT3"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ],
       "GoldSMP": [
