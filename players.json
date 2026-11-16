@@ -2544,5 +2544,26 @@
         }
       ]
     }
+  },
+  {
+    "username": "AxTher__",
+    "modes": {
+      "NetheriteSword": "HT3",
+      "IronAxe": "LT3"
+    },
+    "history": {
+      "NetheriteSword": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
