@@ -2586,5 +2586,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "wkadly",
+    "modes": {
+      "NetheriteSword": "LT3"
+    },
+    "history": {
+      "NetheriteSword": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
   }
 ]
