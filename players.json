@@ -2571,7 +2571,8 @@
     "modes": {
       "NetheriteSword": "HT3",
       "IronAxe": "LT3",
-      "RandomPot": "HT5"
+      "RandomPot": "HT5",
+      "ShieldlessSMP": "HT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2590,6 +2591,12 @@
         {
           "date": "16.11.2026",
           "tier": "HT5"
+        }
+      ],
+      "ShieldlessSMP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
         }
       ]
     }
