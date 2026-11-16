@@ -1587,8 +1587,9 @@
     "username": "Nexik_",
     "modes": {
       "GoldSMP": "HT4",
-      "IronAxe": "LT5",
-      "UHCMace": "HT5"
+      "IronAxe": "LT4",
+      "UHCMace": "HT5",
+      "NetheriteSword": "HT5"
     },
     "history": {
       "GoldSMP": [
@@ -1601,11 +1602,21 @@
         {
           "date": "16.08.2026",
           "tier": "LT5"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
         }
       ],
       "UHCMace": [
         {
           "date": "16.08.2026",
+          "tier": "HT5"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "16.11.2026",
           "tier": "HT5"
         }
       ]
