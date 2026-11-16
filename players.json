@@ -1614,7 +1614,7 @@
   {
     "username": "Nexik_",
     "modes": {
-      "GoldSMP": "HT4",
+      "GoldSMP": "LT4",
       "IronAxe": "LT4",
       "UHCMace": "HT5",
       "NetheriteSword": "HT5",
@@ -1626,6 +1626,10 @@
         {
           "date": "11.08.2026",
           "tier": "HT4"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
         }
       ],
       "IronAxe": [
@@ -2138,7 +2142,7 @@
       "IronAxe": "LT2",
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
-      "GoldSMP": "HT4",
+      "GoldSMP": "LT3",
       "ShieldlessSMP": "LT3",
       "MolePvP": "HT4"
     },
@@ -2175,6 +2179,10 @@
         {
           "date": "13.09.2026",
           "tier": "HT4"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ],
       "ShieldlessSMP": [
@@ -2600,7 +2608,8 @@
       "NetheriteSword": "LT3",
       "IronAxe": "LT3",
       "RandomPot": "LT3",
-      "MolePvP": "LT3"
+      "MolePvP": "LT3",
+      "GoldSMP": "HT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2626,6 +2635,12 @@
           "date": "16.11.2026",
           "tier": "LT3"
         }
+      ],
+      "GoldSMP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
+        }
       ]
     }
   },
@@ -2636,7 +2651,8 @@
       "IronAxe": "LT3",
       "RandomPot": "HT5",
       "ShieldlessSMP": "HT3",
-      "MolePvP": "LT4"
+      "MolePvP": "LT4",
+      "GoldSMP": "HT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2668,6 +2684,12 @@
           "date": "16.11.2026",
           "tier": "LT4"
         }
+      ],
+      "GoldSMP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
+        }
       ]
     }
   },
@@ -2692,6 +2714,20 @@
     },
     "history": {
       "NetheriteSword": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
+        }
+      ]
+    }
+  },
+  {
+    "username": "ycbm",
+    "modes": {
+      "GoldSMP": "LT3"
+    },
+    "history": {
+      "GoldSMP": [
         {
           "date": "16.11.2026",
           "tier": "LT3"
