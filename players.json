@@ -1997,7 +1997,7 @@
   {
     "username": "DroWnerT",
     "modes": {
-      "UHCMace": "HT2",
+      "UHCMace": "LT3",
       "IronAxe": "LT3",
       "AnchorPvP": "LT3",
       "NetheriteSword": "LT3",
@@ -2023,6 +2023,10 @@
         {
           "date": "13.09.2026",
           "tier": "HT2"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ],
       "IronAxe": [
