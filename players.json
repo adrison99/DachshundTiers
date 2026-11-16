@@ -1365,7 +1365,7 @@
     "username": "Frexiq",
     "modes": {
       "AnchorPvP": "HT4",
-      "UHCMace": "LT3",
+      "UHCMace": "HT3",
       "IronAxe": "HT3",
       "ShieldlessSMP": "LT3",
       "RandomPot": "LT3",
@@ -1388,6 +1388,10 @@
         {
           "date": "14.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
         }
       ],
       "IronAxe": [
@@ -2174,7 +2178,7 @@
       "AnchorPvP": "HT3",
       "IronAxe": "LT2",
       "NetheriteSword": "LT3",
-      "UHCMace": "LT3",
+      "UHCMace": "HT3",
       "GoldSMP": "LT3",
       "ShieldlessSMP": "LT3",
       "MolePvP": "HT4"
@@ -2206,6 +2210,10 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
         }
       ],
       "GoldSMP": [
@@ -2651,7 +2659,8 @@
       "MolePvP": "LT3",
       "GoldSMP": "HT3",
       "ShieldlessSMP": "LT3",
-      "AnchorPvP": "LT2"
+      "AnchorPvP": "LT2",
+      "UHCMace": "LT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2695,6 +2704,12 @@
           "date": "16.11.2026",
           "tier": "LT2"
         }
+      ],
+      "UHCMace": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
+        }
       ]
     }
   },
@@ -2707,7 +2722,8 @@
       "ShieldlessSMP": "HT3",
       "MolePvP": "LT4",
       "GoldSMP": "HT3",
-      "AnchorPvP": "HT5"
+      "AnchorPvP": "HT5",
+      "UHCMace": "LT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2750,6 +2766,12 @@
         {
           "date": "16.11.2026",
           "tier": "HT5"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ]
     }
