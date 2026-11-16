@@ -2895,13 +2895,20 @@
   {
     "username": "hrnkoman",
     "modes": {
-      "MolePvP": "LT2"
+      "MolePvP": "LT2",
+      "NetheriteSword": "LT4"
     },
     "history": {
       "MolePvP": [
         {
           "date": "16.11.2026",
           "tier": "LT2"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
         }
       ]
     }
