@@ -2572,5 +2572,19 @@
         }
       ]
     }
+  },
+  {
+    "username": "MartinPasnau2",
+    "modes": {
+      "Martinpasnau2": "LT4"
+    },
+    "history": {
+      "Martinpasnau2": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ]
+    }
   }
 ]
