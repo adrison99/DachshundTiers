@@ -2856,7 +2856,7 @@
   {
     "username": "4mogsu",
     "modes": {
-      "NetheriteSword": "LT4",
+      "NetheriteSword": "HT5",
       "IronAxe": "LT4",
       "AnchorPvP": "LT4",
       "UHCMace": "HT5"
@@ -2866,6 +2866,10 @@
         {
           "date": "16.11.2026",
           "tier": "LT4"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "HT5"
         }
       ],
       "IronAxe": [
