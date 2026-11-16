@@ -2478,12 +2478,26 @@
   {
     "username": "mamls15",
     "modes": {
-      "UHCMace": "LT3"
+      "UHCMace": "LT3",
+      "NetheriteSword": "LT3",
+      "IronAxe": "LT3"
     },
     "history": {
       "UHCMace": [
         {
           "date": "19.09.2026",
+          "tier": "LT3"
+        }
+      ],
+      "NetheriteSword": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "16.11.2026",
           "tier": "LT3"
         }
       ]
