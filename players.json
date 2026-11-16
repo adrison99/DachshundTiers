@@ -2852,5 +2852,40 @@
         }
       ]
     }
+  },
+  {
+    "username": "4mogsu",
+    "modes": {
+      "NetheriteSword": "LT4",
+      "IronAxe": "LT4",
+      "AnchorPvP": "LT4",
+      "UHCMace": "HT5"
+    },
+    "history": {
+      "NetheriteSword": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ],
+      "IronAxe": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ],
+      "AnchorPvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT5"
+        }
+      ]
+    }
   }
 ]
