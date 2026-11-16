@@ -2912,5 +2912,40 @@
         }
       ]
     }
+  },
+  {
+    "username": "_w4sted",
+    "modes": {
+      "MolePvP": "LT5",
+      "GoldSMP": "LT4",
+      "AnchorPvP": "LT4",
+      "UHCMace": "LT4"
+    },
+    "history": {
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT5"
+        }
+      ],
+      "GoldSMP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ],
+      "AnchorPvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ],
+      "UHCMace": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
+        }
+      ]
+    }
   }
 ]
