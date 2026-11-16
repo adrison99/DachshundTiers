@@ -1999,7 +1999,7 @@
     "modes": {
       "UHCMace": "HT2",
       "IronAxe": "LT3",
-      "AnchorPvP": "HT3",
+      "AnchorPvP": "LT3",
       "NetheriteSword": "LT3",
       "GoldSMP": "LT3",
       "RandomPot": "LT3",
@@ -2055,6 +2055,10 @@
         {
           "date": "13.09.2026",
           "tier": "HT3"
+        },
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ],
       "NetheriteSword": [
