@@ -44,7 +44,8 @@
       "IronAxe": "HT3",
       "AnchorPvP": "HT3",
       "RandomPot": "HT3",
-      "ShieldlessSMP": "HT3"
+      "ShieldlessSMP": "HT3",
+      "MolePvP": "LT3"
     },
     "history": {
       "GoldSMP": [
@@ -127,6 +128,12 @@
         {
           "date": "14.09.2026",
           "tier": "HT3"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
         }
       ]
     }
@@ -484,7 +491,8 @@
       "AnchorPvP": "LT3",
       "NetheriteSword": "HT5",
       "IronAxe": "LT3",
-      "ShieldlessSMP": "HT4"
+      "ShieldlessSMP": "HT4",
+      "MolePvP": "LT4"
     },
     "history": {
       "GoldSMP": [
@@ -571,6 +579,12 @@
         {
           "date": "16.11.2026",
           "tier": "HT4"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
         }
       ]
     }
@@ -1338,7 +1352,8 @@
       "ShieldlessSMP": "LT4",
       "RandomPot": "LT3",
       "NetheriteSword": "HT3",
-      "GoldSMP": "LT3"
+      "GoldSMP": "LT3",
+      "MolePvP": "HT3"
     },
     "history": {
       "AnchorPvP": [
@@ -1397,6 +1412,12 @@
         {
           "date": "15.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT3"
         }
       ]
     }
@@ -1597,7 +1618,8 @@
       "IronAxe": "LT4",
       "UHCMace": "HT5",
       "NetheriteSword": "HT5",
-      "RandomPot": "LT5"
+      "RandomPot": "LT5",
+      "MolePvP": "HT5"
     },
     "history": {
       "GoldSMP": [
@@ -1632,6 +1654,12 @@
         {
           "date": "16.11.2026",
           "tier": "LT5"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT5"
         }
       ]
     }
@@ -2111,7 +2139,8 @@
       "NetheriteSword": "LT3",
       "UHCMace": "LT3",
       "GoldSMP": "HT4",
-      "ShieldlessSMP": "LT3"
+      "ShieldlessSMP": "LT3",
+      "MolePvP": "HT4"
     },
     "history": {
       "AnchorPvP": [
@@ -2152,6 +2181,12 @@
         {
           "date": "13.09.2026",
           "tier": "LT3"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT4"
         }
       ]
     }
@@ -2487,7 +2522,8 @@
     "modes": {
       "UHCMace": "LT3",
       "NetheriteSword": "LT3",
-      "IronAxe": "LT3"
+      "IronAxe": "LT3",
+      "MolePvP": "HT5"
     },
     "history": {
       "UHCMace": [
@@ -2506,6 +2542,12 @@
         {
           "date": "16.11.2026",
           "tier": "LT3"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "HT5"
         }
       ]
     }
@@ -2557,7 +2599,8 @@
     "modes": {
       "NetheriteSword": "LT3",
       "IronAxe": "LT3",
-      "RandomPot": "LT3"
+      "RandomPot": "LT3",
+      "MolePvP": "LT3"
     },
     "history": {
       "NetheriteSword": [
@@ -2577,6 +2620,12 @@
           "date": "16.11.2026",
           "tier": "LT3"
         }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT3"
+        }
       ]
     }
   },
@@ -2586,7 +2635,8 @@
       "NetheriteSword": "HT3",
       "IronAxe": "LT3",
       "RandomPot": "HT5",
-      "ShieldlessSMP": "HT3"
+      "ShieldlessSMP": "HT3",
+      "MolePvP": "LT4"
     },
     "history": {
       "NetheriteSword": [
@@ -2611,6 +2661,12 @@
         {
           "date": "16.11.2026",
           "tier": "HT3"
+        }
+      ],
+      "MolePvP": [
+        {
+          "date": "16.11.2026",
+          "tier": "LT4"
         }
       ]
     }
