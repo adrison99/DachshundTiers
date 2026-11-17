@@ -2828,13 +2828,17 @@
   {
     "username": "wkadly",
     "modes": {
-      "NetheriteSword": "LT3"
+      "NetheriteSword": "HT3"
     },
     "history": {
       "NetheriteSword": [
         {
           "date": "16.11.2026",
           "tier": "LT3"
+        },
+        {
+          "date": "17.11.2026",
+          "tier": "HT3"
         }
       ]
     }
