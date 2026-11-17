@@ -2918,7 +2918,7 @@
     "modes": {
       "MolePvP": "LT5",
       "GoldSMP": "LT4",
-      "AnchorPvP": "LT4",
+      "AnchorPvP": "HT4",
       "UHCMace": "LT4",
       "NetheriteSword": "HT5"
     },
@@ -2939,6 +2939,10 @@
         {
           "date": "16.11.2026",
           "tier": "LT4"
+        },
+        {
+          "date": "17.11.2026",
+          "tier": "HT4"
         }
       ],
       "UHCMace": [
